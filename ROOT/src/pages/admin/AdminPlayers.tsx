@@ -32,6 +32,7 @@ export const AdminPlayers: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
         Bedfight: 'Untested',
         Skywars: 'Untested',
         Mace: 'Untested',
+        'Fireball Fight': 'Untested',
       },
       tierHistory: [],
       matchesPlayed: 0,
