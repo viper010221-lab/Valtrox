@@ -283,7 +283,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             tiers: {
               Bedfight: 'HT1',
               Skywars: 'HT1',
-              Mace: 'HT1'
+              Mace: 'HT1',
+              'Fireball Fight': 'HT1'
             },
             tierHistory: [],
             matchesPlayed: 0,
@@ -335,7 +336,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
           tiers: {
             Bedfight: isMasterAdmin ? 'HT1' : 'Untested',
             Skywars: isMasterAdmin ? 'HT1' : 'Untested',
-            Mace: isMasterAdmin ? 'HT1' : 'Untested'
+            Mace: isMasterAdmin ? 'HT1' : 'Untested',
+            'Fireball Fight': isMasterAdmin ? 'HT1' : 'Untested'
           },
           tierHistory: [],
           matchesPlayed: 0,
@@ -408,7 +410,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             tiers: {
               Bedfight: 'HT1',
               Skywars: 'HT1',
-              Mace: 'HT1'
+              Mace: 'HT1',
+              'Fireball Fight': 'HT1'
             },
             tierHistory: [],
             matchesPlayed: 0,
@@ -471,7 +474,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         tiers: {
           Bedfight: isMasterAdmin ? 'HT1' : 'Untested',
           Skywars: isMasterAdmin ? 'HT1' : 'Untested',
-          Mace: isMasterAdmin ? 'HT1' : 'Untested'
+          Mace: isMasterAdmin ? 'HT1' : 'Untested',
+          'Fireball Fight': isMasterAdmin ? 'HT1' : 'Untested'
         },
         tierHistory: [],
         matchesPlayed: 0,
