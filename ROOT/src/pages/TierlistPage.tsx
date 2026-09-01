@@ -5,7 +5,7 @@ import { GamemodeIcon } from '../components/GamemodeIcon';
 import { GamerAvatar } from '../components/GamerAvatar';
 import { RankBadge } from '../components/RankBadge';
 import { Gamemode, TierRank } from '../types';
-import { INITIAL_GAMEMODES, ALL_TIERS_ORDER } from '../data/initialData';
+import { INITIAL_GAMEMODES, ALL_TIERS_ORDER, TIER_POINTS, getPlayerPoints } from '../data/initialData';
 
 export const TierlistPage: React.FC = () => {
   const { players, selectedGamemode, setSelectedGamemode, navigateTo } = useData();
@@ -154,6 +154,9 @@ export const TierlistPage: React.FC = () => {
               <div className={`p-4 md:w-56 shrink-0 border-b md:border-b-0 md:border-r border-[#252538] flex items-center justify-between md:justify-center md:flex-col gap-1 ${details.style}`}>
                 <span className="font-mono font-black text-sm">{details.label}</span>
                 <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-black/40 text-white font-bold">
+                  {TIER_POINTS[tier]} PTS
+                </span>
+                <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-black/40 text-white font-bold">
                   {playersInTier.length} {playersInTier.length === 1 ? 'Player' : 'Players'}
                 </span>
               </div>
@@ -176,7 +179,7 @@ export const TierlistPage: React.FC = () => {
                           {player.rank && <RankBadge rank={player.rank} size="sm" />}
                         </div>
                         <span className="text-[10px] text-zinc-500 font-mono">
-                          {player.region} &bull; {player.points} PTS
+                          {player.region} &bull; {getPlayerPoints(player)} PTS
                         </span>
                       </div>
                     </div>
