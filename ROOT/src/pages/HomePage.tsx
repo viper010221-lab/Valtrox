@@ -293,9 +293,6 @@ export const HomePage: React.FC = () => {
                   <div className="p-3.5 rounded-xl bg-[#0F0F17] border border-[#252538] group-hover:border-[#7C3AED]/50 transition-colors">
                     <GamemodeIcon gamemode={gm.id} size={24} />
                   </div>
-                  <span className="text-xs font-mono px-3 py-1 rounded-lg bg-[#0F0F17] text-zinc-400 border border-[#252538]">
-                    {gm.testQueueCount} in queue
-                  </span>
                 </div>
                 <div>
                   <h4 className="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
