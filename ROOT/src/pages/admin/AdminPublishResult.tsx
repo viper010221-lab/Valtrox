@@ -29,6 +29,7 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
 
   // Discord webhook send state
   const [discordStatus, setDiscordStatus] = useState<'idle' | 'sending' | 'sent' | 'failed'>('idle');
+  const [pubServerName, setPubServerName] = useState<string>(serverConfig.serverName);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,7 +63,8 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
       score: pubScore,
       testerName: pubTesterName,
       date,
-      notes: pubNotes
+      notes: pubNotes,
+      serverName: pubServerName.trim() || serverConfig.serverName
     });
     setDiscordStatus(discordRes.success ? 'sent' : 'failed');
     onFeedback(
@@ -80,6 +82,7 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
     testerName: string;
     date: string;
     notes: string;
+    serverName: string;
   }): Promise<{ success: boolean; message: string }> => {
     try {
       const embed: {
@@ -97,7 +100,7 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
         fields: [
           { name: 'Previous Tier', value: result.previousTier, inline: true },
           { name: 'Current Tier', value: result.newTier, inline: true },
-          { name: 'Server', value: serverConfig.serverName, inline: true },
+          { name: 'Server', value: result.serverName, inline: true },
           { name: 'Score', value: result.score, inline: true },
           { name: 'Tester', value: result.testerName, inline: true }
         ],
@@ -245,6 +248,17 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
               ))}
             </select>
           </div>
+        </div>
+
+        <div>
+          <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Test Server (shown in the Discord embed)</label>
+          <input
+            type="text"
+            value={pubServerName}
+            onChange={(e) => setPubServerName(e.target.value)}
+            placeholder="e.g. SwimGG"
+            className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+          />
         </div>
 
         <div>
