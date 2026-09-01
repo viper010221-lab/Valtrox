@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useData } from '../context/DataContext';
 import { Gamemode, TierRank } from '../types';
-import { INITIAL_GAMEMODES } from '../data/initialData';
+import { INITIAL_GAMEMODES, TIER_POINTS, getPlayerPoints } from '../data/initialData';
 import { TierBadge } from '../components/TierBadge';
 import { GamerAvatar } from '../components/GamerAvatar';
 import { RankBadge } from '../components/RankBadge';
@@ -22,26 +22,8 @@ export const LeaderboardsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRegion, setSelectedRegion] = useState<string>('All');
 
-  // Weighted sorting calculation across all 15 tiers
-  const tierRankWeights: Record<TierRank, number> = {
-    HT1: 15,
-    MT1: 14,
-    LT1: 13,
-    HT2: 12,
-    MT2: 11,
-    LT2: 10,
-    HT3: 9,
-    MT3: 8,
-    LT3: 7,
-    HT4: 6,
-    MT4: 5,
-    LT4: 4,
-    HT5: 3,
-    MT5: 2,
-    LT5: 1,
-    Unranked: 0,
-    Untested: 0
-  };
+  // Weighted sorting calculation across all 15 tiers (official tier point values)
+  const tierRankWeights: Record<TierRank, number> = TIER_POINTS;
 
   const rankedPlayers = useMemo(() => {
     return [...players]
@@ -318,7 +300,7 @@ export const LeaderboardsPage: React.FC = () => {
                       </td>
 
                       <td className="py-4 px-4 text-right font-mono font-extrabold text-[#8B5CF6] text-sm">
-                        {player.points.toLocaleString()} PTS
+                        {getPlayerPoints(player).toLocaleString()} PTS
                       </td>
 
                       <td className="py-4 px-4 text-center">
