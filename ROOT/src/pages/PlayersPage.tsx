@@ -6,7 +6,7 @@ import { GamemodeIcon } from '../components/GamemodeIcon';
 import { GamerAvatar } from '../components/GamerAvatar';
 import { RankBadge } from '../components/RankBadge';
 import { Gamemode, TierRank } from '../types';
-import { INITIAL_GAMEMODES } from '../data/initialData';
+import { INITIAL_GAMEMODES, getPlayerPoints } from '../data/initialData';
 
 export const PlayersPage: React.FC = () => {
   const { players, navigateTo } = useData();
@@ -42,7 +42,7 @@ export const PlayersPage: React.FC = () => {
         return matchesSearch && matchesRegion && matchesDevice && matchesGamemodeTier;
       })
       .sort((a, b) => {
-        if (sortBy === 'points') return b.points - a.points;
+        if (sortBy === 'points') return getPlayerPoints(b) - getPlayerPoints(a);
         if (sortBy === 'winrate') return b.winRate - a.winRate;
         return a.globalRank - b.globalRank;
       });
@@ -203,7 +203,7 @@ export const PlayersPage: React.FC = () => {
 
                   <div className="text-right font-mono">
                     <div className="text-sm font-black text-amber-400">#{player.globalRank}</div>
-                    <div className="text-[11px] text-[#8B5CF6] font-bold">{player.points} PTS</div>
+                    <div className="text-[11px] text-[#8B5CF6] font-bold">{getPlayerPoints(player)} PTS</div>
                   </div>
                 </div>
 
