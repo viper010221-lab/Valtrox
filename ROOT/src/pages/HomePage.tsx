@@ -26,7 +26,7 @@ import { Gamemode, TierRank } from '../types';
 import { motion } from 'framer-motion';
 
 export const HomePage: React.FC = () => {
-  const { players, testResults, serverConfig, navigateTo, setSelectedGamemode } = useData();
+  const { players, testResults, serverConfig, navigateTo, setSelectedGamemode, perfMode } = useData();
   const [selectedShowcaseMode, setSelectedShowcaseMode] = useState<Gamemode>('Bedfight');
 
   // Interactive quick calculator state
@@ -63,8 +63,12 @@ export const HomePage: React.FC = () => {
       {/* HERO SECTION */}
       <section className="relative pt-12 pb-10 overflow-hidden">
         {/* Glow ambient background orbs */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-gradient-to-tr from-[#7C3AED]/25 to-[#8B5CF6]/15 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute top-0 right-10 w-96 h-96 bg-[#7C3AED]/10 rounded-full blur-[100px] pointer-events-none" />
+        {perfMode === 'pc' && (
+          <>
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[380px] bg-gradient-to-tr from-[#7C3AED]/25 to-[#8B5CF6]/15 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-0 right-10 w-96 h-96 bg-[#7C3AED]/10 rounded-full blur-[100px] pointer-events-none" />
+          </>
+        )}
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-6 px-4">
           <motion.div 
@@ -188,12 +192,12 @@ export const HomePage: React.FC = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {testResults.map((result, idx) => (
+          {(perfMode === 'phone' ? testResults.slice(0, 4) : testResults).map((result, idx) => (
             <motion.div
               key={result.id}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.15 }}
+              initial={perfMode === 'pc' ? { opacity: 0, y: 15 } : false}
+              animate={perfMode === 'pc' ? { opacity: 1, y: 0 } : { opacity: 1 }}
+              transition={perfMode === 'pc' ? { delay: idx * 0.15 } : undefined}
               onClick={() => navigateTo('results')}
               className="p-6 rounded-2xl bg-gradient-to-br from-[#171722] to-[#1a1a26] border border-[#252538] hover:border-[#7C3AED]/60 transition-all transform hover:-translate-y-1 cursor-pointer space-y-4 group shadow-xl relative overflow-hidden"
             >
