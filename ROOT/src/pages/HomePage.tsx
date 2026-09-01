@@ -21,7 +21,7 @@ import { TierBadge } from '../components/TierBadge';
 import { GamerAvatar } from '../components/GamerAvatar';
 import { RankBadge } from '../components/RankBadge';
 import { DiscordWidget } from '../components/DiscordWidget';
-import { INITIAL_GAMEMODES } from '../data/initialData';
+import { INITIAL_GAMEMODES, getPlayerPoints } from '../data/initialData';
 import { Gamemode, TierRank } from '../types';
 import { motion } from 'framer-motion';
 
@@ -403,7 +403,7 @@ export const HomePage: React.FC = () => {
                       </td>
 
                       <td className="py-4 px-4 text-right font-mono font-extrabold text-[#8B5CF6]">
-                        {player.points.toLocaleString()} PTS
+                        {getPlayerPoints(player).toLocaleString()} PTS
                       </td>
 
                       <td className="py-4 px-4 text-center">
