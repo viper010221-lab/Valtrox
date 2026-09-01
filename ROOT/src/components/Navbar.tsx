@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
 import { RankBadge } from './RankBadge';
 import { GamerAvatar } from './GamerAvatar';
+import { PerformanceToggle } from './PerformanceToggle';
 import {
   Shield,
   Search,
@@ -127,6 +128,9 @@ export const Navbar: React.FC = () => {
 
           {/* Right Section: Auth + Admin + Logout (GUARANTEED 100% VISIBLE ON 100% ZOOM) */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* Performance mode toggle (PC / Phone) */}
+            <PerformanceToggle />
+
             {/* Quick Search trigger icon */}
             <button
               onClick={() => setSearchOpen(true)}
