@@ -59,6 +59,16 @@ export const AdminConfig: React.FC<{ onFeedback: (msg: string) => void }> = ({ o
           </div>
 
           <div>
+            <label className="text-xs font-semibold text-zinc-400 block mb-1.5">Server Name (shown in result embeds)</label>
+            <input
+              type="text"
+              value={serverConfig.serverName}
+              onChange={(e) => updateServerConfig({ serverName: e.target.value })}
+              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+            />
+          </div>
+
+          <div>
             <label className="text-xs font-semibold text-zinc-400 block mb-1.5">Discord Members Metric</label>
             <input
               type="number"
