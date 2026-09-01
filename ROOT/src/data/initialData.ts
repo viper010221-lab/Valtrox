@@ -12,6 +12,7 @@ export const INITIAL_GAMEMODES: { id: Gamemode; name: string; icon: string; desc
   { id: 'Bedfight', name: 'Bedfight', icon: 'Bed', description: 'Fast-paced bridging, bed defense, game sense, and sprint-reset PvP mechanics.', testQueueCount: 0 },
   { id: 'Skywars', name: 'Skywars', icon: 'Cloud', description: 'Loot routing, rod combos, projectile accuracy, and void positioning.', testQueueCount: 0 },
   { id: 'Mace', name: 'Mace', icon: 'Hammer', description: 'Wind charge height maximization, critical smash timing, and aerial trajectory reads.', testQueueCount: 0 },
+  { id: 'Fireball Fight', name: 'Fireball Fight', icon: 'Flame', description: 'Fireball aim, projectile timing, knockback control, and close-range dueling.', testQueueCount: 0 },
 ];
 
 export const INITIAL_ACCOUNTS: UserAccount[] = [
@@ -49,7 +50,7 @@ Join our official Discord community to queue with certified evaluators.`,
     date: '2025-03-01',
     pinned: true,
     views: 120,
-    tags: ['Testing', 'Bedfight', 'Skywars', 'Mace']
+    tags: ['Testing', 'Bedfight', 'Skywars', 'Mace', 'Fireball Fight']
   }
 ];
 
