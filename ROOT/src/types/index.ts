@@ -132,6 +132,7 @@ export interface Announcement {
 }
 
 export interface ServerConfig {
+  serverName: string;
   testingStatus: 'Open' | 'Closed' | 'Priority Only';
   activeSeason: string;
   discordUrl: string;
