@@ -4,6 +4,7 @@ import { Plus, Trash2 } from 'lucide-react';
 import { TierBadge } from '../../components/TierBadge';
 import { GamerAvatar } from '../../components/GamerAvatar';
 import { RankBadge } from '../../components/RankBadge';
+import { getPlayerPoints } from '../../data/initialData';
 
 export const AdminPlayers: React.FC<{ onFeedback: (msg: string) => void }> = ({ onFeedback }) => {
   const { players, addPlayer, deletePlayer } = useData();
@@ -151,7 +152,7 @@ export const AdminPlayers: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
                   </td>
                   <td className="py-3 px-4 font-mono text-zinc-400">{p.discordTag}</td>
                   <td className="py-3 px-4 text-zinc-300">{p.region}</td>
-                  <td className="py-3 px-4 font-mono font-bold text-[#8B5CF6]">{p.points} PTS</td>
+                  <td className="py-3 px-4 font-mono font-bold text-[#8B5CF6]">{getPlayerPoints(p)} PTS</td>
                   <td className="py-3 px-4"><TierBadge tier={p.tiers.Bedfight || 'Untested'} size="sm" /></td>
                   <td className="py-3 px-4"><TierBadge tier={p.tiers.Skywars || 'Untested'} size="sm" /></td>
                   <td className="py-3 px-4"><TierBadge tier={p.tiers.Mace || 'Untested'} size="sm" /></td>
