@@ -56,6 +56,12 @@ export const HomePage: React.FC = () => {
       const tier = p.tiers[selectedShowcaseMode];
       return tier && tier !== 'Untested' && tier !== 'Unranked';
     })
+    .sort((a, b) => {
+      const pa = getPlayerPoints(a);
+      const pb = getPlayerPoints(b);
+      if (pb !== pa) return pb - pa;
+      return (b.winRate ?? 0) - (a.winRate ?? 0);
+    })
     .slice(0, 5);
 
   return (
