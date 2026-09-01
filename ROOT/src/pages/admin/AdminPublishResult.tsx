@@ -8,8 +8,16 @@ import { INITIAL_GAMEMODES } from '../../data/initialData';
 const DISCORD_WEBHOOK_URL =
   'https://discord.com/api/webhooks/1544018972410650656/J_JSOZfla-5lztGHkj3tYd2szH_Ba0UiGHZodXJW-uwew_OYVrQtPec4sKpChbjNJKHF';
 
+// Custom Discord emoji image (CDN URL works regardless of which server the webhook is in)
+const GAMEMODE_EMOJI: Record<Gamemode, string> = {
+  Bedfight: '1533895195723305142',
+  Skywars: '1533895198013390998',
+  Mace: '1533997411465170964',
+  'Fireball Fight': '1544021694241579098'
+};
+
 export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }> = ({ onFeedback }) => {
-  const { players, testers, addTestResult, testResults, deleteTestResult } = useData();
+  const { players, testers, addTestResult, testResults, deleteTestResult, serverConfig } = useData();
 
   const [pubPlayerId, setPubPlayerId] = useState<string>(players[0]?.id || '');
   const [pubGamemode, setPubGamemode] = useState<Gamemode>('Bedfight');
@@ -80,24 +88,30 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
         color: number;
         fields: { name: string; value: string; inline: boolean }[];
         footer: { text: string };
+        thumbnail: { url: string };
       } = {
-        title: `🏆 Official Tier Test Result — ${result.playerIgn}`,
-        description: `**${result.playerIgn}** was officially tested in **${result.gamemode}** and ranked **${result.newTier}** by **${result.testerName}**.`,
+        title: `${result.gamemode} | Test Result`,
+        description: `@${result.playerDiscord} has been placed at ${result.newTier} in **${result.gamemode}**`,
         color: 0x7c3AED,
+        thumbnail: { url: `https://cdn.discordapp.com/emojis/${GAMEMODE_EMOJI[result.gamemode]}.png` },
         fields: [
-          { name: 'New Tier', value: result.newTier, inline: true },
           { name: 'Previous Tier', value: result.previousTier, inline: true },
-          { name: 'Match Score', value: result.score, inline: true },
-          { name: 'Gamemode', value: result.gamemode, inline: true },
-          { name: 'Evaluating Tester', value: result.testerName, inline: true },
-          { name: 'Date Tested', value: result.date, inline: true },
-          { name: 'Discord', value: result.playerDiscord, inline: false }
+          { name: 'Current Tier', value: result.newTier, inline: true },
+          { name: 'Server', value: serverConfig.serverName, inline: true },
+          { name: 'Score', value: result.score, inline: true },
+          { name: 'Tester', value: result.testerName, inline: true }
         ],
         footer: { text: 'Valtrox Competitive Gaming Platform' }
       };
 
-      if (result.notes) {
-        embed.fields.push({ name: 'Tester Notes', value: result.notes, inline: false });
+      if (result.notes && result.notes.trim()) {
+        const bulletNotes = result.notes
+          .split('\n')
+          .map((line) => line.trim())
+          .filter(Boolean)
+          .map((line) => (line.startsWith('•') || line.startsWith('-') ? line : `• ${line.replace(/^-\s*/, '')}`))
+          .join('\n');
+        embed.fields.push({ name: 'Notes', value: bulletNotes, inline: false });
       }
 
       const webhookRes = await fetch(DISCORD_WEBHOOK_URL, {
