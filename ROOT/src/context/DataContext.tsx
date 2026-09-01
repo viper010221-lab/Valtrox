@@ -33,6 +33,8 @@ interface DataContextType {
   selectedPlayerId: string | null;
   selectedGamemode: Gamemode;
   searchOpen: boolean;
+  perfMode: 'pc' | 'phone';
+  setPerfMode: (mode: 'pc' | 'phone') => void;
   
   // Auth state & methods
   accounts: UserAccount[];
@@ -159,6 +161,12 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [selectedGamemode, setSelectedGamemode] = useState<Gamemode>('Bedfight');
   const [searchOpen, setSearchOpen] = useState<boolean>(false);
 
+  // Performance mode: 'pc' = full graphics/effects, 'phone' = fast/low-end friendly
+  const [perfMode, setPerfMode] = useState<'pc' | 'phone'>(() => {
+    const saved = localStorage.getItem(`${STORAGE_KEY}_perfMode`);
+    return saved === 'phone' ? 'phone' : 'pc';
+  });
+
   // Auto-fetch live Discord stats from official invite API
   useEffect(() => {
     const fetchDiscordStats = async () => {
@@ -231,6 +239,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     localStorage.setItem(`${STORAGE_KEY}_serverConfig`, JSON.stringify(serverConfig));
   }, [serverConfig]);
+
+  useEffect(() => {
+    localStorage.setItem(`${STORAGE_KEY}_perfMode`, JSON.stringify(perfMode));
+  }, [perfMode]);
 
   // Auth Methods
   const login = (email: string, pass: string) => {
@@ -545,7 +557,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (playerId) {
       setSelectedPlayerId(playerId);
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: perfMode === 'phone' ? 'auto' : 'smooth' });
   };
 
   // Player Actions
@@ -744,6 +756,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         navigateTo,
         setSelectedGamemode,
         setSearchOpen,
+        perfMode,
+        setPerfMode,
         addPlayer,
         updatePlayer,
         deletePlayer,
