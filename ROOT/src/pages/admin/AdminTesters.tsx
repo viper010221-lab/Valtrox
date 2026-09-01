@@ -19,7 +19,7 @@ export const AdminTesters: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
       name: newTesterName.trim(),
       discordTag: newTesterDiscord.trim(),
       role: newTesterRole,
-      gamemodes: ['Bedfight', 'Skywars', 'Mace'],
+      gamemodes: ['Bedfight', 'Skywars', 'Mace', 'Fireball Fight'],
       testsConducted: 0,
       status: 'Active',
       joinDate: new Date().toISOString().split('T')[0],
