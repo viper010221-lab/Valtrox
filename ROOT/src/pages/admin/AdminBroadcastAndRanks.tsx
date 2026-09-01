@@ -270,7 +270,8 @@ const PlayerRemovalModeration: React.FC<{ onFeedback: (msg: string) => void }> =
       updatePlayerTier(playerId, 'Bedfight', 'Untested', 'Admin', 'N/A', 'Reset');
       updatePlayerTier(playerId, 'Skywars', 'Untested', 'Admin', 'N/A', 'Reset');
       updatePlayerTier(playerId, 'Mace', 'Untested', 'Admin', 'N/A', 'Reset');
-      onFeedback(`Reset all 3 gamemode tiers for ${ign} to Untested.`);
+      updatePlayerTier(playerId, 'Fireball Fight', 'Untested', 'Admin', 'N/A', 'Reset');
+      onFeedback(`Reset all 4 gamemode tiers for ${ign} to Untested.`);
     }
   };
 
@@ -320,7 +321,7 @@ const PlayerRemovalModeration: React.FC<{ onFeedback: (msg: string) => void }> =
                     <span className="text-xs font-mono text-amber-400 font-bold">#{targetPlayer.globalRank}</span>
                   </div>
                   <span className="text-xs text-zinc-400 font-mono">
-                    BF: {targetPlayer.tiers.Bedfight} | SW: {targetPlayer.tiers.Skywars} | Mace: {targetPlayer.tiers.Mace}
+                    BF: {targetPlayer.tiers.Bedfight} | SW: {targetPlayer.tiers.Skywars} | Mace: {targetPlayer.tiers.Mace} | FB: {targetPlayer.tiers['Fireball Fight']}
                   </span>
                 </div>
               </div>
