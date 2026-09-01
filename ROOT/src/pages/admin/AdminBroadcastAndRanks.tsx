@@ -5,6 +5,7 @@ import { RankBadge } from '../../components/RankBadge';
 import { GamerAvatar } from '../../components/GamerAvatar';
 import { Radio, ShieldAlert, Send, UserCheck, CheckCircle2, AlertCircle, Sparkles, Mail, Trash2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { getPlayerPoints } from '../../data/initialData';
 
 const ALL_RANKS: UserRank[] = [
   'Owner',
@@ -387,7 +388,7 @@ const PlayerRemovalModeration: React.FC<{ onFeedback: (msg: string) => void }> =
                           <GamerAvatar name={p.ign} size="sm" rank={p.rank} />
                           <div>
                             <span className="font-bold text-white block">{p.ign}</span>
-                            <span className="text-[10px] text-zinc-400">#{p.globalRank} • {p.points} PTS</span>
+                            <span className="text-[10px] text-zinc-400">#{p.globalRank} • {getPlayerPoints(p)} PTS</span>
                           </div>
                         </div>
                       </td>
