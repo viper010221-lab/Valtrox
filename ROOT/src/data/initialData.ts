@@ -8,6 +8,32 @@ export const ALL_TIERS_ORDER: TierRank[] = [
   'HT5', 'MT5', 'LT5'
 ];
 
+export const TIER_POINTS: Record<TierRank, number> = {
+  HT1: 50,
+  MT1: 48,
+  LT1: 45,
+  HT2: 35,
+  MT2: 33,
+  LT2: 30,
+  HT3: 25,
+  MT3: 20,
+  LT3: 15,
+  HT4: 10,
+  MT4: 7,
+  LT4: 5,
+  HT5: 3,
+  MT5: 2,
+  LT5: 1,
+  Unranked: 0,
+  Untested: 0
+};
+
+export function getPlayerPoints(player: Player): number {
+  if (!player?.tiers) return player?.points ?? 0;
+  const values = Object.values(player.tiers).map((t) => TIER_POINTS[t] ?? 0);
+  return Math.max(0, ...values);
+}
+
 export const INITIAL_GAMEMODES: { id: Gamemode; name: string; icon: string; description: string; testQueueCount: number }[] = [
   { id: 'Bedfight', name: 'Bedfight', icon: 'Bed', description: 'Fast-paced bridging, bed defense, game sense, and sprint-reset PvP mechanics.', testQueueCount: 0 },
   { id: 'Skywars', name: 'Skywars', icon: 'Cloud', description: 'Loot routing, rod combos, projectile accuracy, and void positioning.', testQueueCount: 0 },
