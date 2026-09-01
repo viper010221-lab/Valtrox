@@ -90,7 +90,7 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
         description: string;
         color: number;
         fields: { name: string; value: string; inline: boolean }[];
-        footer: { text: string };
+        footer?: { text: string };
         thumbnail: { url: string };
       } = {
         title: `${result.gamemode} | Test Result`,
@@ -103,8 +103,7 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
           { name: 'Server', value: result.serverName, inline: true },
           { name: 'Score', value: result.score, inline: true },
           { name: 'Tester', value: result.testerName, inline: true }
-        ],
-        footer: { text: 'Valtrox Competitive Gaming Platform' }
+        ]
       };
 
       if (result.notes && result.notes.trim()) {
