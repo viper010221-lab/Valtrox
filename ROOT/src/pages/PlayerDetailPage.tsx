@@ -21,7 +21,7 @@ import { TierBadge } from '../components/TierBadge';
 import { GamerAvatar } from '../components/GamerAvatar';
 import { RankBadge } from '../components/RankBadge';
 import { GamemodeIcon } from '../components/GamemodeIcon';
-import { INITIAL_GAMEMODES } from '../data/initialData';
+import { INITIAL_GAMEMODES, getPlayerPoints } from '../data/initialData';
 import confetti from 'canvas-confetti';
 import { motion } from 'framer-motion';
 
@@ -137,7 +137,7 @@ export const PlayerDetailPage: React.FC = () => {
           <div className="flex sm:flex-col gap-3 w-full md:w-auto">
             <div className="p-4 rounded-xl bg-[#0F0F17] border border-[#252538] text-center min-w-[120px] shadow-lg">
               <div className="text-xs text-zinc-500 uppercase font-mono">Total Points</div>
-              <div className="text-2xl font-black text-[#8B5CF6] font-mono">{player.points.toLocaleString()}</div>
+              <div className="text-2xl font-black text-[#8B5CF6] font-mono">{getPlayerPoints(player).toLocaleString()}</div>
             </div>
             <div className="p-4 rounded-xl bg-[#0F0F17] border border-[#252538] text-center min-w-[120px] shadow-lg">
               <div className="text-xs text-zinc-500 uppercase font-mono">Win Rate</div>
