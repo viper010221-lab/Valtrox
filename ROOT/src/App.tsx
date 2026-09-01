@@ -20,8 +20,8 @@ import { AdminDashboardPage } from './pages/AdminDashboardPage';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-const AppContent: React.FC = () => {
-  const { activeTab } = useData();
+export const AppContent: React.FC = () => {
+  const { activeTab, perfMode } = useData();
 
   const renderActivePage = () => {
     switch (activeTab) {
@@ -54,12 +54,16 @@ const AppContent: React.FC = () => {
     <div className="min-h-screen relative flex flex-col bg-[#0F0F17] text-[#F5F5F5] selection:bg-[#7C3AED] selection:text-white overflow-x-hidden">
       {/* Dynamic Cyber Grid & Radial Glow Background */}
       <div className="fixed inset-0 bg-grid-pattern pointer-events-none opacity-40 z-0" />
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[550px] bg-radial-glow pointer-events-none z-0" />
-      
-      {/* Floating Ambient Glowing Orbs */}
-      <div className="fixed -top-40 -left-40 w-96 h-96 bg-[#7C3AED]/15 rounded-full blur-[140px] pointer-events-none z-0 animate-pulse-glow" />
-      <div className="fixed top-1/3 -right-40 w-96 h-96 bg-[#8B5CF6]/10 rounded-full blur-[140px] pointer-events-none z-0 animate-pulse-glow" style={{ animationDelay: '2s' }} />
-      <div className="fixed -bottom-40 left-1/3 w-[500px] h-[300px] bg-[#7C3AED]/10 rounded-full blur-[160px] pointer-events-none z-0" />
+      {perfMode === 'pc' && (
+        <>
+          <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[550px] bg-radial-glow pointer-events-none z-0" />
+
+          {/* Floating Ambient Glowing Orbs */}
+          <div className="fixed -top-40 -left-40 w-96 h-96 bg-[#7C3AED]/15 rounded-full blur-[140px] pointer-events-none z-0 animate-pulse-glow" />
+          <div className="fixed top-1/3 -right-40 w-96 h-96 bg-[#8B5CF6]/10 rounded-full blur-[140px] pointer-events-none z-0 animate-pulse-glow" style={{ animationDelay: '2s' }} />
+          <div className="fixed -bottom-40 left-1/3 w-[500px] h-[300px] bg-[#7C3AED]/10 rounded-full blur-[160px] pointer-events-none z-0" />
+        </>
+      )}
 
       {/* Live Server DM Broadcast Banner (10s auto-dismiss) */}
       <LiveDMBanner />
