@@ -51,7 +51,7 @@ export const TestingPage: React.FC = () => {
             Tier Testing & Evaluation Guide
           </h1>
           <p className="text-sm text-zinc-400 mt-1">
-            Official 1v1 testing protocol for <strong>Bedfight</strong>, <strong>Skywars</strong>, and <strong>Mace</strong>.
+            Official 1v1 testing protocol for <strong>Bedfight</strong>, <strong>Skywars</strong>, <strong>Mace</strong>, and <strong>Fireball Fight</strong>.
           </p>
         </div>
 
@@ -80,7 +80,7 @@ export const TestingPage: React.FC = () => {
           </div>
           <h3 className="font-bold text-white text-base">Open Testing Ticket</h3>
           <p className="text-xs text-zinc-400 leading-relaxed">
-            Navigate to <strong>#tier-testing-apply</strong> in Discord and choose Bedfight, Skywars, or Mace.
+            Navigate to <strong>#tier-testing-apply</strong> in Discord and choose Bedfight, Skywars, Mace, or Fireball Fight.
           </p>
         </div>
 
@@ -182,7 +182,7 @@ export const TestingPage: React.FC = () => {
             <div className="p-4 rounded-xl bg-[#0F0F17]/70 border border-[#252538] text-xs text-zinc-400 flex items-start gap-2.5">
               <Shield size={16} className="text-purple-400 mt-0.5 flex-shrink-0" />
               <span>
-                Calculated for a standard <strong>First-to-10 (FT10)</strong> test match in Bedfight, Skywars, or Mace.
+                Calculated for a standard <strong>First-to-10 (FT10)</strong> test match in Bedfight, Skywars, Mace, or Fireball Fight.
               </span>
             </div>
           </div>

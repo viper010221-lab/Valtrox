@@ -178,7 +178,7 @@ export const StaffPage: React.FC = () => {
           ) : (
             <div className="p-8 rounded-2xl bg-[#171722] border border-[#252538] text-center space-y-2">
               <p className="text-sm font-bold text-white">Tester Applications are Open</p>
-              <p className="text-xs text-zinc-400">Apply on our Discord server in #tester-apply to evaluate Bedfight, Skywars, and Mace!</p>
+              <p className="text-xs text-zinc-400">Apply on our Discord server in #tester-apply to evaluate Bedfight, Skywars, Mace, and Fireball Fight!</p>
             </div>
           )}
         </div>

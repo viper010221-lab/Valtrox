@@ -67,10 +67,10 @@ export const INITIAL_ANNOUNCEMENTS: Announcement[] = [
     title: 'Season 1 Standardized Bedrock Tier Testing is Live!',
     category: 'Update',
     content: `Welcome to the official Valtrox Competitive Gaming Platform! 
-Official 1v1 testing and calibration is open for Bedfight, Skywars, and Mace.
+Official 1v1 testing and calibration is open for Bedfight, Skywars, Mace, and Fireball Fight.
 
 Join our official Discord community to queue with certified evaluators.`,
-    summary: 'Testing queues are officially open for Bedfight, Skywars, and Mace on Discord.',
+    summary: 'Testing queues are officially open for Bedfight, Skywars, Mace, and Fireball Fight on Discord.',
     author: 'Valtrox_Owner',
     authorRole: 'Owner',
     date: '2025-03-01',

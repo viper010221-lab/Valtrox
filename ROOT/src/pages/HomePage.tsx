@@ -107,7 +107,7 @@ export const HomePage: React.FC = () => {
             className="max-w-2xl mx-auto text-base sm:text-lg text-zinc-400 font-normal leading-relaxed"
           >
             Valtrox is the official competitive gaming platform for Minecraft Bedrock. Discover standardized
-            tierlists for <strong className="text-zinc-200">Bedfight</strong>, <strong className="text-zinc-200">Skywars</strong>, and <strong className="text-zinc-200">Mace</strong>, get tested by verified veterans, track rankings, and dominate scrims.
+            tierlists for <strong className="text-zinc-200">Bedfight</strong>, <strong className="text-zinc-200">Skywars</strong>, and <strong className="text-zinc-200">Mace</strong>, <strong className="text-zinc-200">Fireball Fight</strong>, get tested by verified veterans, track rankings, and dominate scrims.
           </motion.p>
 
           <motion.div 
@@ -170,8 +170,8 @@ export const HomePage: React.FC = () => {
                 <div className="text-xs text-zinc-400 font-medium mt-1">Discord Members</div>
               </div>
               <div className="p-3 text-center group">
-                <div className="text-3xl font-extrabold text-emerald-400 font-mono group-hover:scale-105 transition-transform">3 Modes</div>
-                <div className="text-xs text-zinc-400 font-medium mt-1">Bedfight, Skywars, Mace</div>
+                <div className="text-3xl font-extrabold text-emerald-400 font-mono group-hover:scale-105 transition-transform">4 Modes</div>
+                <div className="text-xs text-zinc-400 font-medium mt-1">Bedfight, Skywars, Mace, Fireball Fight</div>
               </div>
             </div>
           </motion.div>
@@ -478,6 +478,7 @@ export const HomePage: React.FC = () => {
                   <option value="Bedfight">Bedfight</option>
                   <option value="Skywars">Skywars</option>
                   <option value="Mace">Mace</option>
+                  <option value="Fireball Fight">Fireball Fight</option>
                 </select>
               </div>
 

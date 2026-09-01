@@ -84,7 +84,7 @@ export const TierlistPage: React.FC = () => {
             Competitive Roster Tierlist
           </h1>
           <p className="text-sm text-zinc-400 mt-1">
-            Visual hierarchy across all 15 competitive tiers (S, A, B, C, D) for Bedfight, Skywars, and Mace.
+            Visual hierarchy across all 15 competitive tiers (S, A, B, C, D) for Bedfight, Skywars, Mace, and Fireball Fight.
           </p>
         </div>
 
@@ -98,7 +98,7 @@ export const TierlistPage: React.FC = () => {
       </div>
 
       {/* Gamemode Selector */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
         {INITIAL_GAMEMODES.map((gm) => {
           const isSelected = selectedGamemode === gm.id;
           return (

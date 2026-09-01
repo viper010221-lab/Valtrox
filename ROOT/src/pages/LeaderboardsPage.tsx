@@ -66,7 +66,7 @@ export const LeaderboardsPage: React.FC = () => {
             Competitive Leaderboards
           </h1>
           <p className="text-sm text-zinc-400 mt-1">
-            Standardized Bedrock rankings certified exclusively for <strong className="text-white">Bedfight</strong>, <strong className="text-white">Skywars</strong>, and <strong className="text-white">Mace</strong>.
+            Standardized Bedrock rankings certified exclusively for <strong className="text-white">Bedfight</strong>, <strong className="text-white">Skywars</strong>, and <strong className="text-white">Mace</strong>, and <strong className="text-white">Fireball Fight</strong>.
           </p>
         </div>
 
