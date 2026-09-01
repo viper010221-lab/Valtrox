@@ -5,7 +5,7 @@ import { TierBadge } from './TierBadge';
 import { GamemodeIcon } from './GamemodeIcon';
 import { GamerAvatar } from './GamerAvatar';
 import { RankBadge } from './RankBadge';
-import { INITIAL_GAMEMODES } from '../data/initialData';
+import { INITIAL_GAMEMODES, getPlayerPoints } from '../data/initialData';
 
 export const QuickSearchModal: React.FC = () => {
   const { searchOpen, setSearchOpen, players, announcements, testResults, navigateTo, setSelectedGamemode } = useData();
@@ -132,7 +132,7 @@ export const QuickSearchModal: React.FC = () => {
 
                   <div className="flex items-center gap-2">
                     <TierBadge tier={player.tiers.Bedfight || 'Untested'} size="sm" />
-                    <span className="font-mono text-zinc-400 font-semibold">{player.points} PTS</span>
+                    <span className="font-mono text-zinc-400 font-semibold">{getPlayerPoints(player)} PTS</span>
                   </div>
                 </div>
               ))}
