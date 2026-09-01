@@ -81,6 +81,7 @@ Join our official Discord community to queue with certified evaluators.`,
 ];
 
 export const INITIAL_SERVER_CONFIG: ServerConfig = {
+  serverName: 'SwimGG',
   testingStatus: 'Open',
   activeSeason: 'Season 1 (Bedrock Competitive)',
   discordUrl: 'https://discord.gg/tV9vrAeJHH',
