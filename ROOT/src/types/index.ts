@@ -1,4 +1,4 @@
-export type Gamemode = 'Bedfight' | 'Skywars' | 'Mace';
+export type Gamemode = 'Bedfight' | 'Skywars' | 'Mace' | 'Fireball Fight';
 
 export type TierRank =
   | 'HT1' | 'MT1' | 'LT1'
