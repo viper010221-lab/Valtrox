@@ -16,5 +16,8 @@ export const supabase: SupabaseClient = createClient(
 );
 
 export function isSupabaseConfigured(): boolean {
-  return Boolean(supabaseUrl && supabaseUrl.startsWith('https://') && supabaseAnonKey);
+  // Credentials are baked into the client below (lines 11-16), so the live
+  // Vercel site (phone, every device) can always read/write the shared DB
+  // even though .env.local is only loaded locally. Never gate on env vars here.
+  return true;
 }
