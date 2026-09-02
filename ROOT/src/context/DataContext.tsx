@@ -25,6 +25,7 @@ import {
   fetchSupabaseDatabase,
   queueSupabaseSave,
   saveSupabaseDatabase,
+  deleteSupabaseRow,
   SupabaseDatabasePayload
 } from '../services/supabaseDatabase';
 
@@ -753,6 +754,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
 
   const deletePlayer = (id: string) => {
     setPlayers((prev) => prev.filter((p) => p.id !== id));
+    deleteSupabaseRow('players', id);
   };
 
   const updatePlayerTier = (
@@ -805,6 +807,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
 
   const deleteTestResult = (id: string) => {
     setTestResults((prev) => prev.filter((tr) => tr.id !== id));
+    deleteSupabaseRow('testResults', id);
   };
 
   // Tester Actions
@@ -820,6 +823,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
 
   const deleteTester = (id: string) => {
     setTesters((prev) => prev.filter((t) => t.id !== id));
+    deleteSupabaseRow('testers', id);
   };
 
   // Staff Actions
@@ -835,6 +839,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
 
   const deleteStaff = (id: string) => {
     setStaff((prev) => prev.filter((s) => s.id !== id));
+    deleteSupabaseRow('staff', id);
   };
 
   // Announcement Actions
@@ -850,6 +855,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
 
   const deleteAnnouncement = (id: string) => {
     setAnnouncements((prev) => prev.filter((a) => a.id !== id));
+    deleteSupabaseRow('announcements', id);
   };
 
   // Server Config Actions
