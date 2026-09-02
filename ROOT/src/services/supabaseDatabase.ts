@@ -121,3 +121,35 @@ export function queueSupabaseSave(data: SupabaseDatabasePayload) {
     saveSupabaseDatabase(data).catch((err) => console.warn('Supabase save error:', err));
   }, 900);
 }
+/** App db-table name mapping for deletes. */
+const DB_DELETE_TABLE: Record<string, string> = {
+  players: 'players',
+  testResults: 'test_results',
+  testers: 'testers',
+  staff: 'staff',
+  announcements: 'announcements',
+  serverConfig: 'server_config',
+  accounts: 'accounts',
+};
+
+/**
+ * Deletes a single row from a Supabase table by id.
+ * Used so delete actions (remove player/tester/staff/announcement/test result)
+ * actually remove the cloud row too — otherwise the 15s poll re-fetches
+ * the old row and the deleted item "comes back."
+ */
+export async function deleteSupabaseRow(
+  tableKey: keyof typeof DB_DELETE_TABLE,
+  id: string
+): Promise<{ success: boolean; message: string }> {
+  try {
+    if (!isSupabaseConfigured()) return { success: true, message: 'Supabase not configured — skipping delete.' };
+    const table = DB_DELETE_TABLE[tableKey];
+    { const { error } = await supabase.from(table).delete().eq('id', id);
+      if (error) return { success: false, message: error.message };
+    }
+    return { success: true, message: `Deleted row ${id} from ${table}.` };
+  } catch (err: any) {
+    return { success: false, message: err?.message || 'Failed to delete row.' };
+  }
+}
