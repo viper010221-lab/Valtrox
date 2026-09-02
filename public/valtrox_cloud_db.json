@@ -1,0 +1,34 @@
+{
+  "lastUpdated": 1741000000000,
+  "players": [],
+  "testResults": [],
+  "testers": [],
+  "staff": [],
+  "announcements": [
+    {
+      "id": "a-1",
+      "title": "Season 1 Standardized Bedrock Tier Testing is Live!",
+      "category": "Update",
+      "content": "Welcome to the official Valtrox Competitive Gaming Platform!\nOfficial 1v1 testing and calibration is open for Bedfight, Skywars, Mace, and Fireball Fight.\n\nJoin our official Discord community to queue with certified evaluators.",
+      "summary": "Testing queues are officially open for Bedfight, Skywars, Mace, and Fireball Fight on Discord.",
+      "author": "Valtrox_Owner",
+      "authorRole": "Owner",
+      "date": "2025-03-01",
+      "pinned": true,
+      "views": 120,
+      "tags": ["Testing", "Bedfight", "Skywars", "Mace", "Fireball Fight"]
+    }
+  ],
+  "serverConfig": {
+    "serverName": "SwimGG",
+    "testingStatus": "Open",
+    "activeSeason": "Season 1 (Bedrock Competitive)",
+    "discordUrl": "https://discord.gg/tV9vrAeJHH",
+    "discordMembers": 128,
+    "onlineMembers": 21,
+    "totalTestsConducted": 0,
+    "totalRegisteredPlayers": 0,
+    "scrimsHosted": 0,
+    "rulesVersion": "v1.0"
+  }
+}
