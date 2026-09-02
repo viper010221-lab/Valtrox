@@ -1,4 +1,5 @@
 {
+  "lastUpdated": 1741000000000,
   "players": [],
   "testResults": [],
   "testers": [],
@@ -15,13 +16,7 @@
       "date": "2025-03-01",
       "pinned": true,
       "views": 120,
-      "tags": [
-        "Testing",
-        "Bedfight",
-        "Skywars",
-        "Mace",
-        "Fireball Fight"
-      ]
+      "tags": ["Testing", "Bedfight", "Skywars", "Mace", "Fireball Fight"]
     }
   ],
   "serverConfig": {
@@ -29,12 +24,11 @@
     "testingStatus": "Open",
     "activeSeason": "Season 1 (Bedrock Competitive)",
     "discordUrl": "https://discord.gg/tV9vrAeJHH",
-    "discordMembers": 164,
-    "onlineMembers": 25,
+    "discordMembers": 128,
+    "onlineMembers": 21,
     "totalTestsConducted": 0,
     "totalRegisteredPlayers": 0,
     "scrimsHosted": 0,
     "rulesVersion": "v1.0"
-  },
-  "lastUpdated": 1788338531598
+  }
 }

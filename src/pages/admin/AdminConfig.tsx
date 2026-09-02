@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
-import { Download, Upload, RefreshCw } from 'lucide-react';
+import { Download, Upload, RefreshCw, Cloud, CloudUpload } from 'lucide-react';
 
 export const AdminConfig: React.FC<{ onFeedback: (msg: string) => void }> = ({ onFeedback }) => {
-  const { serverConfig, updateServerConfig, resetToDefaults, exportDataJSON, importDataJSON, syncWithCloud } = useData();
+  const { serverConfig, updateServerConfig, resetToDefaults, exportDataJSON, importDataJSON, syncWithCloud, pushFullSnapshotToCloud, cloudSyncStatus, lastCloudSync } = useData();
   const [jsonInput, setJsonInput] = useState('');
 
   const handleExport = () => {
@@ -136,18 +136,72 @@ export const AdminConfig: React.FC<{ onFeedback: (msg: string) => void }> = ({ o
               <RefreshCw size={14} />
               <span>Reset to Factory Seed Data</span>
             </button>
-            <button
-              onClick={async () => {
-                const result = await syncWithCloud();
-                onFeedback(result.message);
-              }}
-              className="px-4 py-2 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white text-xs font-bold flex items-center gap-2 cursor-pointer"
-            >
-              <RefreshCw size={14} />
-              <span>Sync with Cloud</span>
-            </button>
           </div>
         </div>
+      </div>
+
+      {/* Cloud Database Sync */}
+      <div className="p-6 sm:p-8 rounded-3xl bg-[#171722] border border-[#252538] space-y-5">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-lg font-extrabold text-white flex items-center gap-2">
+              <Cloud size={20} className="text-[#7C3AED]" />
+              Cloud Database Sync
+            </h3>
+            <p className="text-xs text-zinc-400 mt-1">
+              Sync your database across all admins and testers. Everyone sees the same players, rosters, and results.
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className={`inline-block w-2 h-2 rounded-full ${
+              cloudSyncStatus === 'synced' ? 'bg-green-500' : 
+              cloudSyncStatus === 'syncing' ? 'bg-yellow-500 animate-pulse' : 
+              'bg-red-500'
+            }`} />
+            <span className="text-xs text-zinc-400">
+              {cloudSyncStatus === 'synced' ? '● Synced' : 
+               cloudSyncStatus === 'syncing' ? '● Syncing...' : 
+               '● Sync Error'}
+            </span>
+          </div>
+        </div>
+
+        {lastCloudSync && (
+          <p className="text-[10px] text-zinc-500">
+            Last synced: {lastCloudSync.toLocaleTimeString()} ({lastCloudSync.toLocaleDateString()})
+          </p>
+        )}
+
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            onClick={async () => {
+              const result = await syncWithCloud();
+              onFeedback(result.message);
+            }}
+            className="px-5 py-2.5 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white text-xs font-bold flex items-center gap-2 shadow-glow-purple-sm transition-all cursor-pointer"
+          >
+            <RefreshCw size={14} />
+            <span>Pull from Cloud</span>
+          </button>
+
+          <button
+            onClick={async () => {
+              if (confirm('This will OVERWRITE the cloud database with YOUR current local data. All other admins will receive this data on their next sync. Continue?')) {
+                const result = await pushFullSnapshotToCloud();
+                onFeedback(result.message);
+              }
+            }}
+            className="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold flex items-center gap-2 transition-all cursor-pointer"
+          >
+            <CloudUpload size={14} />
+            <span>Push My Data to Cloud</span>
+          </button>
+        </div>
+
+        <p className="text-[10px] text-zinc-500 leading-relaxed">
+          ⚡ Auto-sync runs every 15 seconds. Changes you make are automatically pushed within ~2 seconds.<br/>
+          🟢 <strong>Pull</strong> = Download latest cloud data to this browser. <strong>Push</strong> = Upload your local data as the master copy.
+        </p>
       </div>
     </div>
   );
