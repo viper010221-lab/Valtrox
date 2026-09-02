@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import {
   Player,
   TestResult,
@@ -21,6 +21,12 @@ import {
   INITIAL_SERVER_CONFIG,
   INITIAL_ACCOUNTS
 } from '../data/initialData';
+import {
+  fetchSupabaseDatabase,
+  queueSupabaseSave,
+  saveSupabaseDatabase,
+  SupabaseDatabasePayload
+} from '../services/supabaseDatabase';
 
 interface DataContextType {
   players: Player[];
@@ -87,6 +93,12 @@ interface DataContextType {
   resetToDefaults: () => void;
   exportDataJSON: () => string;
   importDataJSON: (jsonStr: string) => boolean;
+
+  // Cloud Database Sync
+  cloudSyncStatus: 'synced' | 'syncing' | 'error';
+  lastCloudSync: Date | null;
+  syncWithCloud: () => Promise<{ success: boolean; message: string }>;
+  pushFullSnapshotToCloud: () => Promise<{ success: boolean; message: string }>;
 }
 
 const STORAGE_KEY = 'valtrox_db_v7_ranks_auth_clean';
@@ -241,9 +253,98 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return () => clearInterval(interval);
   }, []);
 
-  // Save to LocalStorage
+  // Cloud Database Sync State
+  const [cloudSyncStatus, setCloudSyncStatus] = useState<'synced' | 'syncing' | 'error'>('synced');
+  const [lastCloudSync, setLastCloudSync] = useState<Date | null>(null);
+  const isRemoteSyncingRef = useRef<boolean>(false);
+  const isInitialHydrationDone = useRef<boolean>(false);
+
+  // Manual or programmatic cloud sync
+  const syncWithCloud = async (): Promise<{ success: boolean; message: string }> => {
+    setCloudSyncStatus('syncing');
+    const res = await fetchSupabaseDatabase();
+    if (res.success && res.data) {
+      isRemoteSyncingRef.current = true;
+      if (Array.isArray(res.data.players)) setPlayers(res.data.players);
+      if (Array.isArray(res.data.testResults)) setTestResults(res.data.testResults);
+      if (Array.isArray(res.data.testers)) setTesters(res.data.testers);
+      if (Array.isArray(res.data.staff)) setStaff(res.data.staff);
+      if (Array.isArray(res.data.announcements)) setAnnouncements(res.data.announcements);
+      if (res.data.serverConfig) setServerConfig((prev) => ({ ...prev, ...res.data!.serverConfig }));
+if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(res.data.accounts);
+      
+      setLastCloudSync(new Date());
+      setCloudSyncStatus('synced');
+      setTimeout(() => {
+        isRemoteSyncingRef.current = false;
+      }, 500);
+      return { success: true, message: 'Cloud database synced successfully! All rosters and leaderboards updated.' };
+    } else {
+      setCloudSyncStatus('error');
+      return { success: false, message: res.message || 'Failed to sync with cloud database.' };
+    }
+  };
+
+  // Push local state as master snapshot to cloud
+  const pushFullSnapshotToCloud = async (): Promise<{ success: boolean; message: string }> => {
+    setCloudSyncStatus('syncing');
+    const res = await saveSupabaseDatabase({
+      players,
+      testResults,
+      testers,
+      staff,
+      announcements,
+      serverConfig,
+      accounts
+    });
+    if (res.success) {
+      setCloudSyncStatus('synced');
+      setLastCloudSync(new Date());
+      return { success: true, message: 'Full database snapshot pushed to cloud! All users now see this data.' };
+    } else {
+      setCloudSyncStatus('error');
+      return { success: false, message: res.message || 'Failed to push snapshot to cloud.' };
+    }
+  };
+
+  // 1. Initial Cloud Hydration on App Launch & Periodic Background Polling (every 15s)
+  useEffect(() => {
+    const hydrateFromCloud = async () => {
+      const res = await fetchSupabaseDatabase();
+      if (res.success && res.data) {
+        isRemoteSyncingRef.current = true;
+        // Merge or replace with cloud data
+        if (Array.isArray(res.data.players) && (res.data.players.length > 0 || !isInitialHydrationDone.current)) {
+          setPlayers(res.data.players);
+        }
+        if (Array.isArray(res.data.testResults)) setTestResults(res.data.testResults);
+        if (Array.isArray(res.data.testers)) setTesters(res.data.testers);
+        if (Array.isArray(res.data.staff)) setStaff(res.data.staff);
+        if (Array.isArray(res.data.announcements)) setAnnouncements(res.data.announcements);
+        if (res.data.serverConfig) setServerConfig((prev) => ({ ...prev, ...res.data!.serverConfig }));
+if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(res.data.accounts);
+        
+        setLastCloudSync(new Date());
+        setCloudSyncStatus('synced');
+        isInitialHydrationDone.current = true;
+        setTimeout(() => {
+          isRemoteSyncingRef.current = false;
+        }, 500);
+      }
+    };
+
+    hydrateFromCloud();
+    const pollInterval = setInterval(hydrateFromCloud, 15000); // 15s live sync across all devices
+    return () => clearInterval(pollInterval);
+  }, []);
+
+  // Save to LocalStorage & Trigger Debounced Cloud Sync when data changes locally
   useEffect(() => {
     localStorage.setItem(`${STORAGE_KEY}_accounts`, JSON.stringify(accounts));
+    if (!isRemoteSyncingRef.current && isInitialHydrationDone.current) {
+
+      queueSupabaseSave({ players, testResults, testers, staff, announcements, serverConfig, accounts });
+    }
   }, [accounts]);
 
   useEffect(() => {
@@ -267,26 +368,44 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     localStorage.setItem(`${STORAGE_KEY}_players`, JSON.stringify(players));
+    if (!isRemoteSyncingRef.current && isInitialHydrationDone.current) {
+      queueSupabaseSave({ players, testResults, testers, staff, announcements, serverConfig, accounts });
+    }
   }, [players]);
 
   useEffect(() => {
     localStorage.setItem(`${STORAGE_KEY}_testResults`, JSON.stringify(testResults));
+    if (!isRemoteSyncingRef.current && isInitialHydrationDone.current) {
+      queueSupabaseSave({ players, testResults, testers, staff, announcements, serverConfig, accounts });
+    }
   }, [testResults]);
 
   useEffect(() => {
     localStorage.setItem(`${STORAGE_KEY}_testers`, JSON.stringify(testers));
+    if (!isRemoteSyncingRef.current && isInitialHydrationDone.current) {
+      queueSupabaseSave({ players, testResults, testers, staff, announcements, serverConfig, accounts });
+    }
   }, [testers]);
 
   useEffect(() => {
     localStorage.setItem(`${STORAGE_KEY}_staff`, JSON.stringify(staff));
+    if (!isRemoteSyncingRef.current && isInitialHydrationDone.current) {
+      queueSupabaseSave({ players, testResults, testers, staff, announcements, serverConfig, accounts });
+    }
   }, [staff]);
 
   useEffect(() => {
     localStorage.setItem(`${STORAGE_KEY}_announcements`, JSON.stringify(announcements));
+    if (!isRemoteSyncingRef.current && isInitialHydrationDone.current) {
+      queueSupabaseSave({ players, testResults, testers, staff, announcements, serverConfig, accounts });
+    }
   }, [announcements]);
 
   useEffect(() => {
     localStorage.setItem(`${STORAGE_KEY}_serverConfig`, JSON.stringify(serverConfig));
+    if (!isRemoteSyncingRef.current && isInitialHydrationDone.current) {
+      queueSupabaseSave({ players, testResults, testers, staff, announcements, serverConfig, accounts });
+    }
   }, [serverConfig]);
 
   useEffect(() => {
@@ -830,6 +949,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         resetToDefaults,
         exportDataJSON,
         importDataJSON,
+        // Cloud sync utilities
+        cloudSyncStatus,
+        lastCloudSync,
+        syncWithCloud,
+        pushFullSnapshotToCloud,
       }}
     >
       {children}
