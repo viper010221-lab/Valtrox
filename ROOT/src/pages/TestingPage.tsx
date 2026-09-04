@@ -19,21 +19,20 @@ export const TestingPage: React.FC = () => {
   const { testers, serverConfig, navigateTo } = useData();
 
   const [calcGamemode, setCalcGamemode] = useState<Gamemode>('Bedfight');
-  const [roundsWon, setRoundsWon] = useState<number>(6);
-  const [roundsLost, setRoundsLost] = useState<number>(10);
+  const [roundsWon, setRoundsWon] = useState<number>(2);
+  const [roundsLost, setRoundsLost] = useState<number>(1);
   const [testerTier, setTesterTier] = useState<TierRank>('HT1');
 
   const calculatePredictedTier = (): { tier: TierRank; confidence: string; reason: string } => {
-    if (roundsWon >= 10 && roundsLost <= 2) return { tier: 'HT1', confidence: '98%', reason: 'Dominant victory (10-0 to 10-2) in official FT10 qualifies for High S Tier (HT1).' };
-    if (roundsWon >= 10 && roundsLost <= 5) return { tier: 'MT1', confidence: '95%', reason: 'Convincing FT10 win qualifies for Mid S Tier (MT1).' };
-    if (roundsWon >= 10) return { tier: 'LT1', confidence: '90%', reason: 'Close FT10 win indicates Low S Tier (LT1) mechanics and game sense.' };
-    if (roundsWon >= 8) return { tier: 'HT2', confidence: '88%', reason: 'Winning 8-9 rounds against an official evaluator demonstrates High A Tier (HT2).' };
-    if (roundsWon >= 6) return { tier: 'MT2', confidence: '85%', reason: 'Competitive neutral exchanges and clutch trades qualify for Mid A Tier (MT2).' };
-    if (roundsWon >= 4) return { tier: 'LT2', confidence: '82%', reason: 'Solid fundamentals qualify for Low A Tier (LT2).' };
-    if (roundsWon >= 3) return { tier: 'HT3', confidence: '80%', reason: 'Consistent combo resets qualify for High B Tier (HT3).' };
-    if (roundsWon >= 2) return { tier: 'MT3', confidence: '78%', reason: 'Good mechanical potential placed at Mid B Tier (MT3).' };
-    if (roundsWon >= 1) return { tier: 'HT4', confidence: '75%', reason: 'Promising foundation placed at High C Tier (HT4).' };
-    return { tier: 'MT4', confidence: '70%', reason: 'Entry calibration placed at Mid C Tier (MT4).' };
+    // Score-aware FT3 mapping (first-to-3). Checked most-specific-first.
+    if (roundsWon === 3 && roundsLost === 0) return { tier: 'HT1', confidence: '98%', reason: 'Dominant 3-0 sweep in official FT3 qualifies for High S Tier (HT1).' };
+    if (roundsWon === 3 && roundsLost === 1) return { tier: 'MT1', confidence: '95%', reason: 'Convincing 3-1 win qualifies for Mid S Tier (MT1).' };
+    if (roundsWon === 3 && roundsLost === 2) return { tier: 'LT1', confidence: '90%', reason: 'Clutch 3-2 win qualifies for Low S Tier (LT1) mechanics and game sense.' };
+    if (roundsWon === 2 && roundsLost === 0) return { tier: 'HT2', confidence: '88%', reason: 'Strong 2-0 lead against an official evaluator demonstrates High A Tier (HT2).' };
+    if (roundsWon === 2 && roundsLost === 1) return { tier: 'MT2', confidence: '85%', reason: 'Competitive 2-1 result qualifies for Mid A Tier (MT2).' };
+    if (roundsWon === 1 && roundsLost <= 2) return { tier: 'HT3', confidence: '80%', reason: 'Won a round against an official evaluator — High B Tier (HT3).' };
+    if (roundsWon === 1) return { tier: 'MT3', confidence: '75%', reason: 'Competitive rounds in a 1-3 loss — Mid B Tier (MT3).' };
+    return { tier: 'MT4', confidence: '70%', reason: 'Entry calibration — placed at Mid C Tier (MT4).' };
   };
 
   const prediction = calculatePredictedTier();
@@ -98,7 +97,7 @@ export const TestingPage: React.FC = () => {
           <div className="w-10 h-10 rounded-xl bg-purple-900/30 border border-[#7C3AED]/40 flex items-center justify-center font-mono font-bold text-[#8B5CF6]">
             03
           </div>
-          <h3 className="font-bold text-white text-base">First-to-10 Set</h3>
+          <h3 className="font-bold text-white text-base">First-to-3 Set</h3>
           <p className="text-xs text-zinc-400 leading-relaxed">
             Duel a verified Tester on the official Valtrox server under strict recording rules.
           </p>
@@ -158,7 +157,7 @@ export const TestingPage: React.FC = () => {
                 <input
                   type="range"
                   min={0}
-                  max={10}
+                  max={3}
                   value={roundsWon}
                   onChange={(e) => setRoundsWon(parseInt(e.target.value))}
                   className="w-full accent-[#7C3AED] cursor-pointer"
@@ -182,7 +181,7 @@ export const TestingPage: React.FC = () => {
             <div className="p-4 rounded-xl bg-[#0F0F17]/70 border border-[#252538] text-xs text-zinc-400 flex items-start gap-2.5">
               <Shield size={16} className="text-purple-400 mt-0.5 flex-shrink-0" />
               <span>
-                Calculated for a standard <strong>First-to-10 (FT10)</strong> test match in Bedfight, Skywars, Mace, or Fireball Fight.
+                Calculated for a standard <strong>First-to-3 (FT3)</strong> test match in Bedfight, Skywars, Mace, or Fireball Fight.
               </span>
             </div>
           </div>
