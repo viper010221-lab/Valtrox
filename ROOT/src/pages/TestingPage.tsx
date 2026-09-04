@@ -19,9 +19,25 @@ export const TestingPage: React.FC = () => {
   const { testers, serverConfig, navigateTo } = useData();
 
   const [calcGamemode, setCalcGamemode] = useState<Gamemode>('Bedfight');
-  const [roundsWon, setRoundsWon] = useState<number>(2);
-  const [roundsLost, setRoundsLost] = useState<number>(1);
+  const [rounds, setRounds] = useState<Array<'win' | 'loss' | null>>([null, null, null]);
   const [testerTier, setTesterTier] = useState<TierRank>('HT1');
+
+  // Derive win/loss counts from the rounds array.
+  const roundsWon = rounds.filter((r) => r === 'win').length;
+  const roundsLost = rounds.filter((r) => r === 'loss').length;
+  const roundsPlayed = roundsWon + roundsLost;
+
+  // Cycle a single round: undecided → win → loss → undecided.
+  const cycleRound = (index: number) => {
+    setRounds((prev) => {
+      const next = [...prev];
+      const cur = next[index];
+      next[index] = cur === null ? 'win' : cur === 'win' ? 'loss' : null;
+      return next;
+    });
+  };
+
+  const resetRounds = () => setRounds([null, null, null]);
 
   const calculatePredictedTier = (): { tier: TierRank; confidence: string; reason: string } => {
     // Score-aware FT3 mapping (first-to-3). Checked most-specific-first.
@@ -36,6 +52,25 @@ export const TestingPage: React.FC = () => {
   };
 
   const prediction = calculatePredictedTier();
+
+  // What would the player reach if they won the very next round?
+  const getNextTierGuidance = (): { label: string; emoji: string } => {
+    if (roundsPlayed === 0) return { label: 'Tap a round to start simulating', emoji: '👆' };
+    const hypothetical = [...rounds, 'win'] as Array<'win' | 'loss' | null>;
+    const hWon = hypothetical.filter((r) => r === 'win').length;
+    const hLost = hypothetical.filter((r) => r === 'loss').length;
+    // Re-run the same FT3 logic on the hypothetical score.
+    let nextTier: TierRank = 'MT4';
+    if (hWon === 3 && hLost <= 2) nextTier = hLost <= 0 ? 'HT1' : hLost === 1 ? 'MT1' : 'LT1';
+    else if (hWon === 2 && hLost <= 1) nextTier = hLost === 0 ? 'HT2' : 'MT2';
+    else if (hWon === 1 && hLost <= 2) nextTier = 'HT3';
+    else nextTier = 'MT3';
+    if (nextTier === prediction.tier) return { label: 'Maximum tier reached for this score', emoji: '✅' };
+    return { label: `Win next round → ${nextTier}`, emoji: '🏆' };
+  };
+
+  const guidance = getNextTierGuidance();
+  const winRate = roundsPlayed > 0 ? Math.round((roundsWon / roundsPlayed) * 100) : 0;
 
   return (
     <div className="space-y-12">
@@ -135,46 +170,77 @@ export const TestingPage: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
           <div className="space-y-4 md:col-span-2">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div>
-                <label className="text-xs font-semibold text-zinc-400 block mb-1.5">Gamemode</label>
-                <select
-                  value={calcGamemode}
-                  onChange={(e) => setCalcGamemode(e.target.value as Gamemode)}
-                  className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
-                >
-                  {INITIAL_GAMEMODES.map((gm) => (
-                    <option key={gm.id} value={gm.id}>{gm.name}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center mb-1.5">
-                  <label className="text-xs font-semibold text-zinc-400">Your Score</label>
-                  <span className="text-xs font-mono font-bold text-emerald-400">{roundsWon} Wins</span>
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-xs font-semibold text-zinc-400 block mb-1.5">Gamemode</label>
+                  <select
+                    value={calcGamemode}
+                    onChange={(e) => setCalcGamemode(e.target.value as Gamemode)}
+                    className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+                  >
+                    {INITIAL_GAMEMODES.map((gm) => (
+                      <option key={gm.id} value={gm.id}>{gm.name}</option>
+                    ))}
+                  </select>
                 </div>
-                <input
-                  type="range"
-                  min={0}
-                  max={3}
-                  value={roundsWon}
-                  onChange={(e) => setRoundsWon(parseInt(e.target.value))}
-                  className="w-full accent-[#7C3AED] cursor-pointer"
-                />
+                <div>
+                  <label className="text-xs font-semibold text-zinc-400 block mb-1.5">Tester Rank</label>
+                  <select
+                    value={testerTier}
+                    onChange={(e) => setTesterTier(e.target.value as TierRank)}
+                    className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+                  >
+                    <option value="HT1">High Tier 1 Tester (HT1)</option>
+                    <option value="LT1">Low Tier 1 Tester (LT1)</option>
+                    <option value="HT2">High Tier 2 Tester (HT2)</option>
+                  </select>
+                </div>
               </div>
 
+              {/* Round-by-round scoreboard */}
               <div>
-                <label className="text-xs font-semibold text-zinc-400 block mb-1.5">Tester Rank</label>
-                <select
-                  value={testerTier}
-                  onChange={(e) => setTesterTier(e.target.value as TierRank)}
-                  className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
-                >
-                  <option value="HT1">High Tier 1 Tester (HT1)</option>
-                  <option value="LT1">Low Tier 1 Tester (LT1)</option>
-                  <option value="HT2">High Tier 2 Tester (HT2)</option>
-                </select>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-semibold text-zinc-400">FT3 Match Rounds</label>
+                  <button onClick={resetRounds} className="text-[10px] text-zinc-500 hover:text-[#8B5CF6] transition-colors font-semibold uppercase tracking-wider">Reset</button>
+                </div>
+                <div className="flex items-center gap-3">
+                  {rounds.map((r, i) => (
+                    <button
+                      key={i}
+                      onClick={() => cycleRound(i)}
+                      className={`relative flex-1 py-3 rounded-xl text-xs font-bold transition-all border ${
+                        r === 'win'
+                          ? 'bg-emerald-500/15 border-emerald-500/50 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.15)]'
+                          : r === 'loss'
+                          ? 'bg-red-500/15 border-red-500/50 text-red-300 shadow-[0_0_15px_rgba(239,68,68,0.15)]'
+                          : 'bg-[#0F0F17] border-[#252538] text-zinc-500 hover:border-[#7C3AED]/40 hover:text-zinc-300'
+                      }`}
+                    >
+                      <span className="block text-[10px] opacity-60 mb-0.5">R{i + 1}</span>
+                      {r === 'win' ? 'W' : r === 'loss' ? 'L' : '—'}
+                    </button>
+                  ))}
+                </div>
+                {/* Live score line */}
+                <div className="mt-3 flex items-center justify-between px-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Score</span>
+                    <span className="text-sm font-extrabold text-white font-mono">
+                      You <span className="text-emerald-400">{roundsWon}</span>
+                      <span className="text-zinc-600 mx-1">–</span>
+                      <span className="text-red-400">{roundsLost}</span> Tester
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-mono text-zinc-500">{roundsPlayed}/3 rounds</span>
+                </div>
+                {/* Win-rate progress bar */}
+                <div className="mt-2 h-1.5 w-full rounded-full bg-[#0F0F17] overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-[#7C3AED] to-emerald-400 transition-all duration-300"
+                    style={{ width: `${winRate}%` }}
+                  />
+                </div>
               </div>
             </div>
 
@@ -188,14 +254,42 @@ export const TestingPage: React.FC = () => {
 
           <div className="p-5 rounded-2xl bg-[#0F0F17] border border-[#7C3AED]/40 flex flex-col justify-between space-y-4">
             <div>
-              <span className="text-[11px] font-mono text-zinc-500 uppercase">Estimated Tier</span>
-              <div className="flex items-center gap-3 mt-2">
-                <TierBadge tier={prediction.tier} size="xl" pulse />
-                <span className="text-xs font-mono text-emerald-400 font-bold">{prediction.confidence} Confidence</span>
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-mono text-zinc-500 uppercase">Estimated Tier</span>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#7C3AED]/15 border border-[#7C3AED]/30 text-purple-300">
+                  FT3 · {roundsWon}-{roundsLost}
+                </span>
               </div>
-              <p className="text-xs text-zinc-400 mt-3 leading-relaxed">
-                {prediction.reason}
-              </p>
+              <div className="flex items-center gap-3 mt-3">
+                <TierBadge tier={prediction.tier} size="xl" pulse />
+                <div className="flex-1">
+                  <span className="text-sm font-extrabold text-white block">{prediction.tier}</span>
+                  <span className="text-[10px] font-mono text-emerald-400 font-bold">{prediction.confidence} Confidence</span>
+                </div>
+              </div>
+
+              {/* Win-rate gauge */}
+              <div className="mt-4">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Round Win Rate</span>
+                  <span className="text-[10px] font-mono font-bold text-emerald-400">{winRate}%</span>
+                </div>
+                <div className="h-2 w-full rounded-full bg-[#171722] overflow-hidden">
+                  <div
+                    className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-300 transition-all duration-300"
+                    style={{ width: `${winRate}%` }}
+                  />
+                </div>
+              </div>
+
+              {/* Next-tier guidance */}
+              <div className="mt-4 p-3 rounded-lg bg-[#171722] border border-[#252538] flex items-start gap-2">
+                <span className="text-sm leading-none">{guidance.emoji}</span>
+                <div>
+                  <span className="text-[11px] font-bold text-white block">{guidance.label}</span>
+                  <span className="text-[10px] text-zinc-500 leading-relaxed mt-0.5 block">{prediction.reason}</span>
+                </div>
+              </div>
             </div>
 
             <a
