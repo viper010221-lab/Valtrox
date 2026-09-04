@@ -4,8 +4,6 @@ import { Award, CheckCircle2, Trash2 } from 'lucide-react';
 import { Gamemode, TierRank } from '../../types';
 import { INITIAL_GAMEMODES } from '../../data/initialData';
 
-import { sendTierResultToDiscord } from '../../services/webhookService';
-
 export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }> = ({ onFeedback }) => {
   const { players, testers, addTestResult, testResults, deleteTestResult, serverConfig } = useData();
 
@@ -16,10 +14,6 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
   const [pubScore, setPubScore] = useState<string>('10 - 3');
   const [pubTesterName, setPubTesterName] = useState<string>(testers[0]?.name || 'Zephyr_MC');
   const [pubNotes, setPubNotes] = useState<string>('Exceptional hit spacing and sprint-resets. Approved for promotion.');
-
-  // Discord webhook send state
-  const [discordStatus, setDiscordStatus] = useState<'idle' | 'sending' | 'sent' | 'failed'>('idle');
-  const [pubServerName, setPubServerName] = useState<string>(serverConfig.serverName);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,25 +35,7 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
       verified: true
     });
 
-    // Push the result to the Discord webhook with an embed
-    const date = new Date().toISOString().split('T')[0];
-    setDiscordStatus('sending');
-    const discordRes = await sendTierResultToDiscord({
-      playerIgn: targetPlayer.ign,
-      playerDiscord: targetPlayer.discordTag,
-      gamemode: pubGamemode,
-      previousTier: pubOldTier,
-      newTier: pubNewTier,
-      score: pubScore,
-      testerName: pubTesterName,
-      date,
-      notes: pubNotes,
-      serverName: pubServerName.trim() || serverConfig.serverName
-    });
-    setDiscordStatus(discordRes.success ? 'sent' : 'failed');
-    onFeedback(
-      `Published official tier test result for ${targetPlayer.ign}! ${discordRes.success ? 'Posted to Discord ✅' : '⚠️ Discord webhook failed'}`
-    );
+    onFeedback(`Published official tier test result for ${targetPlayer.ign}! Result is now live on the website.`);
   };
 
   return (
@@ -179,17 +155,6 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
         </div>
 
         <div>
-          <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Test Server (shown in the Discord embed)</label>
-          <input
-            type="text"
-            value={pubServerName}
-            onChange={(e) => setPubServerName(e.target.value)}
-            placeholder="e.g. SwimGG"
-            className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
-          />
-        </div>
-
-        <div>
           <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Evaluator Notes & Feedback</label>
           <textarea
             value={pubNotes}
@@ -207,33 +172,6 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
           <Award size={16} />
           <span>Publish Official Result</span>
         </button>
-
-        {discordStatus !== 'idle' && (
-          <div
-            className={`flex items-center gap-2 p-3 rounded-xl text-xs font-semibold ${
-              discordStatus === 'sending'
-                ? 'bg-[#171722] border border-[#252538] text-zinc-300'
-                : discordStatus === 'sent'
-                  ? 'bg-emerald-950/40 border border-emerald-500/30 text-emerald-300'
-                  : 'bg-red-950/40 border border-red-500/30 text-red-300'
-            }`}
-          >
-            {discordStatus === 'sending' ? (
-              <span className="inline-block w-3 h-3 rounded-full border-2 border-zinc-300 border-t-transparent animate-spin" />
-            ) : discordStatus === 'sent' ? (
-              <CheckCircle2 size={14} />
-            ) : (
-              <Trash2 size={14} />
-            )}
-            <span>
-              {discordStatus === 'sending'
-                ? 'Posting result to Discord webhook...'
-                : discordStatus === 'sent'
-                  ? 'Result posted to Discord successfully.'
-                  : 'Failed to post result to Discord webhook.'}
-            </span>
-          </div>
-        )}
       </form>
 
       {/* Recent Test Results Management */}
