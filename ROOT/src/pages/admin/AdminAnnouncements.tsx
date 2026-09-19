@@ -50,7 +50,7 @@ export const AdminAnnouncements: React.FC<{ onFeedback: (msg: string) => void }>
               <label className="text-[11px] font-semibold text-zinc-400 block mb-1">Headline Title</label>
               <input
                 type="text"
-                placeholder="e.g. Valtrox $1,000 Bedrock Scrim Championship"
+                placeholder="e.g. Bedrock Union $1,000 Bedrock Scrim Championship"
                 value={newAnnTitle}
                 onChange={(e) => setNewAnnTitle(e.target.value)}
                 className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"

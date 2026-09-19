@@ -19,7 +19,9 @@ import {
   INITIAL_STAFF,
   INITIAL_ANNOUNCEMENTS,
   INITIAL_SERVER_CONFIG,
-  INITIAL_ACCOUNTS
+  INITIAL_ACCOUNTS,
+  OFFICIAL_DISCORD_INVITE,
+  OWNER_IGN
 } from '../data/initialData';
 import {
   fetchSupabaseDatabase,
@@ -28,6 +30,13 @@ import {
   deleteSupabaseRow,
   SupabaseDatabasePayload
 } from '../services/supabaseDatabase';
+
+// Official owner display name + legacy-name detection so saved records never duplicate
+const LEGACY_OWNER_IGNS = ['valtrox_owner', 'valtrox.owner', 'valtroxowner'];
+const isOwnerIgn = (ign?: string) => {
+  const clean = (ign || '').toLowerCase();
+  return LEGACY_OWNER_IGNS.includes(clean) || clean.replace(/[\s_-]+/g, '') === 'bedrockunionowner';
+};
 
 interface DataContextType {
   players: Player[];
@@ -201,7 +210,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [serverConfig, setServerConfig] = useState<ServerConfig>(() => {
     try {
       const saved = localStorage.getItem(`${STORAGE_KEY}_serverConfig`);
-      return saved ? { ...INITIAL_SERVER_CONFIG, ...JSON.parse(saved), discordUrl: 'https://discord.gg/tV9vrAeJHH' } : INITIAL_SERVER_CONFIG;
+      return saved ? { ...INITIAL_SERVER_CONFIG, ...JSON.parse(saved), discordUrl: OFFICIAL_DISCORD_INVITE } : INITIAL_SERVER_CONFIG;
     } catch {
       return INITIAL_SERVER_CONFIG;
     }
@@ -271,7 +280,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (Array.isArray(res.data.testers)) setTesters(res.data.testers);
       if (Array.isArray(res.data.staff)) setStaff(res.data.staff);
       if (Array.isArray(res.data.announcements)) setAnnouncements(res.data.announcements);
-      if (res.data.serverConfig) setServerConfig((prev) => ({ ...prev, ...res.data!.serverConfig }));
+      if (res.data.serverConfig) setServerConfig((prev) => ({ ...prev, ...res.data!.serverConfig, discordUrl: OFFICIAL_DISCORD_INVITE }));
 if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(res.data.accounts);
       
       setLastCloudSync(new Date());
@@ -322,7 +331,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
         if (Array.isArray(res.data.testers)) setTesters(res.data.testers);
         if (Array.isArray(res.data.staff)) setStaff(res.data.staff);
         if (Array.isArray(res.data.announcements)) setAnnouncements(res.data.announcements);
-        if (res.data.serverConfig) setServerConfig((prev) => ({ ...prev, ...res.data!.serverConfig }));
+        if (res.data.serverConfig) setServerConfig((prev) => ({ ...prev, ...res.data!.serverConfig, discordUrl: OFFICIAL_DISCORD_INVITE }));
 if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(res.data.accounts);
         
         setLastCloudSync(new Date());
@@ -353,6 +362,13 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
       localStorage.setItem(`${STORAGE_KEY}_currentUser`, JSON.stringify(currentUser));
     } else {
       localStorage.removeItem(`${STORAGE_KEY}_currentUser`);
+    }
+  }, [currentUser]);
+
+  // Self-heal: keep the logged-in master admin name on-brand for old saved sessions
+  useEffect(() => {
+    if (currentUser && currentUser.email.toLowerCase() === 'valtrox51@gmail.com' && currentUser.ign !== OWNER_IGN) {
+      setCurrentUser({ ...currentUser, ign: OWNER_IGN });
     }
   }, [currentUser]);
 
@@ -425,7 +441,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
         id: 'acc-owner-master',
         email: 'valtrox51@gmail.com',
         password: 'ValtroxSystemX1',
-        ign: 'Valtrox_Owner',
+        ign: OWNER_IGN,
         discordTag: 'valtrox_owner',
         rank: 'Owner',
         createdAt: new Date().toISOString().split('T')[0]
@@ -435,10 +451,14 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
 
       // Auto-sync into Players roster
       setPlayers((prev) => {
-        if (!prev.some((p) => p.email?.toLowerCase() === 'valtrox51@gmail.com' || p.ign.toLowerCase() === 'valtrox_owner')) {
+        // Self-heal: migrate any legacy owner display name already saved to the roster
+        const ownerMigrated = prev.map((p) =>
+          p.email?.toLowerCase() === 'valtrox51@gmail.com' ? { ...p, ign: OWNER_IGN } : p
+        );
+        if (!ownerMigrated.some((p) => p.email?.toLowerCase() === 'valtrox51@gmail.com' || isOwnerIgn(p.ign))) {
           const ownerPlayer: Player = {
             id: 'ply-valtrox-owner',
-            ign: 'Valtrox_Owner',
+            ign: OWNER_IGN,
             discordTag: 'valtrox_owner',
             email: 'valtrox51@gmail.com',
             rank: 'Owner',
@@ -446,7 +466,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
             region: 'NA',
             device: 'KBM',
             joinDate: new Date().toISOString().split('T')[0],
-            bio: 'Valtrox Platform Owner & System Administrator.',
+            bio: 'Bedrock Union Platform Owner & System Administrator.',
             verified: true,
             status: 'Active',
             tiers: {
@@ -462,9 +482,9 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
             tourneyTrophies: 0,
             globalRank: 1
           };
-          return [ownerPlayer, ...prev];
+          return [ownerPlayer, ...ownerMigrated];
         }
-        return prev;
+        return ownerMigrated;
       });
 
       setAuthModalOpenState(false);
@@ -478,8 +498,8 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
       return { success: false, message: 'Incorrect password.' };
     }
 
-    if (isMasterAdmin && account.rank !== 'Owner') {
-      account = { ...account, rank: 'Owner' };
+    if (isMasterAdmin && (account.rank !== 'Owner' || account.ign !== OWNER_IGN)) {
+      account = { ...account, rank: 'Owner', ign: OWNER_IGN };
       setAccounts((prev) => prev.map((a) => (a.email.toLowerCase() === trimmedEmail ? account! : a)));
     }
 
@@ -487,7 +507,9 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
 
     // Ensure player is in Players roster
     setPlayers((prev) => {
-      const idx = prev.findIndex((p) => p.email?.toLowerCase() === trimmedEmail || p.ign.toLowerCase() === account!.ign.toLowerCase());
+      // Self-heal: migrate the legacy owner display name in the roster
+      const migrated = prev.map((p) => (p.email?.toLowerCase() === 'valtrox51@gmail.com' ? { ...p, ign: OWNER_IGN } : p));
+      const idx = migrated.findIndex((p) => p.email?.toLowerCase() === trimmedEmail || p.ign.toLowerCase() === account!.ign.toLowerCase());
       if (idx === -1) {
         const newPlayer: Player = {
           id: `ply-${Date.now()}`,
@@ -499,7 +521,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
           region: 'NA',
           device: 'KBM',
           joinDate: account!.createdAt || new Date().toISOString().split('T')[0],
-          bio: 'Competitive Minecraft Bedrock player on Valtrox.',
+          bio: 'Competitive Minecraft Bedrock player on Bedrock Union.',
           verified: true,
           status: 'Active',
           tiers: {
@@ -515,9 +537,9 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
           tourneyTrophies: 0,
           globalRank: prev.length + 1
         };
-        return [...prev, newPlayer];
+        return [...migrated, newPlayer];
       }
-      return prev;
+      return migrated;
     });
 
     setAuthModalOpenState(false);
@@ -573,7 +595,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
             region: 'NA',
             device: 'KBM',
             joinDate: new Date().toISOString().split('T')[0],
-            bio: 'Valtrox Platform Owner & System Administrator.',
+            bio: 'Bedrock Union Platform Owner & System Administrator.',
             verified: true,
             status: 'Active',
             tiers: {
@@ -636,7 +658,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
         region: 'NA',
         device: 'KBM',
         joinDate: new Date().toISOString().split('T')[0],
-        bio: isMasterAdmin ? 'Valtrox Platform Owner & Master Administrator.' : 'Competitive Minecraft Bedrock player on Valtrox.',
+        bio: isMasterAdmin ? 'Bedrock Union Platform Owner & Master Administrator.' : 'Competitive Minecraft Bedrock player on Bedrock Union.',
         verified: true,
         status: 'Active',
         rank: assignedRank,
@@ -661,7 +683,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
       success: true,
       message: isMasterAdmin
         ? '👑 Master Admin registered! Full Admin Panel access unlocked!'
-        : 'Account successfully registered and added to the Players Roster! Welcome to Valtrox.'
+        : 'Account successfully registered and added to the Players Roster! Welcome to Bedrock Union.'
     };
   };
 
@@ -678,7 +700,7 @@ if (Array.isArray(res.data.accounts) && res.data.accounts.length) setAccounts(re
     const dm: LiveDMNews = {
       id: `dm-${Date.now()}`,
       message: message.trim(),
-      sender: currentUser ? currentUser.ign : 'Valtrox System',
+      sender: currentUser ? currentUser.ign : 'Bedrock Union System',
       senderRank: currentUser ? currentUser.rank : 'Owner',
       timestamp: Date.now()
     };

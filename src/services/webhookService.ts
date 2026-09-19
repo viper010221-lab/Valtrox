@@ -59,7 +59,7 @@ const MIN_SEND_INTERVAL_MS = 1500;
 
 /**
  * Securely publishes a tier test result to Discord via the protected webhook endpoint.
- * Formatted to match the official Valtrox Discord Embed with Components V2.
+ * Formatted to match the official Bedrock Union Discord Embed with Components V2.
  */
 export async function sendTierResultToDiscord(
   result: TierResultPayload
@@ -108,7 +108,7 @@ export async function sendTierResultToDiscord(
     const embed = {
       title: `<:${result.gamemode.toLowerCase().replace(/\s+/g, '')}:${emojiId}> ${result.gamemode} | Test Result`,
       description: descriptionLines.join('\n'),
-      color: 0x7c3aed, // Purple theme accent matching Valtrox brand
+      color: 0x7c3aed, // Purple theme accent matching Bedrock Union brand
       author: {
         name: `${result.gamemode} | Test Result`,
         icon_url: `https://cdn.discordapp.com/emojis/${emojiId}.png`
@@ -124,7 +124,8 @@ export async function sendTierResultToDiscord(
             type: 2, // Button
             style: 5, // Link
             label: '🏆 Leaderboards',
-            url: 'https://valtrox.network'
+            // Links back to whichever domain is hosting the platform (no hardcoded legacy domain)
+            url: typeof window !== 'undefined' ? window.location.origin : 'https://discord.gg/tV9vrAeJHH'
           },
           {
             type: 2, // Button

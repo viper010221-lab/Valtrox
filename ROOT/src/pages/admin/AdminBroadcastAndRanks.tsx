@@ -12,7 +12,7 @@ const ALL_RANKS: UserRank[] = [
   'Developer',
   'Administrator',
   'Moderator',
-  'Valtrox Partner',
+  'Bedrock Union Partner',
   'VIP',
   'Tier Tester',
   'Content Creator+',
@@ -102,7 +102,7 @@ export const AdminBroadcastAndRanks: React.FC<{ onFeedback: (msg: string) => voi
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
             <span className="text-[11px] text-zinc-500 font-mono">
-              Sender will be marked as <strong className="text-red-400">{currentUser?.ign || 'Valtrox_Owner'} [Owner]</strong>
+              Sender will be marked as <strong className="text-red-400">{currentUser?.ign || 'Bedrock Union Owner'} [Owner]</strong>
             </span>
             <button
               type="submit"

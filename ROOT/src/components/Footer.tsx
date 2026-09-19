@@ -16,8 +16,8 @@ export const Footer: React.FC = () => {
               <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#7C3AED] to-[#8B5CF6] flex items-center justify-center text-white shadow-glow-purple-sm">
                 <Shield size={18} />
               </div>
-              <span className="font-extrabold text-lg text-white tracking-wider">
-                VALTROX<span className="text-[#8B5CF6]">.GG</span>
+              <span className="font-extrabold text-lg text-white tracking-normal whitespace-nowrap">
+                BEDROCK&nbsp;<span className="text-[#8B5CF6]">UNION</span>
               </span>
             </div>
             <p className="text-zinc-400 text-xs leading-relaxed">
@@ -25,7 +25,7 @@ export const Footer: React.FC = () => {
             </p>
             <div className="flex items-center gap-2 text-[11px] font-mono text-zinc-400">
               <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              <span>Valtrox Bedrock Network v4.2</span>
+              <span>Bedrock Union Network v4.2</span>
             </div>
           </div>
 
@@ -107,7 +107,7 @@ export const Footer: React.FC = () => {
 
         <div className="mt-12 pt-8 border-t border-[#252538] flex flex-col sm:flex-row items-center justify-between gap-4 text-zinc-400 text-[11px]">
           <div>
-            &copy; {new Date().getFullYear()} Valtrox. Not affiliated with Mojang Studios or Microsoft.
+            &copy; {new Date().getFullYear()} Bedrock Union. Not affiliated with Mojang Studios or Microsoft.
           </div>
           <div className="flex items-center gap-4">
             <button onClick={() => navigateTo('admin')} className="hover:text-purple-400 transition-colors cursor-pointer font-mono">

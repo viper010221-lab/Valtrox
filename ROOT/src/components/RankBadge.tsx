@@ -1,6 +1,11 @@
 import React from 'react';
 import { UserRank } from '../types';
 
+// Legacy brand alias: accounts/testers saved under the old "Valtrox Partner" rank
+// still render with the correct "Bedrock Union Partner" badge.
+export const normalizeRank = (rank: UserRank): UserRank =>
+  ((rank as string) === 'Valtrox Partner' ? 'Bedrock Union Partner' : rank);
+
 interface RankBadgeProps {
   rank: UserRank;
   size?: 'sm' | 'md' | 'lg';
@@ -8,7 +13,7 @@ interface RankBadgeProps {
 }
 
 export const getRankColor = (rank: UserRank): { bg: string; text: string; border: string; glow: string } => {
-  switch (rank) {
+  switch (normalizeRank(rank)) {
     case 'Owner':
       return {
         bg: 'bg-gradient-to-r from-red-600/30 via-amber-500/20 to-red-600/30',
@@ -37,7 +42,7 @@ export const getRankColor = (rank: UserRank): { bg: string; text: string; border
         border: 'border-emerald-500/50',
         glow: 'shadow-[0_0_10px_rgba(16,185,129,0.3)]'
       };
-    case 'Valtrox Partner':
+    case 'Bedrock Union Partner':
       return {
         bg: 'bg-purple-950/70',
         text: 'text-purple-300 font-extrabold',
@@ -105,7 +110,8 @@ export const getRankColor = (rank: UserRank): { bg: string; text: string; border
 };
 
 export const RankBadge: React.FC<RankBadgeProps> = ({ rank, size = 'md', className = '' }) => {
-  const styles = getRankColor(rank);
+  const displayRank = normalizeRank(rank);
+  const styles = getRankColor(displayRank);
 
   const sizeClasses = {
     sm: 'text-[9px] px-1.5 py-0.5 rounded font-mono',
@@ -121,7 +127,7 @@ export const RankBadge: React.FC<RankBadgeProps> = ({ rank, size = 'md', classNa
       {rank === 'Developer' && <span>⚡</span>}
       {rank === 'Administrator' && <span>🛡️</span>}
       {rank === 'VIP' && <span>⭐</span>}
-      {rank}
+      {displayRank}
     </span>
   );
 };

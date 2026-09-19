@@ -12,7 +12,7 @@ export const AdminConfig: React.FC<{ onFeedback: (msg: string) => void }> = ({ o
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `valtrox_backup_${new Date().toISOString().split('T')[0]}.json`;
+    a.download = `bedrock_union_backup_${new Date().toISOString().split('T')[0]}.json`;
     a.click();
     onFeedback('Database exported to JSON file!');
   };

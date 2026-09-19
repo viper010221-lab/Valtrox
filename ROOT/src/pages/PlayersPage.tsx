@@ -208,7 +208,7 @@ export const PlayersPage: React.FC = () => {
                 </div>
 
                 <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">
-                  {player.bio || 'Competitive Minecraft Bedrock player active in Valtrox leagues.'}
+                  {player.bio || 'Competitive Minecraft Bedrock player active in Bedrock Union leagues.'}
                 </p>
 
                 <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">

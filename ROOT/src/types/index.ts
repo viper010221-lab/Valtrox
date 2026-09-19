@@ -14,7 +14,7 @@ export type UserRank =
   | 'Developer'
   | 'Administrator'
   | 'Moderator'
-  | 'Valtrox Partner'
+  | 'Bedrock Union Partner'
   | 'VIP'
   | 'Tier Tester'
   | 'Content Creator+'

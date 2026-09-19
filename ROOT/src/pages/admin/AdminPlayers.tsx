@@ -26,7 +26,7 @@ export const AdminPlayers: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
       region: newPlayerRegion,
       device: newPlayerDevice,
       joinDate: new Date().toISOString().split('T')[0],
-      bio: 'Competitive Minecraft Bedrock player on Valtrox.',
+      bio: 'Competitive Minecraft Bedrock player on Bedrock Union.',
       verified: true,
       status: 'Active',
       tiers: {

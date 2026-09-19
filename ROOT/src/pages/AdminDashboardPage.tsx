@@ -92,7 +92,7 @@ export const AdminDashboardPage: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-red-400 font-mono">
             <Sliders size={14} className="text-amber-400" />
-            <span>Valtrox Master Administration Portal</span>
+            <span>Bedrock Union Master Administration Portal</span>
           </div>
           <h1 className="text-3xl font-extrabold text-white tracking-tight mt-1 flex items-center gap-2.5">
             <span>Admin Control Panel</span>

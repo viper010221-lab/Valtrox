@@ -41,12 +41,15 @@ export const INITIAL_GAMEMODES: { id: Gamemode; name: string; icon: string; desc
   { id: 'Fireball Fight', name: 'Fireball Fight', icon: 'Flame', description: 'Fireball aim, projectile timing, knockback control, and close-range dueling.', testQueueCount: 0 },
 ];
 
+// Official owner display name for the platform master admin account
+export const OWNER_IGN = 'Bedrock Union Owner';
+
 export const INITIAL_ACCOUNTS: UserAccount[] = [
   {
     id: 'usr-admin-1',
     email: 'valtrox51@gmail.com',
     password: 'ValtroxSystemX1',
-    ign: 'Valtrox_Owner',
+    ign: OWNER_IGN,
     discordTag: 'valtrox.owner',
     rank: 'Owner',
     createdAt: '2025-01-01'
@@ -66,12 +69,12 @@ export const INITIAL_ANNOUNCEMENTS: Announcement[] = [
     id: 'a-1',
     title: 'Season 1 Standardized Bedrock Tier Testing is Live!',
     category: 'Update',
-    content: `Welcome to the official Valtrox Competitive Gaming Platform! 
+    content: `Welcome to the official Bedrock Union Competitive Gaming Platform! 
 Official 1v1 testing and calibration is open for Bedfight, Skywars, Mace, and Fireball Fight.
 
 Join our official Discord community to queue with certified evaluators.`,
     summary: 'Testing queues are officially open for Bedfight, Skywars, Mace, and Fireball Fight on Discord.',
-    author: 'Valtrox_Owner',
+    author: OWNER_IGN,
     authorRole: 'Owner',
     date: '2025-03-01',
     pinned: true,
@@ -80,13 +83,16 @@ Join our official Discord community to queue with certified evaluators.`,
   }
 ];
 
+// Official "Bedrock Union" Discord invite - single source of truth for the whole platform
+export const OFFICIAL_DISCORD_INVITE = 'https://discord.gg/tV9vrAeJHH';
+
 export const INITIAL_SERVER_CONFIG: ServerConfig = {
   serverName: 'SwimGG',
   testingStatus: 'Open',
   activeSeason: 'Season 1 (Bedrock Competitive)',
-  discordUrl: 'https://discord.gg/tV9vrAeJHH',
-  discordMembers: 128,
-  onlineMembers: 21,
+  discordUrl: OFFICIAL_DISCORD_INVITE,
+  discordMembers: 212,
+  onlineMembers: 43,
   totalTestsConducted: 0,
   totalRegisteredPlayers: 0,
   scrimsHosted: 0,

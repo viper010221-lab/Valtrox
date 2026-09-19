@@ -79,7 +79,7 @@ export const TestingPage: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8B5CF6]">
             <ClipboardCheck size={14} />
-            <span>Valtrox Testing Standard</span>
+            <span>Bedrock Union Testing Standard</span>
           </div>
           <h1 className="text-3xl font-extrabold text-white tracking-tight mt-1">
             Tier Testing & Evaluation Guide
@@ -134,7 +134,7 @@ export const TestingPage: React.FC = () => {
           </div>
           <h3 className="font-bold text-white text-base">First-to-3 Set</h3>
           <p className="text-xs text-zinc-400 leading-relaxed">
-            Duel a verified Tester on the official Valtrox server under strict recording rules.
+            Duel a verified Tester on the official Bedrock Union server under strict recording rules.
           </p>
         </div>
 
@@ -159,7 +159,7 @@ export const TestingPage: React.FC = () => {
             </div>
             <h3 className="text-2xl font-extrabold text-white">Tier Test Score Estimator</h3>
             <p className="text-xs text-zinc-400">
-              Input test rounds won vs an official tester to calculate your predicted Valtrox tier rating.
+              Input test rounds won vs an official tester to calculate your predicted Bedrock Union tier rating.
             </p>
           </div>
 
@@ -322,7 +322,7 @@ export const TestingPage: React.FC = () => {
             </li>
             <li className="flex items-start gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5" />
-              <span><strong>Discord Voice Presence:</strong> Must be in the designated Valtrox testing voice channel during the match.</span>
+              <span><strong>Discord Voice Presence:</strong> Must be in the designated Bedrock Union testing voice channel during the match.</span>
             </li>
           </ul>
         </div>

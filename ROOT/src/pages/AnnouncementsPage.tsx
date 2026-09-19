@@ -22,7 +22,7 @@ export const AnnouncementsPage: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8B5CF6]">
             <Bell size={14} />
-            <span>Valtrox News & Bulletins</span>
+            <span>Bedrock Union News & Bulletins</span>
           </div>
           <h1 className="text-3xl font-extrabold text-white tracking-tight mt-1">
             Announcements & Competitive Events

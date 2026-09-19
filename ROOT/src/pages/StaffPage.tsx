@@ -16,7 +16,7 @@ export const StaffPage: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8B5CF6]">
             <Shield size={14} />
-            <span>Valtrox Platform Administration</span>
+            <span>Bedrock Union Platform Administration</span>
           </div>
           <h1 className="text-3xl font-extrabold text-white tracking-tight mt-1">
             Leadership, Staff & Evaluators

@@ -106,7 +106,7 @@ export const HomePage: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="max-w-2xl mx-auto text-base sm:text-lg text-zinc-400 font-normal leading-relaxed"
           >
-            Valtrox is the official competitive gaming platform for Minecraft Bedrock. Discover standardized
+            Bedrock Union is the official competitive gaming platform for Minecraft Bedrock. Discover standardized
             tierlists for <strong className="text-zinc-200">Bedfight</strong>, <strong className="text-zinc-200">Skywars</strong>, and <strong className="text-zinc-200">Mace</strong>, <strong className="text-zinc-200">Fireball Fight</strong>, get tested by verified veterans, track rankings, and dominate scrims.
           </motion.p>
 
@@ -461,7 +461,7 @@ export const HomePage: React.FC = () => {
               Test Your Estimated Tier Placement
             </h3>
             <p className="text-sm text-zinc-400 leading-relaxed">
-              Wondering where you will place before booking your official test? Input your scrim win rates and mechanical precision to calculate your predicted Valtrox tier.
+              Wondering where you will place before booking your official test? Input your scrim win rates and mechanical precision to calculate your predicted Bedrock Union tier.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">

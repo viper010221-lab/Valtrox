@@ -14,13 +14,13 @@ export const DiscordWidget: React.FC = () => {
         <div className="space-y-4 text-center lg:text-left max-w-xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#5865F2]/20 border border-[#5865F2]/40 text-xs font-semibold text-purple-300">
             <MessageSquare size={14} className="text-[#5865F2]" />
-            <span>Official Valtrox™ Bedrock Hub</span>
+            <span>Official Bedrock Union™ Bedrock Hub</span>
           </div>
 
           <div className="flex items-center justify-center lg:justify-start gap-3.5">
             <img
-              src="https://cdn.discordapp.com/icons/1539146604794224671/a5cbe47cd560c7ffd600ac3794ec53de.png"
-              alt="Valtrox Server Icon"
+              src="https://cdn.discordapp.com/icons/1539146604794224671/24a72cd160f47dc58f85ab1261b60170.png"
+              alt="Bedrock Union Server Icon"
               className="w-14 h-14 rounded-2xl border-2 border-[#5865F2]/50 shadow-glow-purple-sm object-cover"
               onError={(e) => {
                 (e.target as HTMLElement).style.display = 'none';
@@ -28,16 +28,16 @@ export const DiscordWidget: React.FC = () => {
             />
             <div>
               <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-                Valtrox™ | MCPE Competitive
+                Bedrock Union™ | MCPE Competitive
               </h3>
               <p className="text-xs text-purple-300 font-mono">
-                discord.gg/tV9vrAeJHH &bull; Live Bedrock Community
+                {serverConfig.discordUrl.replace(/^https?:\/\//, '')} &bull; Live Bedrock Community
               </p>
             </div>
           </div>
 
           <p className="text-sm text-zinc-400 leading-relaxed">
-            The main Valtrox Minecraft community where players participate in scrims, tier testing, competitive events, and Minecraft PvP activities.
+            The main Bedrock Union Minecraft community where players participate in scrims, tier testing, competitive events, and Minecraft PvP activities.
           </p>
 
           {/* Live Metrics */}

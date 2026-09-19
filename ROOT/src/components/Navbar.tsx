@@ -86,12 +86,9 @@ export const Navbar: React.FC = () => {
               <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-white stroke-[2.5]" />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center gap-1">
-                <span className="text-base sm:text-lg font-black tracking-tight text-white hover:text-purple-300 transition-colors">
-                  VALTROX
-                </span>
-                <span className="text-[9px] uppercase tracking-wider font-mono font-bold bg-red-500/20 text-red-300 px-1 py-0.2 rounded border border-red-500/40">
-                  BEDROCK
+              <div className="flex items-center">
+                <span className="text-base sm:text-lg font-black tracking-normal whitespace-nowrap text-white hover:text-purple-300 transition-colors">
+                  BEDROCK&nbsp;<span className="text-[#8B5CF6]">UNION</span>
                 </span>
               </div>
             </div>
@@ -151,7 +148,7 @@ export const Navbar: React.FC = () => {
                 <div className="flex items-center gap-1.5 sm:gap-2 px-2 py-1 rounded-xl bg-[#171722] border border-[#252538] shadow-sm">
                   <GamerAvatar name={currentUser.ign} size="sm" rank={currentUser.rank} />
                   <div className="flex flex-col text-left">
-                    <span className="text-xs font-black text-white font-mono leading-none">{currentUser.ign}</span>
+                    <span className="text-xs font-black text-white font-mono leading-none whitespace-nowrap">{currentUser.ign}</span>
                     <RankBadge rank={currentUser.rank} size="sm" className="mt-0.5" />
                   </div>
                 </div>
@@ -176,7 +173,7 @@ export const Navbar: React.FC = () => {
                 <button
                   onClick={logout}
                   className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl bg-red-950/40 hover:bg-red-900/70 border border-red-500/30 hover:border-red-500/70 text-red-300 hover:text-white text-xs font-bold transition-all cursor-pointer shrink-0"
-                  title="Log out of Valtrox"
+                  title="Log out of Bedrock Union"
                 >
                   <LogOut size={13} />
                   <span>Log Out</span>

@@ -129,7 +129,7 @@ export const PlayerDetailPage: React.FC = () => {
               </div>
 
               <p className="text-sm text-zinc-300 max-w-xl leading-relaxed pt-1">
-                {player.bio || 'Competitive Bedrock warrior actively competing in Valtrox sanctioned tier tests and tournaments.'}
+                {player.bio || 'Competitive Bedrock warrior actively competing in Bedrock Union sanctioned tier tests and tournaments.'}
               </p>
             </div>
           </div>
@@ -204,7 +204,7 @@ export const PlayerDetailPage: React.FC = () => {
             <Clock size={14} />
             <span>Official Tier Test History</span>
           </div>
-          <span className="text-xs text-zinc-500">Audited by Valtrox Testers</span>
+          <span className="text-xs text-zinc-500">Audited by Bedrock Union Testers</span>
         </div>
 
         {playerTests.length > 0 ? (

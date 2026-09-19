@@ -1,5 +1,5 @@
 -- ====================================================================
--- Valtrox Shared Database Schema
+-- Bedrock Union Shared Database Schema
 -- Run this ONCE in your Supabase project: SQL Editor -> New query -> Run
 --
 -- After running, every admin that adds a player/tester/staff member will

@@ -74,7 +74,7 @@ export const AuthModal: React.FC = () => {
           <div className="space-y-1 mb-5">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#7C3AED]/20 border border-[#7C3AED]/40 text-xs font-bold text-purple-300 font-mono">
               <Shield size={13} className="text-amber-400" />
-              <span>Valtrox Competitive Network</span>
+              <span>Bedrock Union Competitive Network</span>
             </div>
             <h2 className="text-2xl font-black text-white tracking-tight">
               {mode === 'signup' ? 'Create Your Account' : 'Welcome Back'}
@@ -218,7 +218,7 @@ export const AuthModal: React.FC = () => {
               Skip and browse as guest &rarr;
             </button>
 
-            <span className="text-[11px] text-zinc-500">Valtrox ID v2.0</span>
+            <span className="text-[11px] text-zinc-500">Bedrock Union ID v2.0</span>
           </div>
         </motion.div>
       </div>
