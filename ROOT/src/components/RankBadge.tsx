@@ -47,7 +47,7 @@ export const getRankColor = (rank: UserRank): { bg: string; text: string; border
         bg: 'bg-purple-950/70',
         text: 'text-purple-300 font-extrabold',
         border: 'border-purple-500/60',
-        glow: 'shadow-[0_0_12px_rgba(168,85,247,0.4)]'
+        glow: 'shadow-[0_0_12px_rgba(33,150,243,0.4)]'
       };
     case 'Tier Tester':
       return {
@@ -101,9 +101,9 @@ export const getRankColor = (rank: UserRank): { bg: string; text: string; border
     case 'Player':
     default:
       return {
-        bg: 'bg-[#171722]/90',
+        bg: 'bg-[#0E4A87]/80',
         text: 'text-zinc-400 font-medium',
-        border: 'border-[#252538]',
+        border: 'border-white/20',
         glow: ''
       };
   }

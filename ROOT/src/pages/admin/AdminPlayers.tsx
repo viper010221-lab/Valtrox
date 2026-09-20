@@ -50,43 +50,43 @@ export const AdminPlayers: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
   return (
     <div className="space-y-6">
       {/* Create Player Form */}
-      <div className="p-6 rounded-2xl bg-[#171722] border border-[#252538] space-y-4">
+      <div className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-4">
         <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-          <Plus size={16} className="text-[#8B5CF6]" />
+          <Plus size={16} className="text-[#42A5F5]" />
           <span>Register New Competitive Player</span>
         </h3>
 
         <form onSubmit={handleCreatePlayer} className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-3">
           <div>
-            <label className="text-[11px] font-semibold text-zinc-400 block mb-1">Minecraft IGN</label>
+            <label className="text-[11px] font-semibold text-sky-200 block mb-1">Minecraft IGN</label>
             <input
               type="text"
               placeholder="e.g. Vx_Apex"
               value={newPlayerIgn}
               onChange={(e) => setNewPlayerIgn(e.target.value)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
               required
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-semibold text-zinc-400 block mb-1">Discord Tag</label>
+            <label className="text-[11px] font-semibold text-sky-200 block mb-1">Discord Tag</label>
             <input
               type="text"
               placeholder="e.g. apex#1234"
               value={newPlayerDiscord}
               onChange={(e) => setNewPlayerDiscord(e.target.value)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
               required
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-semibold text-zinc-400 block mb-1">Region</label>
+            <label className="text-[11px] font-semibold text-sky-200 block mb-1">Region</label>
             <select
               value={newPlayerRegion}
               onChange={(e) => setNewPlayerRegion(e.target.value as any)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-zinc-300 focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-sky-100 focus:outline-none focus:border-[#1976D2]"
             >
               <option value="NA">North America (NA)</option>
               <option value="EU">Europe (EU)</option>
@@ -97,11 +97,11 @@ export const AdminPlayers: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
           </div>
 
           <div>
-            <label className="text-[11px] font-semibold text-zinc-400 block mb-1">Device</label>
+            <label className="text-[11px] font-semibold text-sky-200 block mb-1">Device</label>
             <select
               value={newPlayerDevice}
               onChange={(e) => setNewPlayerDevice(e.target.value as any)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-zinc-300 focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-sky-100 focus:outline-none focus:border-[#1976D2]"
             >
               <option value="KBM">Keyboard & Mouse</option>
               <option value="Touch">Touch / Mobile</option>
@@ -112,7 +112,7 @@ export const AdminPlayers: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
           <div className="flex items-end">
             <button
               type="submit"
-              className="w-full py-2 bg-[#7C3AED] hover:bg-[#8B5CF6] text-white text-xs font-bold rounded-xl shadow-glow-purple-sm transition-all cursor-pointer"
+              className="w-full py-2 bg-[#1976D2] hover:bg-[#42A5F5] text-white text-xs font-bold rounded-xl shadow-glow-blue-sm transition-all cursor-pointer"
             >
               + Add Player
             </button>
@@ -121,10 +121,10 @@ export const AdminPlayers: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
       </div>
 
       {/* Players Table */}
-      <div className="rounded-2xl bg-[#171722] border border-[#252538] overflow-hidden">
+      <div className="rounded-2xl bg-[#0E4A87]/70 border border-white/20 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#0F0F17] text-zinc-400 uppercase font-mono tracking-wider border-b border-[#252538]">
+            <thead className="bg-[#0B3C70]/55 text-sky-200 uppercase font-mono tracking-wider border-b border-white/20">
               <tr>
                 <th className="py-3 px-4">Rank</th>
                 <th className="py-3 px-4">Player IGN</th>
@@ -137,9 +137,9 @@ export const AdminPlayers: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
                 <th className="py-3 px-4 text-center">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#252538]/60">
+            <tbody className="divide-y divide-white/15">
               {players.map((p) => (
-                <tr key={p.id} className="hover:bg-[#1F1F2E]/50">
+                <tr key={p.id} className="hover:bg-[#1565C0]/60/50">
                   <td className="py-3 px-4 font-mono font-bold text-amber-400">#{p.globalRank}</td>
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2">
@@ -150,9 +150,9 @@ export const AdminPlayers: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
                       </div>
                     </div>
                   </td>
-                  <td className="py-3 px-4 font-mono text-zinc-400">{p.discordTag}</td>
-                  <td className="py-3 px-4 text-zinc-300">{p.region}</td>
-                  <td className="py-3 px-4 font-mono font-bold text-[#8B5CF6]">{getPlayerPoints(p)} PTS</td>
+                  <td className="py-3 px-4 font-mono text-sky-200">{p.discordTag}</td>
+                  <td className="py-3 px-4 text-sky-100">{p.region}</td>
+                  <td className="py-3 px-4 font-mono font-bold text-[#42A5F5]">{getPlayerPoints(p)} PTS</td>
                   <td className="py-3 px-4"><TierBadge tier={p.tiers.Bedfight || 'Untested'} size="sm" /></td>
                   <td className="py-3 px-4"><TierBadge tier={p.tiers.Skywars || 'Untested'} size="sm" /></td>
                   <td className="py-3 px-4"><TierBadge tier={p.tiers.Mace || 'Untested'} size="sm" /></td>

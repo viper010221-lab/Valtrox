@@ -32,18 +32,18 @@ export class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-[#0F0F17] text-white flex items-center justify-center p-6">
-          <div className="max-w-md w-full p-8 rounded-3xl bg-[#171722] border border-red-500/40 text-center space-y-4 shadow-2xl">
+        <div className="min-h-screen bg-[#0B3C70]/55 text-white flex items-center justify-center p-6">
+          <div className="max-w-md w-full p-8 rounded-3xl bg-[#0E4A87]/70 border border-red-500/40 text-center space-y-4 shadow-2xl">
             <div className="w-14 h-14 rounded-2xl bg-red-950/60 border border-red-500/40 flex items-center justify-center text-red-400 mx-auto">
               <AlertTriangle size={28} />
             </div>
-            <h2 className="text-xl font-extrabold text-white">Something went wrong</h2>
-            <p className="text-xs text-zinc-400 leading-relaxed">
+            <h2 className="text-xl font-extrabold heading-gold">Something went wrong</h2>
+            <p className="text-xs text-sky-200 leading-relaxed">
               The application encountered a temporary display issue. Click below to reload cleanly in high-performance mode.
             </p>
             <button
               onClick={this.handleReset}
-              className="px-6 py-2.5 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-glow-purple-sm transition-all"
+              className="px-6 py-2.5 rounded-xl bg-[#1976D2] hover:bg-[#42A5F5] text-white text-xs font-bold flex items-center gap-2 mx-auto cursor-pointer shadow-glow-blue-sm transition-all"
             >
               <RefreshCw size={14} />
               <span>Reload Application</span>

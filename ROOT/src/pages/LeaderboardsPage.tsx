@@ -55,17 +55,17 @@ export const LeaderboardsPage: React.FC = () => {
       <motion.div 
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#252538] pb-6"
+        className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/20 pb-6"
       >
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#7C3AED]/20 border border-[#7C3AED]/40 text-xs font-bold uppercase tracking-wider text-purple-300 shadow-glow-purple-sm">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1976D2]/20 border border-[#1976D2]/40 text-xs font-bold uppercase tracking-wider text-sky-200 shadow-glow-blue-sm">
             <Trophy size={13} className="text-amber-400" />
             <span>Gamemode Standings</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight mt-2">
+          <h1 className="text-3xl sm:text-4xl font-black heading-gold tracking-tight mt-2">
             Competitive Leaderboards
           </h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <p className="text-sm text-sky-200 mt-1">
             Standardized Bedrock rankings certified exclusively for <strong className="text-white">Bedfight</strong>, <strong className="text-white">Skywars</strong>, and <strong className="text-white">Mace</strong>, and <strong className="text-white">Fireball Fight</strong>.
           </p>
         </div>
@@ -73,7 +73,7 @@ export const LeaderboardsPage: React.FC = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigateTo('testing')}
-            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] hover:from-[#8B5CF6] hover:to-[#7C3AED] text-white text-xs font-bold shadow-glow-purple transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
+            className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#1976D2] to-[#42A5F5] hover:from-[#42A5F5] hover:to-[#1976D2] text-white text-xs font-bold shadow-glow-blue transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
           >
             <Sparkles size={14} />
             <span>Queue for Tier Test &rarr;</span>
@@ -94,29 +94,29 @@ export const LeaderboardsPage: React.FC = () => {
               onClick={() => setActiveBoard(gm.id)}
               className={`p-4 rounded-2xl text-left transition-all relative overflow-hidden cursor-pointer border ${
                 isSelected
-                  ? 'bg-gradient-to-br from-[#171722] to-[#1F1F2E] border-[#7C3AED] shadow-glow-purple'
-                  : 'bg-[#171722]/60 hover:bg-[#171722] border-[#252538] hover:border-[#7C3AED]/40'
+                  ? 'bg-gradient-to-br from-[#0E4A87]/85 to-[#1565C0]/50 border-[#1976D2] shadow-glow-blue'
+                  : 'bg-[#0E4A87]/60 hover:bg-[#0E4A87]/70 border-white/20 hover:border-[#1976D2]/40'
               }`}
             >
               {isSelected && (
-                <div className="absolute top-0 right-0 w-24 h-24 bg-[#7C3AED]/20 rounded-full blur-2xl pointer-events-none" />
+                <div className="absolute top-0 right-0 w-24 h-24 bg-[#1976D2]/20 rounded-full blur-2xl pointer-events-none" />
               )}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className={`p-2.5 rounded-xl border ${isSelected ? 'bg-[#7C3AED] border-[#8B5CF6] text-white' : 'bg-[#0F0F17] border-[#252538] text-zinc-400'}`}>
+                  <div className={`p-2.5 rounded-xl border ${isSelected ? 'bg-[#1976D2] border-[#42A5F5] text-white' : 'bg-[#0B3C70]/55 border-white/20 text-sky-200'}`}>
                     <GamemodeIcon gamemode={gm.id} size={20} />
                   </div>
                   <div>
-                    <h3 className={`font-bold text-sm ${isSelected ? 'text-white' : 'text-zinc-300'}`}>
+                    <h3 className={`font-bold text-sm ${isSelected ? 'text-white' : 'text-sky-100'}`}>
                       {gm.name}
                     </h3>
-                    <span className="text-[11px] text-zinc-400 font-mono">
+                    <span className="text-[11px] text-sky-200 font-mono">
                       {countForMode} certified {countForMode === 1 ? 'player' : 'players'}
                     </span>
                   </div>
                 </div>
                 {isSelected && (
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#7C3AED]/30 text-purple-300 border border-[#7C3AED]/50">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#1976D2]/30 text-sky-200 border border-[#1976D2]/50">
                     Active
                   </span>
                 )}
@@ -142,10 +142,10 @@ export const LeaderboardsPage: React.FC = () => {
                 onClick={() => navigateTo('player-detail', player.id)}
                 className={`relative p-5 rounded-2xl border backdrop-blur-md cursor-pointer transition-all hover:-translate-y-1 group ${
                   isFirst
-                    ? 'bg-gradient-to-b from-amber-500/10 via-[#171722] to-[#171722] border-amber-500/50 shadow-glow-gold'
+                    ? 'bg-gradient-to-b from-amber-500/10 via-[#0E4A87]/80 to-[#0E4A87]/70 border-amber-500/50 shadow-glow-gold'
                     : isSecond
-                    ? 'bg-gradient-to-b from-slate-400/10 via-[#171722] to-[#171722] border-slate-400/40'
-                    : 'bg-gradient-to-b from-amber-800/10 via-[#171722] to-[#171722] border-amber-700/40'
+                    ? 'bg-gradient-to-b from-slate-400/10 via-[#0E4A87]/80 to-[#0E4A87]/70 border-slate-400/40'
+                    : 'bg-gradient-to-b from-amber-800/10 via-[#0E4A87]/80 to-[#0E4A87]/70 border-amber-700/40'
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
@@ -168,19 +168,19 @@ export const LeaderboardsPage: React.FC = () => {
                   </div>
                   <div>
                     <div className="flex items-center gap-1.5">
-                      <h4 className="font-extrabold text-white group-hover:text-purple-300 transition-colors text-base">
+                      <h4 className="font-extrabold text-white group-hover:text-sky-200 transition-colors text-base">
                         {player.ign}
                       </h4>
                       {player.rank && <RankBadge rank={player.rank} size="sm" />}
                       {player.verified && <CheckCircle2 size={14} className="text-emerald-400" />}
                     </div>
-                    <span className="text-xs text-zinc-400 font-mono">{player.discordTag}</span>
+                    <span className="text-xs text-sky-200 font-mono">{player.discordTag}</span>
                   </div>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-[#252538]/70 flex items-center justify-between text-xs">
-                  <span className="text-zinc-400 font-mono">Winrate: <strong className="text-emerald-400">{player.winRate}%</strong></span>
-                  <span className="text-purple-400 font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                <div className="mt-4 pt-3 border-t border-white/15 flex items-center justify-between text-xs">
+                  <span className="text-sky-200 font-mono">Winrate: <strong className="text-emerald-400">{player.winRate}%</strong></span>
+                  <span className="text-sky-300 font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
                     <span>Inspect Profile</span>
                     <ChevronRight size={12} />
                   </span>
@@ -192,27 +192,27 @@ export const LeaderboardsPage: React.FC = () => {
       )}
 
       {/* Filter and Search Bar */}
-      <div className="p-4 rounded-2xl bg-[#171722] border border-[#252538] flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+      <div className="p-4 rounded-2xl bg-[#0E4A87]/70 border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
         <div className="relative w-full sm:max-w-sm">
-          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-300" />
           <input
             type="text"
             placeholder={`Search ${activeBoard} ranked players...`}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2.5 bg-[#0F0F17] border border-[#252538] focus:border-[#7C3AED] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none transition-colors"
+            className="w-full pl-10 pr-4 py-2.5 bg-[#0B3C70]/55 border border-white/20 focus:border-[#1976D2] rounded-xl text-xs text-white placeholder-sky-300 focus:outline-none transition-colors"
           />
         </div>
 
         <div className="flex items-center gap-3 w-full sm:w-auto">
-          <span className="text-xs text-zinc-400 font-semibold flex items-center gap-1.5">
-            <Filter size={14} className="text-purple-400" />
+          <span className="text-xs text-sky-200 font-semibold flex items-center gap-1.5">
+            <Filter size={14} className="text-sky-300" />
             <span>Region:</span>
           </span>
           <select
             value={selectedRegion}
             onChange={(e) => setSelectedRegion(e.target.value)}
-            className="px-3.5 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-zinc-300 focus:outline-none focus:border-[#7C3AED] transition-colors cursor-pointer"
+            className="px-3.5 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-sky-100 focus:outline-none focus:border-[#1976D2] transition-colors cursor-pointer"
           >
             <option value="All">All Regions</option>
             <option value="NA">North America (NA)</option>
@@ -226,10 +226,10 @@ export const LeaderboardsPage: React.FC = () => {
 
       {/* Gamemode Leaderboard Table or Empty State */}
       {rankedPlayers.length > 0 ? (
-        <div className="rounded-2xl bg-[#171722] border border-[#252538] overflow-hidden shadow-2xl">
+        <div className="rounded-2xl bg-[#0E4A87]/70 border border-white/20 overflow-hidden shadow-2xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-[#0F0F17]/90 text-zinc-400 uppercase text-[11px] font-mono tracking-wider border-b border-[#252538]">
+              <thead className="bg-[#0B3C70]/75 text-sky-200 uppercase text-[11px] font-mono tracking-wider border-b border-white/20">
                 <tr>
                   <th className="py-4 px-4 sm:px-6">Pos</th>
                   <th className="py-4 px-4">Player</th>
@@ -241,7 +241,7 @@ export const LeaderboardsPage: React.FC = () => {
                   <th className="py-4 px-4 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#252538]/60 text-xs">
+              <tbody className="divide-y divide-white/15 text-xs">
                 <AnimatePresence>
                   {rankedPlayers.map((player, idx) => (
                     <motion.tr
@@ -250,14 +250,14 @@ export const LeaderboardsPage: React.FC = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.2, delay: Math.min(idx * 0.04, 0.4) }}
                       onClick={() => navigateTo('player-detail', player.id)}
-                      className="hover:bg-[#1F1F2E]/70 transition-colors group cursor-pointer"
+                      className="hover:bg-[#1565C0]/60/70 transition-colors group cursor-pointer"
                     >
                       <td className="py-4 px-4 sm:px-6 font-mono font-bold">
                         <div className="flex items-center gap-2">
                           {idx === 0 && <span className="text-amber-400 font-extrabold text-sm">1 👑</span>}
-                          {idx === 1 && <span className="text-zinc-300 font-extrabold text-sm">2 🥈</span>}
+                          {idx === 1 && <span className="text-sky-100 font-extrabold text-sm">2 🥈</span>}
                           {idx === 2 && <span className="text-amber-600 font-extrabold text-sm">3 🥉</span>}
-                          {idx > 2 && <span className="text-zinc-400">{idx + 1}</span>}
+                          {idx > 2 && <span className="text-sky-200">{idx + 1}</span>}
                         </div>
                       </td>
 
@@ -266,7 +266,7 @@ export const LeaderboardsPage: React.FC = () => {
                           <GamerAvatar name={player.ign} size="sm" rank={player.rank} />
                           <div>
                             <div className="flex items-center gap-1.5">
-                              <span className="font-bold text-white group-hover:text-purple-300 transition-colors text-sm">
+                              <span className="font-bold text-white group-hover:text-sky-200 transition-colors text-sm">
                                 {player.ign}
                               </span>
                               {player.rank && <RankBadge rank={player.rank} size="sm" />}
@@ -276,18 +276,18 @@ export const LeaderboardsPage: React.FC = () => {
                                 </span>
                               )}
                             </div>
-                            <span className="text-[11px] text-zinc-400 font-mono">{player.discordTag}</span>
+                            <span className="text-[11px] text-sky-200 font-mono">{player.discordTag}</span>
                           </div>
                         </div>
                       </td>
 
-                      <td className="py-4 px-4 font-mono text-zinc-400">
-                        <span className="px-2.5 py-1 rounded-lg bg-[#0F0F17] border border-[#252538]">
+                      <td className="py-4 px-4 font-mono text-sky-200">
+                        <span className="px-2.5 py-1 rounded-lg bg-[#0B3C70]/55 border border-white/20">
                           {player.region}
                         </span>
                       </td>
 
-                      <td className="py-4 px-4 text-zinc-300 font-medium">
+                      <td className="py-4 px-4 text-sky-100 font-medium">
                         {player.device}
                       </td>
 
@@ -299,7 +299,7 @@ export const LeaderboardsPage: React.FC = () => {
                         {player.winRate}%
                       </td>
 
-                      <td className="py-4 px-4 text-right font-mono font-extrabold text-[#8B5CF6] text-sm">
+                      <td className="py-4 px-4 text-right font-mono font-extrabold text-[#42A5F5] text-sm">
                         {getPlayerPoints(player).toLocaleString()} PTS
                       </td>
 
@@ -309,7 +309,7 @@ export const LeaderboardsPage: React.FC = () => {
                             e.stopPropagation();
                             navigateTo('player-detail', player.id);
                           }}
-                          className="px-3 py-1.5 rounded-lg bg-[#0F0F17] hover:bg-[#7C3AED] text-zinc-300 hover:text-white border border-[#252538] hover:border-[#8B5CF6] text-xs font-semibold transition-all cursor-pointer"
+                          className="px-3 py-1.5 rounded-lg bg-[#0B3C70]/55 hover:bg-[#1976D2] text-sky-100 hover:text-white border border-white/20 hover:border-[#42A5F5] text-xs font-semibold transition-all cursor-pointer"
                         >
                           Inspect
                         </button>
@@ -322,19 +322,19 @@ export const LeaderboardsPage: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="p-12 rounded-2xl bg-[#171722] border border-[#252538] text-center space-y-4 shadow-xl">
-          <div className="w-14 h-14 rounded-2xl bg-[#0F0F17] border border-[#252538] flex items-center justify-center mx-auto text-purple-400">
+        <div className="p-12 rounded-2xl bg-[#0E4A87]/70 border border-white/20 text-center space-y-4 shadow-xl">
+          <div className="w-14 h-14 rounded-2xl bg-[#0B3C70]/55 border border-white/20 flex items-center justify-center mx-auto text-sky-300">
             <GamemodeIcon gamemode={activeBoard} size={28} />
           </div>
           <div className="space-y-1">
             <h3 className="text-lg font-bold text-white">No Certified {activeBoard} Players Yet</h3>
-            <p className="text-xs text-zinc-400 max-w-md mx-auto leading-relaxed">
+            <p className="text-xs text-sky-200 max-w-md mx-auto leading-relaxed">
               Tier testing queues for {activeBoard} are currently open. Be the first player to duel an official evaluator and claim the #1 spot on the leaderboard!
             </p>
           </div>
           <button
             onClick={() => navigateTo('testing')}
-            className="px-5 py-2.5 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white text-xs font-bold shadow-glow-purple-sm transition-all cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-[#1976D2] hover:bg-[#42A5F5] text-white text-xs font-bold shadow-glow-blue-sm transition-all cursor-pointer"
           >
             Apply for {activeBoard} Test &rarr;
           </button>

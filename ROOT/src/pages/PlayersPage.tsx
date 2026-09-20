@@ -64,41 +64,41 @@ export const PlayersPage: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#252538] pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/20 pb-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8B5CF6]">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#42A5F5]">
             <Users size={14} />
             <span>Competitive Player Registry</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight mt-1">
+          <h1 className="text-3xl font-extrabold heading-gold tracking-tight mt-1">
             Players & Verified Profiles
           </h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <p className="text-sm text-sky-200 mt-1">
             Explore verified Minecraft Bedrock competitors, gamemode tier assignments, and test records.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
-          <span className="px-3 py-1.5 rounded-lg bg-[#171722] border border-[#252538]">
+        <div className="flex items-center gap-2 text-xs font-mono text-sky-200">
+          <span className="px-3 py-1.5 rounded-lg bg-[#0E4A87]/70 border border-white/20">
             Total Players: <strong className="text-white">{players.length}</strong>
           </span>
-          <span className="px-3 py-1.5 rounded-lg bg-[#171722] border border-[#252538]">
-            Showing: <strong className="text-purple-400">{filteredPlayers.length}</strong>
+          <span className="px-3 py-1.5 rounded-lg bg-[#0E4A87]/70 border border-white/20">
+            Showing: <strong className="text-sky-300">{filteredPlayers.length}</strong>
           </span>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="p-4 rounded-2xl bg-[#171722] border border-[#252538] space-y-4">
+      <div className="p-4 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
           <div className="relative md:col-span-2">
-            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
+            <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-300" />
             <input
               type="text"
               placeholder="Search by IGN or Discord tag..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-[#7C3AED]"
+              className="w-full pl-9 pr-4 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-sm text-white placeholder-sky-300 focus:outline-none focus:border-[#1976D2]"
             />
           </div>
 
@@ -106,7 +106,7 @@ export const PlayersPage: React.FC = () => {
             <select
               value={selectedRegion}
               onChange={(e) => setSelectedRegion(e.target.value)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-sm text-zinc-300 focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-sm text-sky-100 focus:outline-none focus:border-[#1976D2]"
             >
               <option value="All">All Regions</option>
               <option value="NA">North America (NA)</option>
@@ -121,7 +121,7 @@ export const PlayersPage: React.FC = () => {
             <select
               value={selectedDevice}
               onChange={(e) => setSelectedDevice(e.target.value)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-sm text-zinc-300 focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-sm text-sky-100 focus:outline-none focus:border-[#1976D2]"
             >
               <option value="All">All Devices</option>
               <option value="KBM">Keyboard & Mouse</option>
@@ -134,7 +134,7 @@ export const PlayersPage: React.FC = () => {
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-sm text-zinc-300 focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-sm text-sky-100 focus:outline-none focus:border-[#1976D2]"
             >
               <option value="rank">Sort by Rank (#1 - #100)</option>
               <option value="points">Sort by Points (Highest)</option>
@@ -143,14 +143,14 @@ export const PlayersPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-[#252538]/60 text-xs">
-          <span className="text-zinc-500 font-semibold mr-1">Filter Gamemode:</span>
+        <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-white/15 text-xs">
+          <span className="text-sky-300 font-semibold mr-1">Filter Gamemode:</span>
           <button
             onClick={() => setSelectedGamemode('All')}
             className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
               selectedGamemode === 'All'
-                ? 'bg-[#7C3AED] text-white font-bold'
-                : 'bg-[#0F0F17] text-zinc-400 hover:text-white border border-[#252538]'
+                ? 'bg-[#1976D2] text-white font-bold'
+                : 'bg-[#0B3C70]/55 text-sky-200 hover:text-white border border-white/20'
             }`}
           >
             All Modes
@@ -161,8 +161,8 @@ export const PlayersPage: React.FC = () => {
               onClick={() => setSelectedGamemode(gm.id)}
               className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
                 selectedGamemode === gm.id
-                  ? 'bg-[#7C3AED] text-white font-bold shadow-glow-purple-sm'
-                  : 'bg-[#0F0F17] text-zinc-400 hover:text-white border border-[#252538]'
+                  ? 'bg-[#1976D2] text-white font-bold shadow-glow-blue-sm'
+                  : 'bg-[#0B3C70]/55 text-sky-200 hover:text-white border border-white/20'
               }`}
             >
               <GamemodeIcon gamemode={gm.id} size={14} />
@@ -179,7 +179,7 @@ export const PlayersPage: React.FC = () => {
             <div
               key={player.id}
               onClick={() => navigateTo('player-detail', player.id)}
-              className="p-6 rounded-2xl bg-[#171722] border border-[#252538] hover:border-[#7C3AED]/50 transition-all cursor-pointer group flex flex-col justify-between space-y-5"
+              className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/50 transition-all cursor-pointer group flex flex-col justify-between space-y-5"
             >
               <div className="space-y-4">
                 <div className="flex items-start justify-between">
@@ -187,7 +187,7 @@ export const PlayersPage: React.FC = () => {
                     <GamerAvatar name={player.ign} size="md" rank={player.rank} />
                     <div>
                       <div className="flex items-center gap-1.5 flex-wrap">
-                        <h3 className="font-extrabold text-white group-hover:text-purple-300 text-base transition-colors">
+                        <h3 className="font-extrabold text-white group-hover:text-sky-200 text-base transition-colors">
                           {player.ign}
                         </h3>
                         {player.rank && <RankBadge rank={player.rank} size="sm" />}
@@ -197,42 +197,42 @@ export const PlayersPage: React.FC = () => {
                           </span>
                         )}
                       </div>
-                      <span className="text-xs text-zinc-400 font-mono">{player.discordTag}</span>
+                      <span className="text-xs text-sky-200 font-mono">{player.discordTag}</span>
                     </div>
                   </div>
 
                   <div className="text-right font-mono">
                     <div className="text-sm font-black text-amber-400">#{player.globalRank}</div>
-                    <div className="text-[11px] text-[#8B5CF6] font-bold">{getPlayerPoints(player)} PTS</div>
+                    <div className="text-[11px] text-[#42A5F5] font-bold">{getPlayerPoints(player)} PTS</div>
                   </div>
                 </div>
 
-                <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">
+                <p className="text-xs text-sky-200 line-clamp-2 leading-relaxed">
                   {player.bio || 'Competitive Minecraft Bedrock player active in Bedrock Union leagues.'}
                 </p>
 
-                <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
-                  <span className="px-2 py-0.5 rounded bg-[#0F0F17] border border-[#252538]">
+                <div className="flex items-center gap-2 text-xs font-mono text-sky-200">
+                  <span className="px-2 py-0.5 rounded bg-[#0B3C70]/55 border border-white/20">
                     {player.region}
                   </span>
-                  <span className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#0F0F17] border border-[#252538]">
+                  <span className="flex items-center gap-1 px-2 py-0.5 rounded bg-[#0B3C70]/55 border border-white/20">
                     {getDeviceIcon(player.device)}
                     <span>{player.device}</span>
                   </span>
-                  <span className="text-[11px] text-zinc-500">
-                    WR: <strong className="text-zinc-300">{player.winRate}%</strong>
+                  <span className="text-[11px] text-sky-300">
+                    WR: <strong className="text-sky-100">{player.winRate}%</strong>
                   </span>
                 </div>
 
-                <div className="pt-2 border-t border-[#252538]/60">
-                  <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">
+                <div className="pt-2 border-t border-white/15">
+                  <div className="text-[11px] font-semibold text-sky-300 uppercase tracking-wider mb-2">
                     Current Tiers:
                   </div>
                   <div className="flex flex-wrap gap-1.5">
                     {INITIAL_GAMEMODES.slice(0, 4).map((gm) => (
-                      <div key={gm.id} className="flex items-center gap-1 bg-[#0F0F17] px-2 py-1 rounded-md border border-[#252538] text-[11px]">
+                      <div key={gm.id} className="flex items-center gap-1 bg-[#0B3C70]/55 px-2 py-1 rounded-md border border-white/20 text-[11px]">
                         <GamemodeIcon gamemode={gm.id} size={12} />
-                        <span className="text-zinc-400">{gm.name}:</span>
+                        <span className="text-sky-200">{gm.name}:</span>
                         <TierBadge tier={player.tiers[gm.id] || 'Untested'} size="sm" />
                       </div>
                     ))}
@@ -240,7 +240,7 @@ export const PlayersPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#252538] flex items-center justify-between text-xs text-purple-400 font-semibold group-hover:translate-x-1 transition-transform">
+              <div className="pt-3 border-t border-white/20 flex items-center justify-between text-xs text-sky-300 font-semibold group-hover:translate-x-1 transition-transform">
                 <span>View Full Profile & Test History</span>
                 <ChevronRight size={14} />
               </div>
@@ -248,10 +248,10 @@ export const PlayersPage: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-[#171722] rounded-2xl border border-[#252538] space-y-3">
-          <Users size={36} className="text-zinc-600 mx-auto" />
+        <div className="text-center py-16 bg-[#0E4A87]/70 rounded-2xl border border-white/20 space-y-3">
+          <Users size={36} className="text-sky-300 mx-auto" />
           <h3 className="text-lg font-bold text-white">No players found</h3>
-          <p className="text-sm text-zinc-400 max-w-sm mx-auto">
+          <p className="text-sm text-sky-200 max-w-sm mx-auto">
             Try adjusting your search query, region, or gamemode filters.
           </p>
         </div>

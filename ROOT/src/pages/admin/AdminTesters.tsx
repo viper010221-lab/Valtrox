@@ -34,7 +34,7 @@ export const AdminTesters: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
   return (
     <div className="space-y-6">
       {/* Create Tester */}
-      <div className="p-6 rounded-2xl bg-[#171722] border border-[#252538] space-y-4">
+      <div className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-4">
         <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
           <Shield size={16} className="text-emerald-400" />
           <span>Recruit New Gamemode Tester</span>
@@ -42,35 +42,35 @@ export const AdminTesters: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
 
         <form onSubmit={handleCreateTester} className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           <div>
-            <label className="text-[11px] font-semibold text-zinc-400 block mb-1">Tester Name</label>
+            <label className="text-[11px] font-semibold text-sky-200 block mb-1">Tester Name</label>
             <input
               type="text"
               placeholder="e.g. ApexTester"
               value={newTesterName}
               onChange={(e) => setNewTesterName(e.target.value)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
               required
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-semibold text-zinc-400 block mb-1">Discord Tag</label>
+            <label className="text-[11px] font-semibold text-sky-200 block mb-1">Discord Tag</label>
             <input
               type="text"
               placeholder="e.g. tester#0001"
               value={newTesterDiscord}
               onChange={(e) => setNewTesterDiscord(e.target.value)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
               required
             />
           </div>
 
           <div>
-            <label className="text-[11px] font-semibold text-zinc-400 block mb-1">Tester Role</label>
+            <label className="text-[11px] font-semibold text-sky-200 block mb-1">Tester Role</label>
             <select
               value={newTesterRole}
               onChange={(e) => setNewTesterRole(e.target.value as any)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-zinc-300 focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-sky-100 focus:outline-none focus:border-[#1976D2]"
             >
               <option value="Head Tester">Head Tester</option>
               <option value="Senior Tester">Senior Tester</option>
@@ -82,7 +82,7 @@ export const AdminTesters: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
           <div className="sm:col-span-3">
             <button
               type="submit"
-              className="px-6 py-2 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white text-xs font-bold transition-all cursor-pointer"
+              className="px-6 py-2 rounded-xl bg-[#1976D2] hover:bg-[#42A5F5] text-white text-xs font-bold transition-all cursor-pointer"
             >
               + Add Tester to Council
             </button>
@@ -91,10 +91,10 @@ export const AdminTesters: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
       </div>
 
       {/* Table */}
-      <div className="rounded-2xl bg-[#171722] border border-[#252538] overflow-hidden">
+      <div className="rounded-2xl bg-[#0E4A87]/70 border border-white/20 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#0F0F17] text-zinc-400 uppercase font-mono tracking-wider border-b border-[#252538]">
+            <thead className="bg-[#0B3C70]/55 text-sky-200 uppercase font-mono tracking-wider border-b border-white/20">
               <tr>
                 <th className="py-3 px-4">Tester</th>
                 <th className="py-3 px-4">Role</th>
@@ -104,9 +104,9 @@ export const AdminTesters: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
                 <th className="py-3 px-4 text-center">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#252538]/60">
+            <tbody className="divide-y divide-white/15">
               {testers.map((t) => (
-                <tr key={t.id} className="hover:bg-[#1F1F2E]/50">
+                <tr key={t.id} className="hover:bg-[#1565C0]/60/50">
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-2">
                       <GamerAvatar name={t.name} size="sm" rank="Tier Tester" />
@@ -116,8 +116,8 @@ export const AdminTesters: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
                   <td className="py-3 px-4">
                     <RankBadge rank="Tier Tester" size="sm" />
                   </td>
-                  <td className="py-3 px-4 font-mono text-zinc-400">{t.discordTag}</td>
-                  <td className="py-3 px-4 text-zinc-300">{t.gamemodes.join(', ')}</td>
+                  <td className="py-3 px-4 font-mono text-sky-200">{t.discordTag}</td>
+                  <td className="py-3 px-4 text-sky-100">{t.gamemodes.join(', ')}</td>
                   <td className="py-3 px-4 font-mono font-bold text-emerald-400">{t.testsConducted}</td>
                   <td className="py-3 px-4 text-center">
                     <button

@@ -23,22 +23,22 @@ export const AdminTiers: React.FC<{ onFeedback: (msg: string) => void }> = ({ on
   };
 
   return (
-    <div className="p-6 sm:p-8 rounded-3xl bg-[#171722] border border-[#252538] space-y-6">
+    <div className="p-6 sm:p-8 rounded-3xl bg-[#0E4A87]/70 border border-white/20 space-y-6">
       <div>
-        <span className="text-xs font-bold uppercase tracking-wider text-[#8B5CF6]">Manual Adjustment</span>
-        <h2 className="text-2xl font-extrabold text-white">Direct Player Tier Calibration</h2>
-        <p className="text-xs text-zinc-400 mt-1">
+        <span className="text-xs font-bold uppercase tracking-wider text-[#42A5F5]">Manual Adjustment</span>
+        <h2 className="text-2xl font-extrabold heading-gold">Direct Player Tier Calibration</h2>
+        <p className="text-xs text-sky-200 mt-1">
           Directly assign or promote/demote a player's tier rank in Bedfight, Skywars, or Mace.
         </p>
       </div>
 
       <form onSubmit={handleAssignTier} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div>
-          <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Select Player</label>
+          <label className="text-xs font-semibold text-sky-100 block mb-1.5">Select Player</label>
           <select
             value={tierPlayerId}
             onChange={(e) => setTierPlayerId(e.target.value)}
-            className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+            className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
           >
             {players.map((p) => (
               <option key={p.id} value={p.id}>{p.ign}</option>
@@ -47,11 +47,11 @@ export const AdminTiers: React.FC<{ onFeedback: (msg: string) => void }> = ({ on
         </div>
 
         <div>
-          <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Gamemode</label>
+          <label className="text-xs font-semibold text-sky-100 block mb-1.5">Gamemode</label>
           <select
             value={tierGamemode}
             onChange={(e) => setTierGamemode(e.target.value as Gamemode)}
-            className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+            className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
           >
             {INITIAL_GAMEMODES.map((gm) => (
               <option key={gm.id} value={gm.id}>{gm.name}</option>
@@ -60,11 +60,11 @@ export const AdminTiers: React.FC<{ onFeedback: (msg: string) => void }> = ({ on
         </div>
 
         <div>
-          <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Assign Tier</label>
+          <label className="text-xs font-semibold text-sky-100 block mb-1.5">Assign Tier</label>
           <select
             value={tierNewRank}
             onChange={(e) => setTierNewRank(e.target.value as TierRank)}
-            className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+            className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
           >
             <option value="HT1">HT1 — High S Tier</option>
             <option value="MT1">MT1 — Mid S Tier</option>
@@ -88,7 +88,7 @@ export const AdminTiers: React.FC<{ onFeedback: (msg: string) => void }> = ({ on
         <div className="flex items-end gap-2">
           <button
             type="submit"
-            className="flex-1 py-2.5 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white text-xs font-bold shadow-glow-purple-sm transition-all cursor-pointer"
+            className="flex-1 py-2.5 rounded-xl bg-[#1976D2] hover:bg-[#42A5F5] text-white text-xs font-bold shadow-glow-blue-sm transition-all cursor-pointer"
           >
             Apply Tier Update
           </button>

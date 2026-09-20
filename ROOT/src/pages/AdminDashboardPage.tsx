@@ -34,7 +34,7 @@ export const AdminDashboardPage: React.FC = () => {
   // Access Restricted Guard for Non-Admins
   if (!isAdmin) {
     return (
-      <div className="max-w-xl mx-auto my-12 p-8 sm:p-10 rounded-3xl bg-[#171722] border-2 border-red-500/50 shadow-2xl text-center space-y-6 relative overflow-hidden">
+      <div className="max-w-xl mx-auto my-12 p-8 sm:p-10 rounded-3xl bg-[#0E4A87]/70 border-2 border-red-500/50 shadow-2xl text-center space-y-6 relative overflow-hidden">
         <div className="absolute -top-20 -right-20 w-60 h-60 bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="w-16 h-16 rounded-2xl bg-red-500/20 border border-red-500/40 text-red-400 flex items-center justify-center mx-auto shadow-[0_0_20px_rgba(239,68,68,0.3)]">
@@ -45,17 +45,17 @@ export const AdminDashboardPage: React.FC = () => {
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/20 text-red-300 border border-red-500/40 text-xs font-mono font-bold">
             <span>Restricted Access</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl font-black text-white">Admin Credentials Required</h2>
-          <p className="text-xs text-zinc-400 max-w-md mx-auto leading-relaxed">
+          <h2 className="text-2xl sm:text-3xl font-black heading-gold">Admin Credentials Required</h2>
+          <p className="text-xs text-sky-200 max-w-md mx-auto leading-relaxed">
             This administrative control panel is strictly reserved for the Master Administrator account and designated Owner.
           </p>
         </div>
 
         {currentUser ? (
-          <div className="p-4 rounded-2xl bg-[#0F0F17] border border-[#252538] text-xs font-mono text-zinc-300 space-y-1">
+          <div className="p-4 rounded-2xl bg-[#0B3C70]/55 border border-white/20 text-xs font-mono text-sky-100 space-y-1">
             <span>Logged in as: <strong className="text-white">{currentUser.ign}</strong> ({currentUser.email})</span>
             <div>Current Rank: <RankBadge rank={currentUser.rank} size="sm" /></div>
-            <p className="text-[11px] text-zinc-500 pt-1">You do not have permission to access the admin portal.</p>
+            <p className="text-[11px] text-sky-300 pt-1">You do not have permission to access the admin portal.</p>
           </div>
         ) : null}
 
@@ -68,7 +68,7 @@ export const AdminDashboardPage: React.FC = () => {
           </button>
           <button
             onClick={() => navigateTo('home')}
-            className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#0F0F17] hover:bg-[#252538] border border-[#252538] text-zinc-300 text-xs font-semibold transition-colors cursor-pointer"
+            className="w-full sm:w-auto px-5 py-3 rounded-xl bg-[#0B3C70]/55 hover:bg-white/20 border border-white/20 text-sky-100 text-xs font-semibold transition-colors cursor-pointer"
           >
             Return to Homepage
           </button>
@@ -88,24 +88,24 @@ export const AdminDashboardPage: React.FC = () => {
       )}
 
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#252538] pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/20 pb-6">
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-red-400 font-mono">
             <Sliders size={14} className="text-amber-400" />
             <span>Bedrock Union Master Administration Portal</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight mt-1 flex items-center gap-2.5">
+          <h1 className="text-3xl font-extrabold heading-gold tracking-tight mt-1 flex items-center gap-2.5">
             <span>Admin Control Panel</span>
             <RankBadge rank={currentUser.rank} size="md" />
           </h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <p className="text-sm text-sky-200 mt-1">
             Authenticated as <strong className="text-white">{currentUser.email}</strong> ({currentUser.ign}). Broadcast live 10s top DM news and assign community ranks.
           </p>
         </div>
 
         <button
           onClick={() => navigateTo('home')}
-          className="px-3.5 py-1.5 rounded-xl bg-[#171722] hover:bg-[#1F1F2E] border border-[#252538] text-xs font-semibold text-zinc-300 transition-all cursor-pointer"
+          className="px-3.5 py-1.5 rounded-xl bg-[#0E4A87]/70 hover:bg-[#1565C0]/60 border border-white/20 text-xs font-semibold text-sky-100 transition-all cursor-pointer"
         >
           &larr; View Live Website
         </button>
@@ -116,7 +116,7 @@ export const AdminDashboardPage: React.FC = () => {
         <button
           onClick={() => setActiveTab('broadcast-ranks')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'broadcast-ranks' ? 'bg-red-600 text-white shadow-[0_0_15px_rgba(239,68,68,0.5)]' : 'bg-[#171722] text-zinc-400 hover:text-white border border-[#252538]'
+            activeTab === 'broadcast-ranks' ? 'bg-red-600 text-white shadow-[0_0_15px_rgba(239,68,68,0.5)]' : 'bg-[#0E4A87]/70 text-sky-200 hover:text-white border border-white/20'
           }`}
         >
           <Radio size={14} className="text-amber-300 animate-pulse" />
@@ -126,7 +126,7 @@ export const AdminDashboardPage: React.FC = () => {
         <button
           onClick={() => setActiveTab('publish-result')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'publish-result' ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm' : 'bg-[#171722] text-zinc-400 hover:text-white border border-[#252538]'
+            activeTab === 'publish-result' ? 'bg-[#1976D2] text-white shadow-glow-blue-sm' : 'bg-[#0E4A87]/70 text-sky-200 hover:text-white border border-white/20'
           }`}
         >
           <Award size={14} />
@@ -136,7 +136,7 @@ export const AdminDashboardPage: React.FC = () => {
         <button
           onClick={() => setActiveTab('players')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'players' ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm' : 'bg-[#171722] text-zinc-400 hover:text-white border border-[#252538]'
+            activeTab === 'players' ? 'bg-[#1976D2] text-white shadow-glow-blue-sm' : 'bg-[#0E4A87]/70 text-sky-200 hover:text-white border border-white/20'
           }`}
         >
           <Users size={14} />
@@ -146,7 +146,7 @@ export const AdminDashboardPage: React.FC = () => {
         <button
           onClick={() => setActiveTab('tiers')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'tiers' ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm' : 'bg-[#171722] text-zinc-400 hover:text-white border border-[#252538]'
+            activeTab === 'tiers' ? 'bg-[#1976D2] text-white shadow-glow-blue-sm' : 'bg-[#0E4A87]/70 text-sky-200 hover:text-white border border-white/20'
           }`}
         >
           <Layers size={14} />
@@ -156,7 +156,7 @@ export const AdminDashboardPage: React.FC = () => {
         <button
           onClick={() => setActiveTab('testers')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'testers' ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm' : 'bg-[#171722] text-zinc-400 hover:text-white border border-[#252538]'
+            activeTab === 'testers' ? 'bg-[#1976D2] text-white shadow-glow-blue-sm' : 'bg-[#0E4A87]/70 text-sky-200 hover:text-white border border-white/20'
           }`}
         >
           <Shield size={14} />
@@ -166,7 +166,7 @@ export const AdminDashboardPage: React.FC = () => {
         <button
           onClick={() => setActiveTab('announcements')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'announcements' ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm' : 'bg-[#171722] text-zinc-400 hover:text-white border border-[#252538]'
+            activeTab === 'announcements' ? 'bg-[#1976D2] text-white shadow-glow-blue-sm' : 'bg-[#0E4A87]/70 text-sky-200 hover:text-white border border-white/20'
           }`}
         >
           <Bell size={14} />
@@ -176,7 +176,7 @@ export const AdminDashboardPage: React.FC = () => {
         <button
           onClick={() => setActiveTab('server-config')}
           className={`px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
-            activeTab === 'server-config' ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm' : 'bg-[#171722] text-zinc-400 hover:text-white border border-[#252538]'
+            activeTab === 'server-config' ? 'bg-[#1976D2] text-white shadow-glow-blue-sm' : 'bg-[#0E4A87]/70 text-sky-200 hover:text-white border border-white/20'
           }`}
         >
           <Settings size={14} />
@@ -187,7 +187,7 @@ export const AdminDashboardPage: React.FC = () => {
           <button
             onClick={() => setActiveTab('admin-users')}
             className={`px-4 py-2.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-2 cursor-pointer ${
-              activeTab === 'admin-users' ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm' : 'bg-[#171722] text-zinc-400 hover:text-white border border-[#252538]'
+              activeTab === 'admin-users' ? 'bg-[#1976D2] text-white shadow-glow-blue-sm' : 'bg-[#0E4A87]/70 text-sky-200 hover:text-white border border-white/20'
             }`}
           >
             <Shield size={14} />

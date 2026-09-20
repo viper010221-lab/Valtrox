@@ -25,13 +25,13 @@ export const TierBadge: React.FC<TierBadgeProps> = ({
         };
       case 'MT1':
         return {
-          bg: 'bg-gradient-to-r from-purple-900/70 to-purple-600/50 text-purple-200 border-purple-400/70 shadow-[0_0_14px_rgba(168,85,247,0.4)]',
+          bg: 'bg-gradient-to-r from-purple-900/70 to-purple-600/50 text-purple-200 border-purple-400/70 shadow-[0_0_14px_rgba(33,150,243,0.4)]',
           label: 'MT1',
           name: 'MT1 — Mid S Tier'
         };
       case 'LT1':
         return {
-          bg: 'bg-purple-950/60 text-purple-300 border-purple-500/60 shadow-[0_0_10px_rgba(139,92,246,0.3)]',
+          bg: 'bg-purple-950/60 text-purple-300 border-purple-500/60 shadow-[0_0_10px_rgba(66,165,245,0.3)]',
           label: 'LT1',
           name: 'LT1 — Low S Tier'
         };
@@ -120,7 +120,7 @@ export const TierBadge: React.FC<TierBadgeProps> = ({
       case 'Untested':
       default:
         return {
-          bg: 'bg-[#171722]/80 text-zinc-500 border-zinc-700/30',
+          bg: 'bg-[#0E4A87]/75 text-zinc-500 border-zinc-700/30',
           label: 'Unranked',
           name: 'Unranked'
         };

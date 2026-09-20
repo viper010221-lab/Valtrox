@@ -51,15 +51,16 @@ export const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen relative flex flex-col bg-[#0F0F17] text-[#F5F5F5] selection:bg-[#7C3AED] selection:text-white overflow-x-hidden">
-      {/* Dynamic Cyber Grid Background */}
-      <div className="fixed inset-0 bg-grid-pattern pointer-events-none opacity-30 z-0" />
+    <div className="min-h-screen relative flex flex-col text-white selection:bg-[#FBBF24] selection:text-[#0B3C70] overflow-x-hidden">
+      {/* Minecraft sky backdrop: block grid + logo-style sunburst rays */}
+      <div className="fixed inset-0 bg-grid-pattern pointer-events-none opacity-20 z-0" />
+      <div className="fixed inset-0 bg-sky-rays pointer-events-none opacity-70 z-0" />
       {perfMode === 'pc' && (
         <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[550px] bg-radial-glow opacity-80" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[550px] bg-radial-glow opacity-90" />
           {/* Lightweight Ambient Glowing Orbs with GPU acceleration */}
-          <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#7C3AED]/15 rounded-full blur-3xl transform-gpu animate-pulse-glow" />
-          <div className="absolute top-1/3 -right-20 w-80 h-80 bg-[#8B5CF6]/10 rounded-full blur-3xl transform-gpu animate-pulse-glow" style={{ animationDelay: '2s' }} />
+          <div className="absolute -top-20 -left-20 w-80 h-80 bg-[#FBBF24]/20 rounded-full blur-3xl transform-gpu animate-pulse-glow" />
+          <div className="absolute top-1/3 -right-20 w-80 h-80 bg-white/20 rounded-full blur-3xl transform-gpu animate-pulse-glow" style={{ animationDelay: '2s' }} />
         </div>
       )}
 

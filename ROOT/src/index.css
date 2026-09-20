@@ -2,12 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   Minecraft Ten web font (self-hosted from Mojang web-theme-bootstrap)
+   ========================================================================== */
+@font-face {
+  font-family: 'MinecraftTen';
+  src: url('/fonts/MinecraftTen.woff') format('woff'),
+       url('/fonts/MinecraftTen.ttf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+}
+
+/* Minecraft Ten display font. It only ships a Regular weight, so pin the
+   weight and disable synthetic bolding — faux-bold smears the pixel edges
+   and stops it reading like real Minecraft lettering. */
+.font-minecraft {
+  font-family: 'MinecraftTen', 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+}
+
+/* ==========================================================================
+   BEDROCK UNION — "Sky" theme
+   Gradient sky background · royal-blue glass panels · gold headings ·
+   gold "BEDROCK" / blue "UNION" wordmark (mirrors the server logo).
+   ========================================================================== */
+
 @layer base {
+  :root {
+    --bu-sky-top: #1E88E5;
+    --bu-sky-mid: #2E96E9;
+    --bu-sky-low: #64B5F6;
+    --bu-surface: rgba(14, 74, 135, 0.70);
+    --bu-surface-deep: rgba(11, 60, 112, 0.60);
+    --bu-border: rgba(255, 255, 255, 0.20);
+    --bu-navy: #0B3C70;
+    --bu-gold: #FBBF24;
+    --bu-gold-deep: #D97706;
+    --bu-blue: #1976D2;
+    --bu-blue-accent: #42A5F5;
+  }
+
+  html {
+    background-color: var(--bu-sky-top);
+  }
+
   body {
-    background-color: #0F0F17;
-    color: #F5F5F5;
+    background-color: #1E88E5;
+    background-image: linear-gradient(180deg, #1E88E5 0%, #2E96E9 40%, #64B5F6 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #FFFFFF;
     overflow-x: hidden;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  ::selection {
+    background: #FBBF24;
+    color: #0B3C70;
+  }
+
+  /* Small copy sitting directly on the sky gradient keeps its edge */
+  main h1,
+  main h2,
+  main h3,
+  main p,
+  main blockquote {
+    text-shadow: 0 1px 2px rgba(11, 60, 112, 0.45);
   }
 }
 
@@ -17,42 +80,53 @@
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0F0F17;
+  background: rgba(11, 60, 112, 0.55);
 }
 ::-webkit-scrollbar-thumb {
-  background: #252538;
+  background: rgba(255, 255, 255, 0.35);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #7C3AED;
+  background: #FBBF24;
 }
 
-/* Background Cyber Grid */
+/* Minecraft-style block grid */
 .bg-grid-pattern {
   background-size: 40px 40px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.10) 1px, transparent 1px);
+}
+
+/* Sunburst rays behind the wordmark, like the logo backdrop */
+.bg-sky-rays {
+  background-image: repeating-conic-gradient(
+    from 0deg at 50% -12%,
+    rgba(255, 255, 255, 0.22) 0deg 5deg,
+    rgba(255, 255, 255, 0) 5deg 11deg
+  );
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 72%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 72%);
 }
 
 .bg-radial-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.22) 0%, rgba(15, 15, 23, 0) 70%);
+  background: radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0) 70%);
 }
 
-/* Glassmorphic Panels - Optimized for GPU Performance */
+/* Glassmorphic Panels */
 .glass-panel {
-  background: rgba(23, 23, 34, 0.9);
+  background: rgba(14, 74, 135, 0.70);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.20);
 }
 
 .glass-panel-glow {
-  background: linear-gradient(135deg, rgba(23, 23, 34, 0.95) 0%, rgba(31, 31, 46, 0.85) 100%);
+  background: linear-gradient(135deg, rgba(21, 87, 152, 0.92) 0%, rgba(14, 74, 135, 0.82) 100%);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(124, 58, 237, 0.25);
-  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(251, 191, 36, 0.38);
+  box-shadow: 0 10px 28px 0 rgba(6, 28, 63, 0.30);
 }
 
 /* Mobile Fallback: Disable expensive backdrop shader filters on smaller/mobile devices */
@@ -61,7 +135,7 @@
   .glass-panel-glow {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    background: #171722 !important;
+    background: #1257A0 !important;
   }
 }
 
@@ -72,8 +146,8 @@
 }
 .glass-card-hover:hover {
   transform: translateY(-2px);
-  border-color: rgba(139, 92, 246, 0.45);
-  box-shadow: 0 10px 25px -5px rgba(124, 58, 237, 0.25);
+  border-color: rgba(251, 191, 36, 0.60);
+  box-shadow: 0 12px 28px -6px rgba(6, 28, 63, 0.35);
 }
 
 /* Animated Shimmer Effect */
@@ -122,21 +196,338 @@
   animation: floatAnim 5s ease-in-out infinite;
 }
 
-/* Gradient Text */
-.gradient-text-purple {
-  background: linear-gradient(135deg, #FFFFFF 0%, #E9D5FF 40%, #A855F7 100%);
+/* --------------------------------------------------------------------------
+   Wordmark + heading treatments
+   Gradient-clipped text with a drop-shadow outline: drop-shadow is applied to
+   the rendered glyph pixels, so it also outlines background-clip:text fills.
+   -------------------------------------------------------------------------- */
+
+.heading-gold {
+  color: #FBBF24;
+  background-image: linear-gradient(180deg, #FFF3C4 0%, #FBBF24 36%, #F59E0B 68%, #D97706 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  /* em-based so the outline scales with the type — a fixed px stroke
+     swallows small lockups like the navbar wordmark */
+  -webkit-text-stroke: 0.04em rgba(11, 60, 112, 0.90);
+  filter:
+    drop-shadow(0 1px 0 rgba(11, 60, 112, 0.85))
+    drop-shadow(0 3px 6px rgba(6, 28, 63, 0.35));
+}
+
+.heading-blue {
+  color: #64B5F6;
+  background-image: linear-gradient(180deg, #EAF7FF 0%, #BBDEFB 34%, #64B5F6 68%, #1976D2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.04em rgba(11, 60, 112, 0.90);
+  filter:
+    drop-shadow(0 1px 0 rgba(11, 60, 112, 0.85))
+    drop-shadow(0 3px 6px rgba(6, 28, 63, 0.35));
 }
 
 .gradient-text-gold {
-  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
+  background-image: linear-gradient(135deg, #FFF3C4 0%, #FBBF24 50%, #D97706 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.03em rgba(11, 60, 112, 0.85);
+  filter:
+    drop-shadow(0 0 4px rgba(251, 191, 36, 0.45))
+    drop-shadow(0 4px 8px rgba(6, 28, 63, 0.25));
+}
+
+.gradient-text-blue {
+  background-image: linear-gradient(135deg, #EAF7FF 0%, #90CAF9 45%, #1976D2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0.03em rgba(11, 60, 112, 0.85);
+  filter:
+    drop-shadow(0 0 5px rgba(25, 118, 210, 0.45))
+    drop-shadow(0 4px 10px rgba(6, 28, 63, 0.30));
 }
 
 /* Border Beam glow */
-.border-glow-purple {
-  border: 1px solid rgba(124, 58, 237, 0.35);
-  box-shadow: inset 0 0 15px rgba(124, 58, 237, 0.1), 0 0 20px rgba(124, 58, 237, 0.15);
+.border-glow-gold {
+  border: 1px solid rgba(251, 191, 36, 0.45);
+  box-shadow: inset 0 0 15px rgba(251, 191, 36, 0.12), 0 0 20px rgba(251, 191, 36, 0.20);
 }
+
+/* ==========================================================================
+   3D BLOCK WORDMARK
+   Chunky extruded lettering that mirrors the Bedrock Union logo artwork.
+   The extrude is built from stacked text-shadows: the first eight paint the
+   dark outline ring around each glyph, the remaining ones step down-right to
+   carve the solid 3D side wall, and a soft blurred pair casts the ground
+   shadow. Requires the MinecraftTen face and a large font size to read well.
+   ========================================================================== */
+
+.wordmark-3d {
+  font-family: 'MinecraftTen', 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: 0.015em;
+  transform-style: preserve-3d;
+}
+
+/* gold "BEDROCK" — amber face, burnt-orange side wall, dark-brown outline */
+.wordmark-3d--gold {
+  color: #FFD24A;
+  text-shadow:
+    -0.035em -0.035em 0 #3F1605, 0 -0.035em 0 #3F1605, 0.035em -0.035em 0 #3F1605,
+    -0.035em 0 0 #3F1605, 0.035em 0 0 #3F1605,
+    -0.035em 0.035em 0 #3F1605, 0 0.035em 0 #3F1605, 0.035em 0.035em 0 #3F1605,
+    0.04em 0.055em 0 #B45309,
+    0.07em 0.095em 0 #A6470F,
+    0.10em 0.140em 0 #92400E,
+    0.13em 0.180em 0 #7C2D12,
+    0.16em 0.220em 0 #5B2109,
+    0.19em 0.260em 0 #3F1605,
+    0.22em 0.360em 0.22em rgba(4, 18, 42, 0.50);
+}
+
+/* blue "UNION" — sky face, cobalt side wall, midnight-navy outline */
+.wordmark-3d--blue {
+  color: #4FC9FF;
+  text-shadow:
+    -0.035em -0.035em 0 #04122A, 0 -0.035em 0 #04122A, 0.035em -0.035em 0 #04122A,
+    -0.035em 0 0 #04122A, 0.035em 0 0 #04122A,
+    -0.035em 0.035em 0 #04122A, 0 0.035em 0 #04122A, 0.035em 0.035em 0 #04122A,
+    0.04em 0.055em 0 #1E88E5,
+    0.07em 0.095em 0 #1976D2,
+    0.10em 0.140em 0 #1565C0,
+    0.13em 0.180em 0 #0D47A1,
+    0.16em 0.220em 0 #0A3A85,
+    0.19em 0.260em 0 #04122A,
+    0.22em 0.360em 0.22em rgba(4, 18, 42, 0.50);
+}
+
+/* lays the wordmark back into the scene so it reads as a solid object */
+.wordmark-3d-tilt {
+  transform: perspective(1000px) rotateX(7deg);
+}
+
+/* ==========================================================================
+   3D UI LAYER
+   Minecraft-slab surfaces: bright bevel on the top edge, dark bevel under
+   it, a chunky hard drop edge and a soft cast shadow. Hovering lifts the
+   element up off the page.
+   ========================================================================== */
+
+.scene-3d {
+  perspective: 1400px;
+  perspective-origin: 50% 25%;
+}
+
+.card-3d {
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.24),
+    0 8px 0 -2px rgba(6, 28, 63, 0.42),
+    0 18px 30px -10px rgba(6, 28, 63, 0.50);
+  transform-style: preserve-3d;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+}
+
+.card-3d:hover {
+  transform: translateY(-6px) rotateX(4deg);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.24),
+    0 14px 0 -2px rgba(6, 28, 63, 0.42),
+    0 30px 46px -12px rgba(6, 28, 63, 0.55);
+}
+
+.panel-3d {
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -5px 0 rgba(0, 0, 0, 0.22),
+    0 12px 0 -4px rgba(6, 28, 63, 0.38),
+    0 28px 48px -16px rgba(6, 28, 63, 0.55);
+}
+
+.btn-3d {
+  position: relative;
+  transform: translateY(-2px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.25),
+    0 6px 0 rgba(6, 28, 63, 0.60),
+    0 12px 18px -6px rgba(6, 28, 63, 0.55);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.2s ease;
+}
+
+.btn-3d:hover {
+  filter: brightness(1.08);
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.50),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.25),
+    0 9px 0 rgba(6, 28, 63, 0.60),
+    0 18px 26px -8px rgba(6, 28, 63, 0.55);
+}
+
+.btn-3d:active {
+  transform: translateY(3px);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.30),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.20),
+    0 1px 0 rgba(6, 28, 63, 0.60),
+    0 4px 10px -4px rgba(6, 28, 63, 0.50);
+}
+
+/* Isometric blocks used as banner decoration */
+@keyframes blockFloat3d {
+  0%, 100% { transform: translate3d(0, 0, 0) rotateX(14deg) rotateY(-16deg); }
+  50%      { transform: translate3d(0, -16px, 26px) rotateX(20deg) rotateY(-6deg); }
+}
+
+.block-float {
+  transform-style: preserve-3d;
+  animation: blockFloat3d 7s ease-in-out infinite;
+}
+
+/* --------------------------------------------------------------------------
+   Isometric Minecraft blocks (banner decoration)
+
+   Drawn — not tilted. Three clipped faces inside a square box give a solid
+   cube in classic 2:1 dimetric projection, so the block keeps reading as a
+   block no matter what it overlaps. Tone comes from the --mc-* variables.
+
+     top   : polygon(50% 0%, 100% 25%, 50% 50.6%, 0% 25%)            lightest
+     left  : polygon(0% 25%, 50.6% 50%, 50.6% 100%, 0% 75%)          mid
+     right : polygon(100% 25%, 100% 75%, 50% 100%, 50% 50%)           darkest
+   (top + left overshoot the centre line by 0.6% so the abutting clip edges
+   can never leave an antialiased hairline seam through the cube.)
+   -------------------------------------------------------------------------- */
+
+.mc-block {
+  --mc-top: #FFDF74;
+  --mc-left: #F2A93B;
+  --mc-right: #C87A16;
+  --mc-outline: #3F1605;
+  --mc-shadow: rgba(6, 28, 63, 0.45);
+  display: block;
+  /* position is intentionally left to the caller so Tailwind's absolute /
+     relative utilities keep working */
+}
+
+/* chunky dark rim — same silhouette, scaled out a touch */
+.mc-block::before {
+  content: '';
+  position: absolute;
+  inset: -4%;
+  background: var(--mc-outline);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* specular pixel on the top face (rotated square = rhombus on the 2:1 plane) */
+.mc-block::after {
+  content: '';
+  position: absolute;
+  left: 32%;
+  top: 15%;
+  width: 15%;
+  height: 15%;
+  background: rgba(255, 255, 255, 0.60);
+  transform: rotate(45deg) scaleY(0.5);
+  pointer-events: none;
+}
+
+.mc-block__face {
+  position: absolute;
+  inset: 0;
+}
+
+.mc-block__top {
+  background: var(--mc-top);
+  /* bottom vertex overshoots the centre line by a hair so the antialiased
+     clip edges of the three faces can never leave a hairline seam */
+  clip-path: polygon(50% 0%, 100% 25%, 50% 50.6%, 0% 25%);
+}
+
+.mc-block__left {
+  background: var(--mc-left);
+  clip-path: polygon(0% 25%, 50.6% 50%, 50.6% 100%, 0% 75%);
+}
+
+.mc-block__right {
+  background: var(--mc-right);
+  clip-path: polygon(100% 25%, 100% 75%, 50% 100%, 50% 50%);
+}
+
+/* soft contact shadow on the ground plane, tucked under the cube */
+.mc-block__shadow {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 98%;
+  height: 16%;
+  border-radius: 50%;
+  background: var(--mc-shadow);
+  filter: blur(3px);
+}
+
+/* Palettes */
+.mc-block--gold {
+  --mc-top: #FFE08A;
+  --mc-left: #F2A93B;
+  --mc-right: #C87A16;
+  --mc-outline: #3F1605;
+}
+
+.mc-block--cyan {
+  --mc-top: #C6ECFF;
+  --mc-left: #4FB8F5;
+  --mc-right: #1B6FB8;
+  --mc-outline: #04122A;
+}
+
+.mc-block--blue {
+  --mc-top: #86CBF9;
+  --mc-left: #2F86D6;
+  --mc-right: #0F4F97;
+  --mc-outline: #04122A;
+}
+
+/* Idle bob: a solid block only ever translates, it never re-projects */
+@keyframes mcBlockFloat {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -14px, 0); }
+}
+
+.mc-block--float {
+  animation: mcBlockFloat 6.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Banner entrance: tips up out of the page plane */
+@keyframes bannerRise {
+  from { opacity: 0; transform: perspective(1400px) rotateX(14deg) translateY(34px); }
+  to   { opacity: 1; transform: perspective(1400px) rotateX(0deg) translateY(0); }
+}
+
+.banner-rise {
+  animation: bannerRise 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Motion-sensitive users: drop the movement, keep the depth styling */
+@media (prefers-reduced-motion: reduce) {
+  .block-float,
+  .banner-rise,
+  .mc-block--float {
+    animation: none !important;
+  }
+  .card-3d:hover,
+  .btn-3d:hover,
+  .btn-3d:active {
+    transform: none;
+  }
+}
+

@@ -56,7 +56,7 @@ export const GamerAvatar: React.FC<GamerAvatarProps> = ({
     if (rank === 'Moderator') return 'border-2 border-emerald-400';
     if (rank === 'VIP' || rank === 'MVP++') return 'border-2 border-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.4)]';
     if (rank === 'Tier Tester') return 'border-2 border-blue-400';
-    return 'border border-[#252538]';
+    return 'border border-white/20';
   };
 
   const gradient = getGradient(name);

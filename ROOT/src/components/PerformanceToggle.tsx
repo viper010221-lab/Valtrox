@@ -7,7 +7,7 @@ export const PerformanceToggle: React.FC = () => {
 
   return (
     <div
-      className="flex items-center gap-0.5 p-0.5 rounded-xl bg-[#0F0F17] border border-[#252538] shadow-sm shrink-0"
+      className="flex items-center gap-0.5 p-0.5 rounded-xl bg-[#0B3C70]/55 border border-white/20 shadow-sm shrink-0"
       title="Performance mode: PC = full graphics, Phone = fast & low-end friendly"
     >
       {/* PC mode button */}
@@ -15,8 +15,8 @@ export const PerformanceToggle: React.FC = () => {
         onClick={() => setPerfMode('pc')}
         className={`p-1.5 rounded-lg transition-all cursor-pointer ${
           perfMode === 'pc'
-            ? 'bg-[#7C3AED]/30 text-white border border-[#7C3AED]/60 shadow-glow-purple-sm'
-            : 'text-zinc-500 hover:text-zinc-300 hover:bg-[#171722] border border-transparent'
+            ? 'bg-[#1976D2]/30 text-white border border-[#1976D2]/60 shadow-glow-blue-sm'
+            : 'text-sky-300 hover:text-sky-100 hover:bg-[#0E4A87]/70 border border-transparent'
         }`}
         title="PC mode (full graphics & animations)"
       >
@@ -29,7 +29,7 @@ export const PerformanceToggle: React.FC = () => {
         className={`p-1.5 rounded-lg transition-all cursor-pointer ${
           perfMode === 'phone'
             ? 'bg-emerald-500/25 text-emerald-300 border border-emerald-500/60 shadow-[0_0_10px_rgba(16,185,129,0.4)]'
-            : 'text-zinc-500 hover:text-zinc-300 hover:bg-[#171722] border border-transparent'
+            : 'text-sky-300 hover:text-sky-100 hover:bg-[#0E4A87]/70 border border-transparent'
         }`}
         title="Phone mode (fast, fewer animations, lower memory)"
       >

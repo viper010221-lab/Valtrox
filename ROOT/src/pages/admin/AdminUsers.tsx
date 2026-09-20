@@ -59,14 +59,14 @@ export const AdminUsers: React.FC<{ onFeedback: (msg: string) => void }> = ({ on
   return (
     <div className="space-y-6">
       {/* Add Admin User */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-[#171722] border border-[#7C3AED]/40 space-y-4">
+      <div className="p-6 sm:p-8 rounded-3xl bg-[#0E4A87]/70 border border-[#1976D2]/40 space-y-4">
         <div className="flex items-center gap-3">
-          <div className="p-3 rounded-2xl bg-purple-500/20 border border-purple-500/40 text-purple-400">
+          <div className="p-3 rounded-2xl bg-sky-400/20 border border-sky-400/40 text-sky-300">
             <ShieldCheck size={22} />
           </div>
           <div>
-            <h2 className="text-xl font-black text-white">Admin Users</h2>
-            <p className="text-xs text-zinc-400">
+            <h2 className="text-xl font-black heading-gold">Admin Users</h2>
+            <p className="text-xs text-sky-200">
               Grant admin panel access to users by email. Added users will be able to access the full admin dashboard.
             </p>
           </div>
@@ -74,22 +74,22 @@ export const AdminUsers: React.FC<{ onFeedback: (msg: string) => void }> = ({ on
 
         <form onSubmit={handleAdd} className="space-y-3">
           <div>
-            <label className="text-xs font-semibold text-zinc-300 block mb-1.5">User Email</label>
+            <label className="text-xs font-semibold text-sky-100 block mb-1.5">User Email</label>
             <div className="flex gap-3">
               <div className="relative flex-1">
-                <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500" />
+                <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-sky-300" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter user's email address..."
-                  className="w-full pl-10 pr-4 py-2.5 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none focus:border-[#7C3AED]"
+                  className="w-full pl-10 pr-4 py-2.5 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white placeholder-sky-300 focus:outline-none focus:border-[#1976D2]"
                   required
                 />
               </div>
               <button
                 type="submit"
-                className="px-6 py-2.5 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0"
+                className="px-6 py-2.5 rounded-xl bg-[#1976D2] hover:bg-[#42A5F5] text-white text-xs font-bold transition-all cursor-pointer flex items-center gap-2 shrink-0"
               >
                 <UserPlus size={16} />
                 <span>Add</span>
@@ -113,36 +113,36 @@ export const AdminUsers: React.FC<{ onFeedback: (msg: string) => void }> = ({ on
       </div>
 
       {/* Current Admin Users List */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-[#171722] border border-[#252538] space-y-4">
+      <div className="p-6 sm:p-8 rounded-3xl bg-[#0E4A87]/70 border border-white/20 space-y-4">
         <div className="flex items-center gap-3">
           <div className="p-2.5 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-400">
             <Users size={18} />
           </div>
           <div>
             <h3 className="text-sm font-bold text-white uppercase tracking-wider">Current Admin Users</h3>
-            <p className="text-xs text-zinc-400">{adminUsers.length} user(s) with admin panel access</p>
+            <p className="text-xs text-sky-200">{adminUsers.length} user(s) with admin panel access</p>
           </div>
         </div>
 
         {adminUsers.length === 0 ? (
           <div className="text-center py-8 space-y-2">
-            <Users size={28} className="text-zinc-600 mx-auto" />
-            <p className="text-xs text-zinc-400">No admin users added yet.</p>
+            <Users size={28} className="text-sky-300 mx-auto" />
+            <p className="text-xs text-sky-200">No admin users added yet.</p>
           </div>
         ) : (
           <div className="space-y-2">
             {adminUsers.map((admin) => (
               <div
                 key={admin.email}
-                className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#0F0F17] border border-[#252538]"
+                className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#0B3C70]/55 border border-white/20"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="p-2 rounded-lg bg-purple-500/20 border border-purple-500/30">
-                    <ShieldCheck size={14} className="text-purple-400" />
+                  <div className="p-2 rounded-lg bg-sky-400/20 border border-sky-400/30">
+                    <ShieldCheck size={14} className="text-sky-300" />
                   </div>
                   <div className="min-w-0">
                     <div className="font-bold text-white text-sm truncate">{admin.ign}</div>
-                    <span className="text-xs text-zinc-400 font-mono truncate block">{admin.email}</span>
+                    <span className="text-xs text-sky-200 font-mono truncate block">{admin.email}</span>
                   </div>
                 </div>
                 <button

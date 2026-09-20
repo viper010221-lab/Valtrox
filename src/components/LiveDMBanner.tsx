@@ -17,9 +17,9 @@ export const LiveDMBanner: React.FC = () => {
           transition={{ type: 'spring', stiffness: 500, damping: 25 }}
           className="fixed top-8 inset-x-0 mx-auto z-[9999] w-[92%] max-w-xl pointer-events-auto"
         >
-          <div className="relative overflow-hidden rounded-3xl bg-[#171722]/98 border-2 border-red-500/80 shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_40px_rgba(239,68,68,0.45)] backdrop-blur-2xl p-5 text-white">
+          <div className="relative overflow-hidden rounded-3xl bg-[#0E4A87]/90 border-2 border-red-500/80 shadow-[0_25px_60px_rgba(0,0,0,0.85),0_0_40px_rgba(239,68,68,0.45)] backdrop-blur-2xl p-5 text-white">
             {/* Ambient Pulsing Glow */}
-            <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-24 bg-gradient-to-r from-red-500/30 via-amber-500/20 to-purple-500/30 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-64 h-24 bg-gradient-to-r from-red-500/30 via-amber-500/20 to-sky-400/30 rounded-full blur-2xl pointer-events-none" />
 
             <div className="relative z-10 flex items-start gap-4">
               <div className="p-3 rounded-2xl bg-gradient-to-br from-red-600 to-rose-700 text-white shrink-0 shadow-[0_0_20px_rgba(239,68,68,0.6)] animate-pulse">
@@ -33,7 +33,7 @@ export const LiveDMBanner: React.FC = () => {
                     <span>Live DM Broadcast</span>
                   </span>
                   <RankBadge rank={activeLiveDM.senderRank} size="sm" />
-                  <span className="text-xs font-bold text-zinc-300 font-mono">@{activeLiveDM.sender}</span>
+                  <span className="text-xs font-bold text-sky-100 font-mono">@{activeLiveDM.sender}</span>
                 </div>
 
                 <p className="text-sm font-semibold text-white leading-relaxed break-words pr-2">
@@ -43,7 +43,7 @@ export const LiveDMBanner: React.FC = () => {
 
               <button
                 onClick={dismissLiveDM}
-                className="p-2 rounded-xl bg-[#0F0F17] hover:bg-red-950/60 hover:text-red-300 border border-[#252538] hover:border-red-500/40 text-zinc-400 transition-all cursor-pointer shrink-0"
+                className="p-2 rounded-xl bg-[#0B3C70]/55 hover:bg-red-950/60 hover:text-red-300 border border-white/20 hover:border-red-500/40 text-sky-200 transition-all cursor-pointer shrink-0"
                 title="Dismiss"
               >
                 <X size={16} />

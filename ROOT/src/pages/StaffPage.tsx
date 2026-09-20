@@ -12,16 +12,16 @@ export const StaffPage: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#252538] pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/20 pb-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8B5CF6]">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#42A5F5]">
             <Shield size={14} />
             <span>Bedrock Union Platform Administration</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight mt-1">
+          <h1 className="text-3xl font-extrabold heading-gold tracking-tight mt-1">
             Leadership, Staff & Evaluators
           </h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <p className="text-sm text-sky-200 mt-1">
             Official administration team, tier test evaluators, and competitive community directors.
           </p>
         </div>
@@ -43,8 +43,8 @@ export const StaffPage: React.FC = () => {
           onClick={() => setActiveTab('all')}
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
             activeTab === 'all'
-              ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm'
-              : 'bg-[#171722] text-zinc-400 hover:text-white border border-[#252538]'
+              ? 'bg-[#1976D2] text-white shadow-glow-blue-sm'
+              : 'bg-[#0E4A87]/70 text-sky-200 hover:text-white border border-white/20'
           }`}
         >
           All Members ({staff.length + testers.length})
@@ -53,8 +53,8 @@ export const StaffPage: React.FC = () => {
           onClick={() => setActiveTab('staff')}
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
             activeTab === 'staff'
-              ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm'
-              : 'bg-[#171722] text-zinc-400 hover:text-white border border-[#252538]'
+              ? 'bg-[#1976D2] text-white shadow-glow-blue-sm'
+              : 'bg-[#0E4A87]/70 text-sky-200 hover:text-white border border-white/20'
           }`}
         >
           Administration Staff ({staff.length})
@@ -63,8 +63,8 @@ export const StaffPage: React.FC = () => {
           onClick={() => setActiveTab('testers')}
           className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
             activeTab === 'testers'
-              ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm'
-              : 'bg-[#171722] text-zinc-400 hover:text-white border border-[#252538]'
+              ? 'bg-[#1976D2] text-white shadow-glow-blue-sm'
+              : 'bg-[#0E4A87]/70 text-sky-200 hover:text-white border border-white/20'
           }`}
         >
           Official Testers ({testers.length})
@@ -74,7 +74,7 @@ export const StaffPage: React.FC = () => {
       {/* Staff Section */}
       {(activeTab === 'all' || activeTab === 'staff') && (
         <div className="space-y-4">
-          <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-purple-400">
+          <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-sky-300">
             <Shield size={16} />
             <span>Executive Staff & Leadership</span>
           </div>
@@ -84,7 +84,7 @@ export const StaffPage: React.FC = () => {
               {staff.map((member) => (
                 <div
                   key={member.id}
-                  className="p-6 rounded-2xl bg-[#171722] border border-[#252538] hover:border-[#7C3AED]/40 transition-all space-y-4 flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/40 transition-all space-y-4 flex flex-col justify-between"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center gap-4">
@@ -95,22 +95,22 @@ export const StaffPage: React.FC = () => {
                       </div>
                     </div>
 
-                    <p className="text-xs text-zinc-400 leading-relaxed">
+                    <p className="text-xs text-sky-200 leading-relaxed">
                       {member.bio}
                     </p>
                   </div>
 
-                  <div className="pt-3 border-t border-[#252538] flex items-center justify-between text-xs font-mono text-zinc-400">
-                    <span className="text-purple-300">{member.discordTag}</span>
+                  <div className="pt-3 border-t border-white/20 flex items-center justify-between text-xs font-mono text-sky-200">
+                    <span className="text-sky-200">{member.discordTag}</span>
                     <span className="text-[11px]">Since {member.joinedDate}</span>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="p-8 rounded-2xl bg-[#171722] border border-[#252538] text-center space-y-2">
+            <div className="p-8 rounded-2xl bg-[#0E4A87]/70 border border-white/20 text-center space-y-2">
               <p className="text-sm font-bold text-white">Staff Roster is Currently Being Calibrated</p>
-              <p className="text-xs text-zinc-400">Join our Discord community to view staff openings and team roles.</p>
+              <p className="text-xs text-sky-200">Join our Discord community to view staff openings and team roles.</p>
             </div>
           )}
         </div>
@@ -129,7 +129,7 @@ export const StaffPage: React.FC = () => {
               {testers.map((tester) => (
                 <div
                   key={tester.id}
-                  className="p-6 rounded-2xl bg-[#171722] border border-[#252538] hover:border-[#7C3AED]/40 transition-all space-y-4 flex flex-col justify-between"
+                  className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/40 transition-all space-y-4 flex flex-col justify-between"
                 >
                   <div className="space-y-4">
                     <div className="flex items-start justify-between">
@@ -142,7 +142,7 @@ export const StaffPage: React.FC = () => {
                       </div>
 
                       <div className="text-right font-mono">
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] bg-[#0F0F17] text-emerald-400 border border-emerald-500/30">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] bg-[#0B3C70]/55 text-emerald-400 border border-emerald-500/30">
                           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                           <span>{tester.status}</span>
                         </span>
@@ -151,14 +151,14 @@ export const StaffPage: React.FC = () => {
 
                     {/* Gamemodes Tested */}
                     <div>
-                      <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider block mb-2">
+                      <span className="text-[11px] font-semibold text-sky-300 uppercase tracking-wider block mb-2">
                         Testing Specialties:
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {tester.gamemodes.map((gm) => (
                           <div
                             key={gm}
-                            className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#0F0F17] border border-[#252538] text-[11px] font-mono text-zinc-300"
+                            className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-[#0B3C70]/55 border border-white/20 text-[11px] font-mono text-sky-100"
                           >
                             <GamemodeIcon gamemode={gm} size={12} />
                             <span>{gm}</span>
@@ -168,17 +168,17 @@ export const StaffPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-[#252538] flex items-center justify-between text-xs font-mono text-zinc-400">
-                    <span className="text-purple-300">{tester.discordTag}</span>
+                  <div className="pt-3 border-t border-white/20 flex items-center justify-between text-xs font-mono text-sky-200">
+                    <span className="text-sky-200">{tester.discordTag}</span>
                     <span>{tester.testsConducted} Tests Conducted</span>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="p-8 rounded-2xl bg-[#171722] border border-[#252538] text-center space-y-2">
+            <div className="p-8 rounded-2xl bg-[#0E4A87]/70 border border-white/20 text-center space-y-2">
               <p className="text-sm font-bold text-white">Tester Applications are Open</p>
-              <p className="text-xs text-zinc-400">Apply on our Discord server in #tester-apply to evaluate Bedfight, Skywars, Mace, and Fireball Fight!</p>
+              <p className="text-xs text-sky-200">Apply on our Discord server in #tester-apply to evaluate Bedfight, Skywars, Mace, and Fireball Fight!</p>
             </div>
           )}
         </div>

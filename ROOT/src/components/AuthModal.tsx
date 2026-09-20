@@ -56,15 +56,15 @@ export const AuthModal: React.FC = () => {
           initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
-          className="relative w-full max-w-md bg-[#171722] border-2 border-[#7C3AED]/50 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden"
+          className="relative w-full max-w-md bg-[#0E4A87]/70 border-2 border-[#1976D2]/50 rounded-3xl p-6 sm:p-8 shadow-2xl overflow-hidden"
         >
           {/* Ambient Glow */}
-          <div className="absolute -top-24 -right-24 w-60 h-60 bg-[#7C3AED]/25 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -top-24 -right-24 w-60 h-60 bg-[#1976D2]/25 rounded-full blur-3xl pointer-events-none" />
 
           {/* Close / Skip to Guest Button */}
           <button
             onClick={() => setAuthModalOpen(false)}
-            className="absolute top-5 right-5 p-2 rounded-xl bg-[#0F0F17] hover:bg-[#252538] text-zinc-400 hover:text-white transition-colors cursor-pointer"
+            className="absolute top-5 right-5 p-2 rounded-xl bg-[#0B3C70]/55 hover:bg-white/20 text-sky-200 hover:text-white transition-colors cursor-pointer"
             title="Close or browse as guest"
           >
             <X size={18} />
@@ -72,14 +72,14 @@ export const AuthModal: React.FC = () => {
 
           {/* Header */}
           <div className="space-y-1 mb-5">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#7C3AED]/20 border border-[#7C3AED]/40 text-xs font-bold text-purple-300 font-mono">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1976D2]/20 border border-[#1976D2]/40 text-xs font-bold text-sky-200 font-mono">
               <Shield size={13} className="text-amber-400" />
               <span>Bedrock Union Competitive Network</span>
             </div>
-            <h2 className="text-2xl font-black text-white tracking-tight">
+            <h2 className="text-2xl font-black heading-gold tracking-tight">
               {mode === 'signup' ? 'Create Your Account' : 'Welcome Back'}
             </h2>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-sky-200">
               {mode === 'signup'
                 ? 'Sign up to record your matches, calibrate your tier & manage ranking.'
                 : 'Sign in to access your profile & admin dashboard tools.'}
@@ -87,7 +87,7 @@ export const AuthModal: React.FC = () => {
           </div>
 
           {/* Mode Switch Tabs */}
-          <div className="grid grid-cols-2 gap-2 p-1 bg-[#0F0F17] border border-[#252538] rounded-2xl mb-4">
+          <div className="grid grid-cols-2 gap-2 p-1 bg-[#0B3C70]/55 border border-white/20 rounded-2xl mb-4">
             <button
               type="button"
               onClick={() => {
@@ -96,8 +96,8 @@ export const AuthModal: React.FC = () => {
               }}
               className={`py-2 text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                 mode === 'signup'
-                  ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm'
-                  : 'text-zinc-400 hover:text-white'
+                  ? 'bg-[#1976D2] text-white shadow-glow-blue-sm'
+                  : 'text-sky-200 hover:text-white'
               }`}
             >
               <UserPlus size={14} />
@@ -111,8 +111,8 @@ export const AuthModal: React.FC = () => {
               }}
               className={`py-2 text-xs font-bold rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
                 mode === 'login'
-                  ? 'bg-[#7C3AED] text-white shadow-glow-purple-sm'
-                  : 'text-zinc-400 hover:text-white'
+                  ? 'bg-[#1976D2] text-white shadow-glow-blue-sm'
+                  : 'text-sky-200 hover:text-white'
               }`}
             >
               <LogIn size={14} />
@@ -142,66 +142,66 @@ export const AuthModal: React.FC = () => {
             {mode === 'signup' && (
               <>
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-zinc-300">In-Game Name (Bedrock IGN)</label>
+                  <label className="text-xs font-bold text-sky-100">In-Game Name (Bedrock IGN)</label>
                   <div className="relative">
-                    <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
+                    <User size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-300" />
                     <input
                       type="text"
                       required
                       placeholder="e.g. BedrockPro"
                       value={ign}
                       onChange={(e) => setIgn(e.target.value)}
-                      className="w-full pl-10 pr-4 py-2.5 bg-[#0F0F17] border border-[#252538] focus:border-[#7C3AED] rounded-xl text-xs text-white focus:outline-none transition-colors font-mono"
+                      className="w-full pl-10 pr-4 py-2.5 bg-[#0B3C70]/55 border border-white/20 focus:border-[#1976D2] rounded-xl text-xs text-white focus:outline-none transition-colors font-mono"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-zinc-300">Discord Username</label>
+                  <label className="text-xs font-bold text-sky-100">Discord Username</label>
                   <input
                     type="text"
                     placeholder="e.g. bedrock_pro#0000"
                     value={discordTag}
                     onChange={(e) => setDiscordTag(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-[#0F0F17] border border-[#252538] focus:border-[#7C3AED] rounded-xl text-xs text-white focus:outline-none transition-colors font-mono"
+                    className="w-full px-4 py-2.5 bg-[#0B3C70]/55 border border-white/20 focus:border-[#1976D2] rounded-xl text-xs text-white focus:outline-none transition-colors font-mono"
                   />
                 </div>
               </>
             )}
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-zinc-300">Email Address</label>
+              <label className="text-xs font-bold text-sky-100">Email Address</label>
               <div className="relative">
-                <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
+                <Mail size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-300" />
                 <input
                   type="email"
                   required
                   placeholder="e.g. player@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-[#0F0F17] border border-[#252538] focus:border-[#7C3AED] rounded-xl text-xs text-white focus:outline-none transition-colors font-mono"
+                  className="w-full pl-10 pr-4 py-2.5 bg-[#0B3C70]/55 border border-white/20 focus:border-[#1976D2] rounded-xl text-xs text-white focus:outline-none transition-colors font-mono"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-zinc-300">Password</label>
+              <label className="text-xs font-bold text-sky-100">Password</label>
               <div className="relative">
-                <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
+                <Lock size={15} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-300" />
                 <input
                   type="password"
                   required
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-[#0F0F17] border border-[#252538] focus:border-[#7C3AED] rounded-xl text-xs text-white focus:outline-none transition-colors font-mono"
+                  className="w-full pl-10 pr-4 py-2.5 bg-[#0B3C70]/55 border border-white/20 focus:border-[#1976D2] rounded-xl text-xs text-white focus:outline-none transition-colors font-mono"
                 />
               </div>
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] hover:from-[#8B5CF6] hover:to-[#7C3AED] text-white text-xs font-bold shadow-glow-purple transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center justify-center gap-2 mt-2"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-[#1976D2] to-[#42A5F5] hover:from-[#42A5F5] hover:to-[#1976D2] text-white text-xs font-bold shadow-glow-blue transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center justify-center gap-2 mt-2"
             >
               <span>{mode === 'signup' ? 'Complete Sign Up & Enter' : 'Sign In & Enter'}</span>
               <ArrowRight size={14} />
@@ -209,16 +209,16 @@ export const AuthModal: React.FC = () => {
           </form>
 
           {/* Guest Option */}
-          <div className="mt-4 pt-3 border-t border-[#252538] flex items-center justify-between text-xs text-zinc-400">
+          <div className="mt-4 pt-3 border-t border-white/20 flex items-center justify-between text-xs text-sky-200">
             <button
               type="button"
               onClick={() => setAuthModalOpen(false)}
-              className="text-zinc-400 hover:text-white transition-colors cursor-pointer"
+              className="text-sky-200 hover:text-white transition-colors cursor-pointer"
             >
               Skip and browse as guest &rarr;
             </button>
 
-            <span className="text-[11px] text-zinc-500">Bedrock Union ID v2.0</span>
+            <span className="text-[11px] text-sky-300">Bedrock Union ID v2.0</span>
           </div>
         </motion.div>
       </div>

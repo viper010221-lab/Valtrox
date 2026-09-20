@@ -66,7 +66,7 @@ export const AdminBroadcastAndRanks: React.FC<{ onFeedback: (msg: string) => voi
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-red-950/20 via-[#171722] to-[#171722] border-2 border-red-500/50 shadow-2xl relative overflow-hidden"
+        className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-red-950/20 via-[#0E4A87]/80 to-[#0E4A87]/70 border-2 border-red-500/50 shadow-2xl relative overflow-hidden"
       >
         <div className="absolute -top-16 -right-16 w-52 h-52 bg-red-500/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -76,12 +76,12 @@ export const AdminBroadcastAndRanks: React.FC<{ onFeedback: (msg: string) => voi
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-xl font-black text-white">Live News & DM Broadcast System</h2>
+              <h2 className="text-xl font-black heading-gold">Live News & DM Broadcast System</h2>
               <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/40 font-mono">
                 10-Sec Auto-Expire
               </span>
             </div>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-sky-200">
               Type any announcement. It will appear at the very top of the website like a direct server message and fade away after 10 seconds.
             </p>
           </div>
@@ -89,19 +89,19 @@ export const AdminBroadcastAndRanks: React.FC<{ onFeedback: (msg: string) => voi
 
         <form onSubmit={handleSendBroadcast} className="space-y-4">
           <div>
-            <label className="text-xs font-bold text-zinc-300 block mb-1.5">Broadcast Message Content</label>
+            <label className="text-xs font-bold text-sky-100 block mb-1.5">Broadcast Message Content</label>
             <textarea
               required
               rows={3}
               placeholder="e.g. 📢 BEDFIGHT TOURNAMENT REGISTRATION IS NOW LIVE! Open tickets in Discord to compete for  Prize Pool!"
               value={broadcastMessage}
               onChange={(e) => setBroadcastMessage(e.target.value)}
-              className="w-full px-4 py-3 bg-[#0F0F17] border border-[#252538] focus:border-red-500 rounded-2xl text-xs text-white placeholder-zinc-500 focus:outline-none transition-colors leading-relaxed font-sans"
+              className="w-full px-4 py-3 bg-[#0B3C70]/55 border border-white/20 focus:border-red-500 rounded-2xl text-xs text-white placeholder-sky-300 focus:outline-none transition-colors leading-relaxed font-sans"
             />
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-            <span className="text-[11px] text-zinc-500 font-mono">
+            <span className="text-[11px] text-sky-300 font-mono">
               Sender will be marked as <strong className="text-red-400">{currentUser?.ign || 'Bedrock Union Owner'} [Owner]</strong>
             </span>
             <button
@@ -121,15 +121,15 @@ export const AdminBroadcastAndRanks: React.FC<{ onFeedback: (msg: string) => voi
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="p-6 sm:p-8 rounded-3xl bg-[#171722] border border-[#7C3AED]/50 shadow-2xl space-y-6"
+        className="p-6 sm:p-8 rounded-3xl bg-[#0E4A87]/70 border border-[#1976D2]/50 shadow-2xl space-y-6"
       >
         <div className="flex items-center gap-3">
-          <div className="p-3 rounded-2xl bg-[#7C3AED]/20 border border-[#7C3AED]/40 text-purple-400">
+          <div className="p-3 rounded-2xl bg-[#1976D2]/20 border border-[#1976D2]/40 text-sky-300">
             <UserCheck size={22} />
           </div>
           <div>
-            <h2 className="text-xl font-black text-white">Assign User Community Rank</h2>
-            <p className="text-xs text-zinc-400">
+            <h2 className="text-xl font-black heading-gold">Assign User Community Rank</h2>
+            <p className="text-xs text-sky-200">
               Input any registered user's email address and choose their platform permissions and prestige badge rank.
             </p>
           </div>
@@ -150,26 +150,26 @@ export const AdminBroadcastAndRanks: React.FC<{ onFeedback: (msg: string) => voi
 
         <form onSubmit={handleAssignRank} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
           <div className="space-y-1.5 md:col-span-1">
-            <label className="text-xs font-bold text-zinc-300">Target User Email</label>
+            <label className="text-xs font-bold text-sky-100">Target User Email</label>
             <div className="relative">
-              <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
+              <Mail size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-300" />
               <input
                 type="email"
                 required
                 placeholder="e.g. player@gmail.com"
                 value={targetEmail}
                 onChange={(e) => setTargetEmail(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-[#0F0F17] border border-[#252538] focus:border-[#7C3AED] rounded-xl text-xs text-white focus:outline-none transition-colors font-mono"
+                className="w-full pl-10 pr-4 py-2.5 bg-[#0B3C70]/55 border border-white/20 focus:border-[#1976D2] rounded-xl text-xs text-white focus:outline-none transition-colors font-mono"
               />
             </div>
           </div>
 
           <div className="space-y-1.5 md:col-span-1">
-            <label className="text-xs font-bold text-zinc-300">Assign Platform Rank</label>
+            <label className="text-xs font-bold text-sky-100">Assign Platform Rank</label>
             <select
               value={selectedRank}
               onChange={(e) => setSelectedRank(e.target.value as UserRank)}
-              className="w-full px-3.5 py-2.5 bg-[#0F0F17] border border-[#252538] focus:border-[#7C3AED] rounded-xl text-xs text-white focus:outline-none transition-colors cursor-pointer font-mono"
+              className="w-full px-3.5 py-2.5 bg-[#0B3C70]/55 border border-white/20 focus:border-[#1976D2] rounded-xl text-xs text-white focus:outline-none transition-colors cursor-pointer font-mono"
             >
               {ALL_RANKS.map((r) => (
                 <option key={r} value={r}>
@@ -181,7 +181,7 @@ export const AdminBroadcastAndRanks: React.FC<{ onFeedback: (msg: string) => voi
 
           <button
             type="submit"
-            className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#7C3AED] to-[#8B5CF6] hover:from-[#8B5CF6] hover:to-[#7C3AED] text-white font-bold text-xs shadow-glow-purple transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center justify-center gap-2"
+            className="w-full py-2.5 rounded-xl bg-gradient-to-r from-[#1976D2] to-[#42A5F5] hover:from-[#42A5F5] hover:to-[#1976D2] text-white font-bold text-xs shadow-glow-blue transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center justify-center gap-2"
           >
             <Sparkles size={14} />
             <span>Update User Rank</span>
@@ -189,14 +189,14 @@ export const AdminBroadcastAndRanks: React.FC<{ onFeedback: (msg: string) => voi
         </form>
 
         {/* Registered Accounts Table */}
-        <div className="pt-4 border-t border-[#252538] space-y-3">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-400 font-mono">
+        <div className="pt-4 border-t border-white/20 space-y-3">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-sky-200 font-mono">
             Registered Accounts Directory ({accounts.length})
           </h3>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#0F0F17] text-zinc-400 uppercase text-[10px] font-mono border-b border-[#252538]">
+              <thead className="bg-[#0B3C70]/55 text-sky-200 uppercase text-[10px] font-mono border-b border-white/20">
                 <tr>
                   <th className="py-3 px-4">User</th>
                   <th className="py-3 px-4">Email</th>
@@ -205,17 +205,17 @@ export const AdminBroadcastAndRanks: React.FC<{ onFeedback: (msg: string) => voi
                   <th className="py-3 px-4 text-center">Quick Assign</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#252538]/60 font-mono">
+              <tbody className="divide-y divide-white/15 font-mono">
                 {accounts.map((acc) => (
-                  <tr key={acc.id} className="hover:bg-[#1F1F2E]/60 transition-colors">
+                  <tr key={acc.id} className="hover:bg-[#1565C0]/60/60 transition-colors">
                     <td className="py-3 px-4">
                       <div className="flex items-center gap-2.5">
                         <GamerAvatar name={acc.ign} size="sm" rank={acc.rank} />
                         <span className="font-bold text-white">{acc.ign}</span>
                       </div>
                     </td>
-                    <td className="py-3 px-4 text-zinc-300">{acc.email}</td>
-                    <td className="py-3 px-4 text-zinc-400">{acc.discordTag}</td>
+                    <td className="py-3 px-4 text-sky-100">{acc.email}</td>
+                    <td className="py-3 px-4 text-sky-200">{acc.discordTag}</td>
                     <td className="py-3 px-4">
                       <RankBadge rank={acc.rank} size="sm" />
                     </td>
@@ -223,7 +223,7 @@ export const AdminBroadcastAndRanks: React.FC<{ onFeedback: (msg: string) => voi
                       <select
                         value={acc.rank}
                         onChange={(e) => assignRankByEmail(acc.email, e.target.value as UserRank)}
-                        className="px-2 py-1 bg-[#0F0F17] border border-[#252538] rounded-lg text-[11px] text-zinc-300 focus:border-[#7C3AED] focus:outline-none cursor-pointer"
+                        className="px-2 py-1 bg-[#0B3C70]/55 border border-white/20 rounded-lg text-[11px] text-sky-100 focus:border-[#1976D2] focus:outline-none cursor-pointer"
                       >
                         {ALL_RANKS.map((r) => (
                           <option key={r} value={r}>
@@ -286,7 +286,7 @@ const PlayerRemovalModeration: React.FC<{ onFeedback: (msg: string) => void }> =
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 }}
-      className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-red-950/20 via-[#171722] to-[#171722] border-2 border-red-500/50 shadow-2xl space-y-6"
+      className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-red-950/20 via-[#0E4A87]/80 to-[#0E4A87]/70 border-2 border-red-500/50 shadow-2xl space-y-6"
     >
       <div className="flex items-center gap-3">
         <div className="p-3 rounded-2xl bg-red-500/20 border border-red-500/40 text-red-400">
@@ -294,26 +294,26 @@ const PlayerRemovalModeration: React.FC<{ onFeedback: (msg: string) => void }> =
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-black text-white">Leaderboard, Tierlist & Player Removal</h2>
+            <h2 className="text-xl font-black heading-gold">Leaderboard, Tierlist & Player Removal</h2>
             <span className="text-[10px] font-black uppercase px-2 py-0.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/40 font-mono">
               Admin Moderation
             </span>
           </div>
-          <p className="text-xs text-zinc-400">
+          <p className="text-xs text-sky-200">
             Instantly remove players from the active leaderboard standings, wipe their tierlist placements, or delete them from the platform.
           </p>
         </div>
       </div>
 
       {players.length === 0 ? (
-        <div className="p-6 rounded-2xl bg-[#0F0F17] border border-[#252538] text-center text-xs text-zinc-400 font-mono">
+        <div className="p-6 rounded-2xl bg-[#0B3C70]/55 border border-white/20 text-center text-xs text-sky-200 font-mono">
           No players currently registered in the database. Use "Publish Test Result" or "Players Roster" to register players.
         </div>
       ) : (
         <div className="space-y-4">
           {/* Quick Remove Action Panel */}
           {targetPlayer && (
-            <div className="p-4 rounded-2xl bg-[#0F0F17] border border-red-500/30 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="p-4 rounded-2xl bg-[#0B3C70]/55 border border-red-500/30 flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <GamerAvatar name={targetPlayer.ign} size="md" rank={targetPlayer.rank} />
                 <div>
@@ -321,7 +321,7 @@ const PlayerRemovalModeration: React.FC<{ onFeedback: (msg: string) => void }> =
                     <span className="text-sm font-extrabold text-white font-mono">{targetPlayer.ign}</span>
                     <span className="text-xs font-mono text-amber-400 font-bold">#{targetPlayer.globalRank}</span>
                   </div>
-                  <span className="text-xs text-zinc-400 font-mono">
+                  <span className="text-xs text-sky-200 font-mono">
                     BF: {targetPlayer.tiers.Bedfight} | SW: {targetPlayer.tiers.Skywars} | Mace: {targetPlayer.tiers.Mace} | FB: {targetPlayer.tiers['Fireball Fight']}
                   </span>
                 </div>
@@ -357,7 +357,7 @@ const PlayerRemovalModeration: React.FC<{ onFeedback: (msg: string) => void }> =
           {/* Searchable Players Moderation List */}
           <div className="space-y-2">
             <div className="flex items-center justify-between gap-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 font-mono">
+              <span className="text-xs font-bold uppercase tracking-wider text-sky-200 font-mono">
                 Active Players Roster ({players.length})
               </span>
               <input
@@ -365,13 +365,13 @@ const PlayerRemovalModeration: React.FC<{ onFeedback: (msg: string) => void }> =
                 placeholder="Filter player to moderate..."
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                className="px-3 py-1.5 bg-[#0F0F17] border border-[#252538] focus:border-red-500 rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none"
+                className="px-3 py-1.5 bg-[#0B3C70]/55 border border-white/20 focus:border-red-500 rounded-xl text-xs text-white placeholder-sky-300 focus:outline-none"
               />
             </div>
 
-            <div className="overflow-x-auto rounded-2xl border border-[#252538]">
+            <div className="overflow-x-auto rounded-2xl border border-white/20">
               <table className="w-full text-left text-xs">
-                <thead className="bg-[#0F0F17] text-zinc-400 uppercase text-[10px] font-mono border-b border-[#252538]">
+                <thead className="bg-[#0B3C70]/55 text-sky-200 uppercase text-[10px] font-mono border-b border-white/20">
                   <tr>
                     <th className="py-2.5 px-3">Player</th>
                     <th className="py-2.5 px-3">Bedfight</th>
@@ -380,21 +380,21 @@ const PlayerRemovalModeration: React.FC<{ onFeedback: (msg: string) => void }> =
                     <th className="py-2.5 px-3 text-right">Moderation Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#252538]/60 font-mono">
+                <tbody className="divide-y divide-white/15 font-mono">
                   {filteredPlayers.map((p) => (
-                    <tr key={p.id} className="hover:bg-[#1F1F2E]/60 transition-colors">
+                    <tr key={p.id} className="hover:bg-[#1565C0]/60/60 transition-colors">
                       <td className="py-2.5 px-3">
                         <div className="flex items-center gap-2">
                           <GamerAvatar name={p.ign} size="sm" rank={p.rank} />
                           <div>
                             <span className="font-bold text-white block">{p.ign}</span>
-                            <span className="text-[10px] text-zinc-400">#{p.globalRank} • {getPlayerPoints(p)} PTS</span>
+                            <span className="text-[10px] text-sky-200">#{p.globalRank} • {getPlayerPoints(p)} PTS</span>
                           </div>
                         </div>
                       </td>
-                      <td className="py-2.5 px-3 text-zinc-300">{p.tiers.Bedfight || 'Untested'}</td>
-                      <td className="py-2.5 px-3 text-zinc-300">{p.tiers.Skywars || 'Untested'}</td>
-                      <td className="py-2.5 px-3 text-zinc-300">{p.tiers.Mace || 'Untested'}</td>
+                      <td className="py-2.5 px-3 text-sky-100">{p.tiers.Bedfight || 'Untested'}</td>
+                      <td className="py-2.5 px-3 text-sky-100">{p.tiers.Skywars || 'Untested'}</td>
+                      <td className="py-2.5 px-3 text-sky-100">{p.tiers.Mace || 'Untested'}</td>
                       <td className="py-2.5 px-3 text-right">
                         <div className="inline-flex items-center gap-1.5">
                           <button

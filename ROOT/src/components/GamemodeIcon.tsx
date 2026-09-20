@@ -19,6 +19,6 @@ export const GamemodeIcon: React.FC<GamemodeIconProps> = ({ gamemode, size = 18,
     case 'Fireball Fight':
       return <Flame size={size} className={`text-orange-400 ${className}`} />;
     default:
-      return <Swords size={size} className={`text-purple-400 ${className}`} />;
+      return <Swords size={size} className={`text-sky-300 ${className}`} />;
   }
 };

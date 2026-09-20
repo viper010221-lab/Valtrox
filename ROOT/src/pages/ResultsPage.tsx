@@ -38,37 +38,37 @@ export const ResultsPage: React.FC = () => {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#252538] pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/20 pb-6">
         <div>
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-400">
             <Award size={14} />
             <span>Public Testing Registry</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight mt-1">
+          <h1 className="text-3xl font-extrabold heading-gold tracking-tight mt-1">
             Tier Test Results & Audit Log
           </h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <p className="text-sm text-sky-200 mt-1">
             Real-time verified log of official 1v1 tier test evaluations, scorecards, and evaluator remarks.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
-          <span className="px-3 py-1.5 rounded-lg bg-[#171722] border border-[#252538]">
-            Total Audited: <strong className="text-purple-400">{testResults.length}</strong>
+        <div className="flex items-center gap-2 text-xs font-mono text-sky-200">
+          <span className="px-3 py-1.5 rounded-lg bg-[#0E4A87]/70 border border-white/20">
+            Total Audited: <strong className="text-sky-300">{testResults.length}</strong>
           </span>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="p-4 rounded-2xl bg-[#171722] border border-[#252538] flex flex-col md:flex-row items-center justify-between gap-4 shadow-lg">
+      <div className="p-4 rounded-2xl bg-[#0E4A87]/70 border border-white/20 flex flex-col md:flex-row items-center justify-between gap-4 shadow-lg">
         <div className="relative w-full md:max-w-xs">
-          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500" />
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-300" />
           <input
             type="text"
             placeholder="Search player, discord, or notes..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-[#0F0F17] border border-[#252538] focus:border-[#7C3AED] rounded-xl text-xs text-white placeholder-zinc-500 focus:outline-none transition-colors"
+            className="w-full pl-10 pr-4 py-2 bg-[#0B3C70]/55 border border-white/20 focus:border-[#1976D2] rounded-xl text-xs text-white placeholder-sky-300 focus:outline-none transition-colors"
           />
         </div>
 
@@ -76,7 +76,7 @@ export const ResultsPage: React.FC = () => {
           <select
             value={selectedGamemode}
             onChange={(e) => setSelectedGamemode(e.target.value as any)}
-            className="px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-zinc-300 focus:outline-none focus:border-[#7C3AED] transition-colors cursor-pointer"
+            className="px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-sky-100 focus:outline-none focus:border-[#1976D2] transition-colors cursor-pointer"
           >
             <option value="All">All Gamemodes</option>
             {INITIAL_GAMEMODES.map((gm) => (
@@ -87,7 +87,7 @@ export const ResultsPage: React.FC = () => {
           <select
             value={selectedTier}
             onChange={(e) => setSelectedTier(e.target.value)}
-            className="px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-zinc-300 focus:outline-none focus:border-[#7C3AED] transition-colors cursor-pointer"
+            className="px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-sky-100 focus:outline-none focus:border-[#1976D2] transition-colors cursor-pointer"
           >
             <option value="All">All Awarded Tiers</option>
             <option value="HT1">HT1</option>
@@ -111,7 +111,7 @@ export const ResultsPage: React.FC = () => {
             <select
               value={selectedTester}
               onChange={(e) => setSelectedTester(e.target.value)}
-              className="px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-zinc-300 focus:outline-none focus:border-[#7C3AED] transition-colors cursor-pointer"
+              className="px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-sky-100 focus:outline-none focus:border-[#1976D2] transition-colors cursor-pointer"
             >
               <option value="All">All Testers</option>
               {testersList.map((tester) => (
@@ -128,7 +128,7 @@ export const ResultsPage: React.FC = () => {
           {filteredResults.map((res) => (
             <div
               key={res.id}
-              className="p-5 rounded-2xl bg-[#171722] border border-[#252538] hover:border-[#7C3AED]/40 transition-all space-y-4 group"
+              className="p-5 rounded-2xl bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/40 transition-all space-y-4 group"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3.5">
@@ -137,7 +137,7 @@ export const ResultsPage: React.FC = () => {
                     <div className="flex items-center gap-2">
                       <span
                         onClick={() => navigateTo('player-detail', res.playerId)}
-                        className="font-extrabold text-white group-hover:text-purple-300 transition-colors text-base cursor-pointer hover:underline"
+                        className="font-extrabold text-white group-hover:text-sky-200 transition-colors text-base cursor-pointer hover:underline"
                       >
                         {res.playerIgn}
                       </span>
@@ -147,39 +147,39 @@ export const ResultsPage: React.FC = () => {
                         </span>
                       )}
                     </div>
-                    <span className="text-xs text-zinc-400 font-mono">
+                    <span className="text-xs text-sky-200 font-mono">
                       {res.gamemode} Competitive Test &bull; {res.playerDiscord}
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-2 font-mono">
-                  <div className="text-xs text-zinc-500">
-                    Previous: <strong className="text-zinc-300">{res.previousTier}</strong>
+                  <div className="text-xs text-sky-300">
+                    Previous: <strong className="text-sky-100">{res.previousTier}</strong>
                   </div>
-                  <span className="text-purple-400 font-black text-sm">&rarr;</span>
+                  <span className="text-sky-300 font-black text-sm">&rarr;</span>
                   <TierBadge tier={res.newTier} size="lg" pulse />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-3.5 rounded-xl bg-[#0F0F17] border border-[#252538]/80 text-xs">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 p-3.5 rounded-xl bg-[#0B3C70]/55 border border-white/20/80 text-xs">
                 <div>
-                  <span className="text-zinc-500 font-mono uppercase text-[10px] block">Match Score</span>
+                  <span className="text-sky-300 font-mono uppercase text-[10px] block">Match Score</span>
                   <span className="font-bold text-white font-mono text-sm">{res.score}</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 font-mono uppercase text-[10px] block">Evaluating Tester</span>
-                  <span className="font-semibold text-purple-300">{res.testerName}</span>
+                  <span className="text-sky-300 font-mono uppercase text-[10px] block">Evaluating Tester</span>
+                  <span className="font-semibold text-sky-200">{res.testerName}</span>
                 </div>
                 <div>
-                  <span className="text-zinc-500 font-mono uppercase text-[10px] block">Date Tested</span>
-                  <span className="font-mono text-zinc-300">{res.date}</span>
+                  <span className="text-sky-300 font-mono uppercase text-[10px] block">Date Tested</span>
+                  <span className="font-mono text-sky-100">{res.date}</span>
                 </div>
               </div>
 
               {res.notes && (
-                <div className="text-xs text-zinc-300 leading-relaxed bg-[#13131D] p-3 rounded-lg border border-[#252538]/50">
-                  <span className="font-semibold text-zinc-400 mr-1.5">Tester Notes:</span>
+                <div className="text-xs text-sky-100 leading-relaxed bg-[#0B3C70]/60 p-3 rounded-lg border border-white/15">
+                  <span className="font-semibold text-sky-200 mr-1.5">Tester Notes:</span>
                   <span>"{res.notes}"</span>
                 </div>
               )}
@@ -187,10 +187,10 @@ export const ResultsPage: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="text-center py-16 bg-[#171722] rounded-2xl border border-[#252538] space-y-2">
-          <Award size={36} className="text-zinc-600 mx-auto" />
+        <div className="text-center py-16 bg-[#0E4A87]/70 rounded-2xl border border-white/20 space-y-2">
+          <Award size={36} className="text-sky-300 mx-auto" />
           <h3 className="text-lg font-bold text-white">No results matched your filters</h3>
-          <p className="text-xs text-zinc-400">Try choosing a different gamemode or clearing the search query.</p>
+          <p className="text-xs text-sky-200">Try choosing a different gamemode or clearing the search query.</p>
         </div>
       )}
     </div>

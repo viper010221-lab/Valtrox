@@ -39,11 +39,11 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
   };
 
   return (
-    <div className="p-6 sm:p-8 rounded-3xl bg-[#171722] border border-[#7C3AED]/40 space-y-6">
+    <div className="p-6 sm:p-8 rounded-3xl bg-[#0E4A87]/70 border border-[#1976D2]/40 space-y-6">
       <div>
-        <span className="text-xs font-bold uppercase tracking-wider text-[#8B5CF6]">Audited Entry</span>
-        <h2 className="text-2xl font-extrabold text-white">Publish Official Tier Test Result</h2>
-        <p className="text-xs text-zinc-400 mt-1">
+        <span className="text-xs font-bold uppercase tracking-wider text-[#42A5F5]">Audited Entry</span>
+        <h2 className="text-2xl font-extrabold heading-gold">Publish Official Tier Test Result</h2>
+        <p className="text-xs text-sky-200 mt-1">
           Submitting this form immediately publishes the result to the Public Results feed and auto-updates the player's profile and tierlist rank!
         </p>
       </div>
@@ -51,11 +51,11 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Select Player</label>
+            <label className="text-xs font-semibold text-sky-100 block mb-1.5">Select Player</label>
             <select
               value={pubPlayerId}
               onChange={(e) => setPubPlayerId(e.target.value)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
               required
             >
               {players.map((p) => (
@@ -65,11 +65,11 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Gamemode</label>
+            <label className="text-xs font-semibold text-sky-100 block mb-1.5">Gamemode</label>
             <select
               value={pubGamemode}
               onChange={(e) => setPubGamemode(e.target.value as Gamemode)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
             >
               {INITIAL_GAMEMODES.map((gm) => (
                 <option key={gm.id} value={gm.id}>{gm.name}</option>
@@ -78,23 +78,23 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Match Score (e.g. 10 - 4)</label>
+            <label className="text-xs font-semibold text-sky-100 block mb-1.5">Match Score (e.g. 10 - 4)</label>
             <input
               type="text"
               value={pubScore}
               onChange={(e) => setPubScore(e.target.value)}
               placeholder="10 - 4"
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
               required
             />
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Previous Tier</label>
+            <label className="text-xs font-semibold text-sky-100 block mb-1.5">Previous Tier</label>
             <select
               value={pubOldTier}
               onChange={(e) => setPubOldTier(e.target.value as TierRank)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
             >
               <option value="Untested">Untested / Unranked</option>
               <option value="HT1">HT1 — High S Tier</option>
@@ -116,11 +116,11 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-zinc-300 block mb-1.5">New Awarded Tier</label>
+            <label className="text-xs font-semibold text-sky-100 block mb-1.5">New Awarded Tier</label>
             <select
               value={pubNewTier}
               onChange={(e) => setPubNewTier(e.target.value as TierRank)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
             >
               <option value="HT1">HT1 — High S Tier</option>
               <option value="MT1">MT1 — Mid S Tier</option>
@@ -141,11 +141,11 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
           </div>
 
           <div>
-            <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Evaluating Tester</label>
+            <label className="text-xs font-semibold text-sky-100 block mb-1.5">Evaluating Tester</label>
             <select
               value={pubTesterName}
               onChange={(e) => setPubTesterName(e.target.value)}
-              className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+              className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
             >
               {testers.map((t) => (
                 <option key={t.id} value={t.name}>{t.name} ({t.role})</option>
@@ -155,19 +155,19 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
         </div>
 
         <div>
-          <label className="text-xs font-semibold text-zinc-300 block mb-1.5">Evaluator Notes & Feedback</label>
+          <label className="text-xs font-semibold text-sky-100 block mb-1.5">Evaluator Notes & Feedback</label>
           <textarea
             value={pubNotes}
             onChange={(e) => setPubNotes(e.target.value)}
             rows={3}
             placeholder="Detail match performance, sprint-reset consistency, hit tracking..."
-            className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+            className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
           />
         </div>
 
         <button
           type="submit"
-          className="px-6 py-3 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white text-xs font-bold shadow-glow-purple transition-all font-semibold flex items-center gap-2"
+          className="px-6 py-3 rounded-xl bg-[#1976D2] hover:bg-[#42A5F5] text-white text-xs font-bold shadow-glow-blue transition-all font-semibold flex items-center gap-2"
         >
           <Award size={16} />
           <span>Publish Official Result</span>
@@ -180,36 +180,36 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-red-400">Results Moderation</span>
             <h3 className="text-lg font-extrabold text-white">Delete Recent Tier Test Results</h3>
-            <p className="text-xs text-zinc-400 mt-1">
+            <p className="text-xs text-sky-200 mt-1">
               Nuke any of the latest audited test results below. This permanently removes them from the Public Results feed and player history.
             </p>
           </div>
-          <span className="px-3 py-1.5 rounded-lg bg-[#171722] border border-[#252538] text-xs font-mono text-zinc-400 shrink-0">
+          <span className="px-3 py-1.5 rounded-lg bg-[#0E4A87]/70 border border-white/20 text-xs font-mono text-sky-200 shrink-0">
             Showing latest {Math.min(testResults.length, 12)} of {testResults.length}
           </span>
         </div>
 
         {testResults.length === 0 ? (
-          <div className="text-center py-10 rounded-xl bg-[#171722] border border-[#252538] space-y-2">
-            <Award size={28} className="text-zinc-600 mx-auto" />
-            <p className="text-xs text-zinc-400">No test results have been published yet.</p>
+          <div className="text-center py-10 rounded-xl bg-[#0E4A87]/70 border border-white/20 space-y-2">
+            <Award size={28} className="text-sky-300 mx-auto" />
+            <p className="text-xs text-sky-200">No test results have been published yet.</p>
           </div>
         ) : (
           <div className="space-y-2.5">
             {testResults.slice(0, 12).map((res) => (
               <div
                 key={res.id}
-                className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#171722] border border-[#252538]/80"
+                className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-[#0E4A87]/70 border border-white/20/80"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="p-2 rounded-lg bg-[#0F0F17] border border-[#252538]">
+                  <div className="p-2 rounded-lg bg-[#0B3C70]/55 border border-white/20">
                     <CheckCircle2 size={15} className="text-emerald-400" />
                   </div>
                   <div className="min-w-0">
                     <div className="font-extrabold text-white text-sm truncate">
-                      {res.playerIgn} <span className="text-zinc-500">&middot; {res.gamemode}</span>
+                      {res.playerIgn} <span className="text-sky-300">&middot; {res.gamemode}</span>
                     </div>
-                    <span className="text-xs text-zinc-400 font-mono truncate block">
+                    <span className="text-xs text-sky-200 font-mono truncate block">
                       {res.previousTier} &rarr; {res.newTier} &middot; {res.score} &middot; {res.testerName} &middot; {res.date}
                     </span>
                   </div>

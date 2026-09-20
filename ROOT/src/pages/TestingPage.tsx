@@ -75,22 +75,22 @@ export const TestingPage: React.FC = () => {
   return (
     <div className="space-y-12">
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#252538] pb-6">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/20 pb-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8B5CF6]">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#42A5F5]">
             <ClipboardCheck size={14} />
             <span>Bedrock Union Testing Standard</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight mt-1">
+          <h1 className="text-3xl font-extrabold heading-gold tracking-tight mt-1">
             Tier Testing & Evaluation Guide
           </h1>
-          <p className="text-sm text-zinc-400 mt-1">
+          <p className="text-sm text-sky-200 mt-1">
             Official 1v1 testing protocol for <strong>Bedfight</strong>, <strong>Skywars</strong>, <strong>Mace</strong>, and <strong>Fireball Fight</strong>.
           </p>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#171722] border border-[#252538] text-xs font-mono text-zinc-300">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-[#0E4A87]/70 border border-white/20 text-xs font-mono text-sky-100">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span>Queue: <strong className="text-emerald-400">{serverConfig.testingStatus}</strong></span>
           </div>
@@ -98,7 +98,7 @@ export const TestingPage: React.FC = () => {
             href={serverConfig.discordUrl}
             target="_blank"
             rel="noreferrer"
-            className="px-4 py-2 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white text-xs font-bold shadow-glow-purple-sm transition-all flex items-center gap-1.5"
+            className="px-4 py-2 rounded-xl bg-[#1976D2] hover:bg-[#42A5F5] text-white text-xs font-bold shadow-glow-blue-sm transition-all flex items-center gap-1.5"
           >
             <span>Apply in Discord</span>
             <ExternalLink size={13} />
@@ -108,62 +108,62 @@ export const TestingPage: React.FC = () => {
 
       {/* 4-Step Process */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="p-6 rounded-2xl bg-[#171722] border border-[#252538] space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-purple-900/30 border border-[#7C3AED]/40 flex items-center justify-center font-mono font-bold text-[#8B5CF6]">
+        <div className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-3">
+          <div className="w-10 h-10 rounded-xl bg-sky-900/30 border border-[#1976D2]/40 flex items-center justify-center font-mono font-bold text-[#42A5F5]">
             01
           </div>
           <h3 className="font-bold text-white text-base">Open Testing Ticket</h3>
-          <p className="text-xs text-zinc-400 leading-relaxed">
+          <p className="text-xs text-sky-200 leading-relaxed">
             Navigate to <strong>#tier-testing-apply</strong> in Discord and choose Bedfight, Skywars, Mace, or Fireball Fight.
           </p>
         </div>
 
-        <div className="p-6 rounded-2xl bg-[#171722] border border-[#252538] space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-purple-900/30 border border-[#7C3AED]/40 flex items-center justify-center font-mono font-bold text-[#8B5CF6]">
+        <div className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-3">
+          <div className="w-10 h-10 rounded-xl bg-sky-900/30 border border-[#1976D2]/40 flex items-center justify-center font-mono font-bold text-[#42A5F5]">
             02
           </div>
           <h3 className="font-bold text-white text-base">POV & Client Check</h3>
-          <p className="text-xs text-zinc-400 leading-relaxed">
+          <p className="text-xs text-sky-200 leading-relaxed">
             Launch approved Minecraft Bedrock client with screen recording active and input display.
           </p>
         </div>
 
-        <div className="p-6 rounded-2xl bg-[#171722] border border-[#252538] space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-purple-900/30 border border-[#7C3AED]/40 flex items-center justify-center font-mono font-bold text-[#8B5CF6]">
+        <div className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-3">
+          <div className="w-10 h-10 rounded-xl bg-sky-900/30 border border-[#1976D2]/40 flex items-center justify-center font-mono font-bold text-[#42A5F5]">
             03
           </div>
           <h3 className="font-bold text-white text-base">First-to-3 Set</h3>
-          <p className="text-xs text-zinc-400 leading-relaxed">
+          <p className="text-xs text-sky-200 leading-relaxed">
             Duel a verified Tester on the official Bedrock Union server under strict recording rules.
           </p>
         </div>
 
-        <div className="p-6 rounded-2xl bg-[#171722] border border-[#252538] space-y-3">
-          <div className="w-10 h-10 rounded-xl bg-purple-900/30 border border-[#7C3AED]/40 flex items-center justify-center font-mono font-bold text-emerald-400">
+        <div className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-3">
+          <div className="w-10 h-10 rounded-xl bg-sky-900/30 border border-[#1976D2]/40 flex items-center justify-center font-mono font-bold text-emerald-400">
             04
           </div>
           <h3 className="font-bold text-white text-base">Council Evaluation</h3>
-          <p className="text-xs text-zinc-400 leading-relaxed">
+          <p className="text-xs text-sky-200 leading-relaxed">
             Tester grades score, mechanics, and game sense, publishing your official Tier Badge instantly.
           </p>
         </div>
       </div>
 
       {/* Interactive Simulator */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#171722] via-[#141420] to-[#0F0F17] border border-[#7C3AED]/40 shadow-[0_10px_35px_rgba(124,58,237,0.15)] space-y-6">
+      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-[#0E4A87]/85 via-[#1257A0] to-[#0B3C70]/55 border border-[#1976D2]/40 shadow-[0_10px_35px_rgba(25,118,210,0.15)] space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8B5CF6]">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#42A5F5]">
               <Calculator size={16} />
               <span>Interactive Simulation Tool</span>
             </div>
             <h3 className="text-2xl font-extrabold text-white">Tier Test Score Estimator</h3>
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-sky-200">
               Input test rounds won vs an official tester to calculate your predicted Bedrock Union tier rating.
             </p>
           </div>
 
-          <span className="px-3 py-1 rounded-full bg-[#7C3AED]/20 border border-[#7C3AED]/30 text-purple-300 text-xs font-semibold">
+          <span className="px-3 py-1 rounded-full bg-[#1976D2]/20 border border-[#1976D2]/30 text-sky-200 text-xs font-semibold">
             Algorithm v4.2
           </span>
         </div>
@@ -173,11 +173,11 @@ export const TestingPage: React.FC = () => {
             <div className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs font-semibold text-zinc-400 block mb-1.5">Gamemode</label>
+                  <label className="text-xs font-semibold text-sky-200 block mb-1.5">Gamemode</label>
                   <select
                     value={calcGamemode}
                     onChange={(e) => setCalcGamemode(e.target.value as Gamemode)}
-                    className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+                    className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
                   >
                     {INITIAL_GAMEMODES.map((gm) => (
                       <option key={gm.id} value={gm.id}>{gm.name}</option>
@@ -185,11 +185,11 @@ export const TestingPage: React.FC = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="text-xs font-semibold text-zinc-400 block mb-1.5">Tester Rank</label>
+                  <label className="text-xs font-semibold text-sky-200 block mb-1.5">Tester Rank</label>
                   <select
                     value={testerTier}
                     onChange={(e) => setTesterTier(e.target.value as TierRank)}
-                    className="w-full px-3 py-2 bg-[#0F0F17] border border-[#252538] rounded-xl text-xs text-white focus:outline-none focus:border-[#7C3AED]"
+                    className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
                   >
                     <option value="HT1">High Tier 1 Tester (HT1)</option>
                     <option value="LT1">Low Tier 1 Tester (LT1)</option>
@@ -201,8 +201,8 @@ export const TestingPage: React.FC = () => {
               {/* Round-by-round scoreboard */}
               <div>
                 <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-semibold text-zinc-400">FT3 Match Rounds</label>
-                  <button onClick={resetRounds} className="text-[10px] text-zinc-500 hover:text-[#8B5CF6] transition-colors font-semibold uppercase tracking-wider">Reset</button>
+                  <label className="text-xs font-semibold text-sky-200">FT3 Match Rounds</label>
+                  <button onClick={resetRounds} className="text-[10px] text-sky-300 hover:text-[#42A5F5] transition-colors font-semibold uppercase tracking-wider">Reset</button>
                 </div>
                 <div className="flex items-center gap-3">
                   {rounds.map((r, i) => (
@@ -214,7 +214,7 @@ export const TestingPage: React.FC = () => {
                           ? 'bg-emerald-500/15 border-emerald-500/50 text-emerald-300 shadow-[0_0_15px_rgba(16,185,129,0.15)]'
                           : r === 'loss'
                           ? 'bg-red-500/15 border-red-500/50 text-red-300 shadow-[0_0_15px_rgba(239,68,68,0.15)]'
-                          : 'bg-[#0F0F17] border-[#252538] text-zinc-500 hover:border-[#7C3AED]/40 hover:text-zinc-300'
+                          : 'bg-[#0B3C70]/55 border-white/20 text-sky-300 hover:border-[#1976D2]/40 hover:text-sky-100'
                       }`}
                     >
                       <span className="block text-[10px] opacity-60 mb-0.5">R{i + 1}</span>
@@ -225,38 +225,38 @@ export const TestingPage: React.FC = () => {
                 {/* Live score line */}
                 <div className="mt-3 flex items-center justify-between px-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-500">Score</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-sky-300">Score</span>
                     <span className="text-sm font-extrabold text-white font-mono">
                       You <span className="text-emerald-400">{roundsWon}</span>
-                      <span className="text-zinc-600 mx-1">–</span>
+                      <span className="text-sky-300 mx-1">–</span>
                       <span className="text-red-400">{roundsLost}</span> Tester
                     </span>
                   </div>
-                  <span className="text-[10px] font-mono text-zinc-500">{roundsPlayed}/3 rounds</span>
+                  <span className="text-[10px] font-mono text-sky-300">{roundsPlayed}/3 rounds</span>
                 </div>
                 {/* Win-rate progress bar */}
-                <div className="mt-2 h-1.5 w-full rounded-full bg-[#0F0F17] overflow-hidden">
+                <div className="mt-2 h-1.5 w-full rounded-full bg-[#0B3C70]/55 overflow-hidden">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-[#7C3AED] to-emerald-400 transition-all duration-300"
+                    className="h-full rounded-full bg-gradient-to-r from-[#1976D2] to-emerald-400 transition-all duration-300"
                     style={{ width: `${winRate}%` }}
                   />
                 </div>
               </div>
             </div>
 
-            <div className="p-4 rounded-xl bg-[#0F0F17]/70 border border-[#252538] text-xs text-zinc-400 flex items-start gap-2.5">
-              <Shield size={16} className="text-purple-400 mt-0.5 flex-shrink-0" />
+            <div className="p-4 rounded-xl bg-[#0B3C70]/60 border border-white/20 text-xs text-sky-200 flex items-start gap-2.5">
+              <Shield size={16} className="text-sky-300 mt-0.5 flex-shrink-0" />
               <span>
                 Calculated for a standard <strong>First-to-3 (FT3)</strong> test match in Bedfight, Skywars, Mace, or Fireball Fight.
               </span>
             </div>
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#0F0F17] border border-[#7C3AED]/40 flex flex-col justify-between space-y-4">
+          <div className="p-5 rounded-2xl bg-[#0B3C70]/55 border border-[#1976D2]/40 flex flex-col justify-between space-y-4">
             <div>
               <div className="flex items-center justify-between">
-                <span className="text-[11px] font-mono text-zinc-500 uppercase">Estimated Tier</span>
-                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#7C3AED]/15 border border-[#7C3AED]/30 text-purple-300">
+                <span className="text-[11px] font-mono text-sky-300 uppercase">Estimated Tier</span>
+                <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-[#1976D2]/15 border border-[#1976D2]/30 text-sky-200">
                   FT3 · {roundsWon}-{roundsLost}
                 </span>
               </div>
@@ -271,10 +271,10 @@ export const TestingPage: React.FC = () => {
               {/* Win-rate gauge */}
               <div className="mt-4">
                 <div className="flex items-center justify-between mb-1">
-                  <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Round Win Rate</span>
+                  <span className="text-[10px] font-semibold text-sky-300 uppercase tracking-wider">Round Win Rate</span>
                   <span className="text-[10px] font-mono font-bold text-emerald-400">{winRate}%</span>
                 </div>
-                <div className="h-2 w-full rounded-full bg-[#171722] overflow-hidden">
+                <div className="h-2 w-full rounded-full bg-[#0E4A87]/70 overflow-hidden">
                   <div
                     className="h-full rounded-full bg-gradient-to-r from-emerald-500 to-emerald-300 transition-all duration-300"
                     style={{ width: `${winRate}%` }}
@@ -283,11 +283,11 @@ export const TestingPage: React.FC = () => {
               </div>
 
               {/* Next-tier guidance */}
-              <div className="mt-4 p-3 rounded-lg bg-[#171722] border border-[#252538] flex items-start gap-2">
+              <div className="mt-4 p-3 rounded-lg bg-[#0E4A87]/70 border border-white/20 flex items-start gap-2">
                 <span className="text-sm leading-none">{guidance.emoji}</span>
                 <div>
                   <span className="text-[11px] font-bold text-white block">{guidance.label}</span>
-                  <span className="text-[10px] text-zinc-500 leading-relaxed mt-0.5 block">{prediction.reason}</span>
+                  <span className="text-[10px] text-sky-300 leading-relaxed mt-0.5 block">{prediction.reason}</span>
                 </div>
               </div>
             </div>
@@ -296,7 +296,7 @@ export const TestingPage: React.FC = () => {
               href={serverConfig.discordUrl}
               target="_blank"
               rel="noreferrer"
-              className="w-full py-2.5 rounded-xl bg-[#7C3AED] hover:bg-[#8B5CF6] text-white text-xs font-bold text-center block transition-all shadow-glow-purple-sm"
+              className="w-full py-2.5 rounded-xl bg-[#1976D2] hover:bg-[#42A5F5] text-white text-xs font-bold text-center block transition-all shadow-glow-blue-sm"
             >
               Queue Real Test on Discord &rarr;
             </a>
@@ -306,12 +306,12 @@ export const TestingPage: React.FC = () => {
 
       {/* Rules */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="p-6 rounded-2xl bg-[#171722] border border-[#252538] space-y-4">
+        <div className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-4">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-400">
             <CheckCircle2 size={16} />
             <span>Eligibility Requirements</span>
           </div>
-          <ul className="space-y-3 text-xs text-zinc-300 leading-relaxed">
+          <ul className="space-y-3 text-xs text-sky-100 leading-relaxed">
             <li className="flex items-start gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5" />
               <span><strong>Verified Minecraft Bedrock Edition:</strong> Valid Gamertag with Xbox Live link.</span>
@@ -327,18 +327,18 @@ export const TestingPage: React.FC = () => {
           </ul>
         </div>
 
-        <div className="p-6 rounded-2xl bg-[#171722] border border-[#252538] space-y-4">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-purple-400">
+        <div className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-4">
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-sky-300">
             <Video size={16} />
             <span>Recording & Anti-Cheat Standards</span>
           </div>
-          <ul className="space-y-3 text-xs text-zinc-300 leading-relaxed">
+          <ul className="space-y-3 text-xs text-sky-100 leading-relaxed">
             <li className="flex items-start gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5" />
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-300 mt-1.5" />
               <span><strong>Uncut POV Required:</strong> Full 1080p/720p 60fps recording from match start to finish.</span>
             </li>
             <li className="flex items-start gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-400 mt-1.5" />
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-300 mt-1.5" />
               <span><strong>Input Overlay:</strong> Keyboard/mouse overlay or handcam (mandatory for Touch device competitors).</span>
             </li>
           </ul>
