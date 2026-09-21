@@ -531,3 +531,38 @@
   }
 }
 
+/* ==========================================================================
+   Phone / touch ergonomics
+   --------------------------------------------------------------------------
+   WCAG 2.5.5 asks for 44x44 CSS px tap targets; touch-action also skips the
+   300ms double-tap-zoom delay on iOS / Android.
+   ========================================================================== */
+@media (max-width: 1023px), (hover: none) and (pointer: coarse) {
+  button,
+  a[href],
+  [role='button'] {
+    touch-action: manipulation;
+  }
+
+  /* Standalone text links in the footer get a real hit area without visibly
+     bulking up the column rhythm. */
+  footer button,
+  footer a[href] {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* Momentum scrolling + contained overscroll for the wide data tables that
+   live behind .overflow-x-auto wrappers. */
+.overflow-x-auto {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+}
+
+/* Quieter taps: no grey flash rectangle painted over the custom button chrome. */
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+

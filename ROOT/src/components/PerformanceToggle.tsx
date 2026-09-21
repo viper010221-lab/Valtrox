@@ -13,7 +13,7 @@ export const PerformanceToggle: React.FC = () => {
       {/* PC mode button */}
       <button
         onClick={() => setPerfMode('pc')}
-        className={`p-1.5 rounded-lg transition-all cursor-pointer ${
+        className={`p-1.5 min-h-[40px] min-w-[40px] sm:min-h-0 sm:min-w-0 flex items-center justify-center rounded-lg transition-all cursor-pointer ${
           perfMode === 'pc'
             ? 'bg-[#1976D2]/30 text-white border border-[#1976D2]/60 shadow-glow-blue-sm'
             : 'text-sky-300 hover:text-sky-100 hover:bg-[#0E4A87]/70 border border-transparent'
@@ -26,7 +26,7 @@ export const PerformanceToggle: React.FC = () => {
       {/* Phone mode button */}
       <button
         onClick={() => setPerfMode('phone')}
-        className={`p-1.5 rounded-lg transition-all cursor-pointer ${
+        className={`p-1.5 min-h-[40px] min-w-[40px] sm:min-h-0 sm:min-w-0 flex items-center justify-center rounded-lg transition-all cursor-pointer ${
           perfMode === 'phone'
             ? 'bg-emerald-500/25 text-emerald-300 border border-emerald-500/60 shadow-[0_0_10px_rgba(16,185,129,0.4)]'
             : 'text-sky-300 hover:text-sky-100 hover:bg-[#0E4A87]/70 border border-transparent'

@@ -61,35 +61,35 @@ export const Navbar: React.FC = () => {
   return (
     <header className="sticky top-0 z-40 w-full bg-[#0B3C70]/85 backdrop-blur-2xl border-b border-[#FBBF24]/35">
       {/* Top micro alert banner */}
-      <div className="bg-gradient-to-r from-[#FBBF24]/25 via-[#1976D2]/25 to-[#FBBF24]/25 border-b border-[#FBBF24]/40 py-1.5 px-4 text-xs text-center text-sky-100 flex items-center justify-center gap-2">
-        <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+      <div className="bg-gradient-to-r from-[#FBBF24]/25 via-[#1976D2]/25 to-[#FBBF24]/25 border-b border-[#FBBF24]/40 py-1.5 px-3 sm:px-4 text-[11px] sm:text-xs text-center text-sky-100 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5">
+        <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0" />
         <span className="font-semibold text-white">Season 1 Standardized Bedrock:</span>
         <span className="hidden sm:inline">15-Tier PvP Calibration queues are open on Discord!</span>
         <button
           onClick={() => handleNav('testing')}
-          className="text-[#FBBF24] hover:text-white font-medium underline ml-1 cursor-pointer"
+          className="inline-flex items-center py-2 text-[#FBBF24] hover:text-white font-medium underline cursor-pointer whitespace-nowrap"
         >
           Queue now &rarr;
         </button>
       </div>
 
-      <div className="w-full max-w-[1750px] mx-auto px-2 sm:px-4 lg:px-6">
-        <div className="flex items-center justify-between h-16 gap-2">
+      <div className="w-full max-w-[1750px] mx-auto px-1.5 sm:px-4 lg:px-6">
+        <div className="flex items-center justify-between h-16 gap-1 sm:gap-2">
           {/* Left: Brand Logo */}
           <motion.div
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => handleNav('home')}
-            className="flex items-center gap-2 cursor-pointer select-none shrink-0"
+            className="flex items-center gap-1.5 sm:gap-2 cursor-pointer select-none shrink-0"
           >
             <img
               src="/bedrock-union-bu.svg"
               alt="Bedrock Union"
-              className="w-10 h-10 sm:w-12 sm:h-12 object-contain drop-shadow-[0_4px_6px_rgba(4,18,42,0.55)]"
+              className="w-9 h-9 sm:w-12 sm:h-12 object-contain drop-shadow-[0_4px_6px_rgba(4,18,42,0.55)]"
             />
             <div className="flex flex-col">
               <div className="flex items-center">
-                <span className="text-base sm:text-lg font-black font-minecraft tracking-normal whitespace-nowrap transition-colors">
+                <span className="hidden min-[360px]:inline text-xs sm:text-lg font-black font-minecraft tracking-normal whitespace-nowrap transition-colors">
                   <span className="heading-gold">BEDROCK</span>&nbsp;<span className="heading-blue">UNION</span>
                 </span>
               </div>
@@ -126,14 +126,14 @@ export const Navbar: React.FC = () => {
           </nav>
 
           {/* Right Section: Auth + Admin + Logout (GUARANTEED 100% VISIBLE ON 100% ZOOM) */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-2 shrink-0">
             {/* Performance mode toggle (PC / Phone) */}
             <PerformanceToggle />
 
             {/* Quick Search trigger icon */}
             <button
               onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-[#0E4A87]/70 border border-white/20 text-xs text-sky-200 hover:text-white hover:border-[#1976D2]/50 transition-all cursor-pointer shadow-sm group"
+              className="flex items-center justify-center gap-1.5 px-2.5 min-h-[44px] min-w-[44px] sm:min-h-0 sm:min-w-0 sm:py-1.5 rounded-xl bg-[#0E4A87]/70 border border-white/20 text-xs text-sky-200 hover:text-white hover:border-[#1976D2]/50 transition-all cursor-pointer shadow-sm group"
               title="Search (Ctrl + K)"
             >
               <Search size={14} className="group-hover:text-[#42A5F5] transition-colors" />
@@ -145,7 +145,7 @@ export const Navbar: React.FC = () => {
 
             {/* Auth Profile / Login / Logout Buttons */}
             {currentUser ? (
-              <div className="flex items-center gap-1.5 sm:gap-2">
+              <div className="hidden lg:flex items-center gap-1.5 sm:gap-2">
                 {/* User profile badge */}
                 <div className="flex items-center gap-1.5 sm:gap-2 px-2 py-1 rounded-xl bg-[#0E4A87]/70 border border-white/20 shadow-sm">
                   <GamerAvatar name={currentUser.ign} size="sm" rank={currentUser.rank} />
@@ -182,7 +182,7 @@ export const Navbar: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-1.5">
+              <div className="hidden lg:flex items-center gap-1.5">
                 {/* Log In button */}
                 <button
                   onClick={() => setAuthModalOpen(true, 'login')}
@@ -205,7 +205,7 @@ export const Navbar: React.FC = () => {
             {/* Mobile & Medium Screen Hamburger for Navigation Tabs */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="2xl:hidden p-2 rounded-xl bg-[#0E4A87]/70 hover:bg-[#1565C0]/60 border border-white/20 text-sky-100 hover:text-white cursor-pointer transition-colors"
+              className="2xl:hidden flex items-center justify-center p-2 min-h-[44px] min-w-[44px] rounded-xl bg-[#0E4A87]/70 hover:bg-[#1565C0]/60 border border-white/20 text-sky-100 hover:text-white cursor-pointer transition-colors"
               title="Toggle Menu"
             >
               {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -244,6 +244,44 @@ export const Navbar: React.FC = () => {
                 );
               })}
             </div>
+
+            {/* Quick search — mobile drawer */}
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl bg-[#0B3C70]/55 hover:bg-[#1565C0]/60 border border-white/15 text-xs font-bold text-sky-100 hover:text-white transition-all cursor-pointer"
+            >
+              <Search size={16} className="text-[#42A5F5]" />
+              <span>Search Players, Tiers &amp; News</span>
+              <kbd className="ml-auto bg-[#0B3C70]/55 px-1.5 py-0.5 rounded text-[9px] font-mono text-sky-200 border border-white/20">Ctrl K</kbd>
+            </button>
+
+            {/* Auth — mobile drawer */}
+            {currentUser ? (
+              <button
+                onClick={logout}
+                className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-red-950/40 hover:bg-red-900/70 border border-red-500/30 hover:border-red-500/70 text-red-300 hover:text-white text-xs font-bold transition-all cursor-pointer"
+              >
+                <LogOut size={16} />
+                <span>Log Out ({currentUser.ign})</span>
+              </button>
+            ) : (
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => setAuthModalOpen(true, 'login')}
+                  className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#0E4A87]/70 hover:bg-[#1565C0]/60 border border-white/20 text-xs font-bold text-white transition-all cursor-pointer"
+                >
+                  <LogIn size={16} className="text-sky-300" />
+                  <span>Log In</span>
+                </button>
+                <button
+                  onClick={() => setAuthModalOpen(true, 'signup')}
+                  className="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gradient-to-r from-[#1976D2] to-[#42A5F5] hover:from-[#42A5F5] hover:to-[#1976D2] text-white text-xs font-bold shadow-glow-blue transition-all cursor-pointer"
+                >
+                  <UserPlus size={16} />
+                  <span>Sign Up</span>
+                </button>
+              </div>
+            )}
 
             {isAdmin && (
               <div className="pt-2 border-t border-white/20">

@@ -92,7 +92,7 @@ export const HomePage: React.FC = () => {
           </div>
           <button
             onClick={() => navigateTo('results')}
-            className="text-xs font-semibold text-sky-300 hover:text-sky-200 flex items-center gap-1 cursor-pointer transition-colors"
+            className="text-xs font-semibold text-sky-300 hover:text-sky-200 flex items-center gap-1 min-h-[44px] py-2 cursor-pointer transition-colors"
           >
             <span>View all public results ({testResults.length})</span>
             <ChevronRight size={14} />
@@ -227,12 +227,12 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* Gamemode Switcher Tabs */}
-          <div className="flex items-center gap-2 p-1 rounded-xl bg-[#0E4A87]/70 border border-white/20">
+          <div className="flex flex-wrap items-center gap-2 p-1 rounded-xl bg-[#0E4A87]/70 border border-white/20">
             {INITIAL_GAMEMODES.map((gm) => (
               <button
                 key={gm.id}
                 onClick={() => setSelectedShowcaseMode(gm.id)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                className={`px-3.5 py-1.5 min-h-[40px] rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
                   selectedShowcaseMode === gm.id
                     ? 'bg-[#1976D2] text-white shadow-glow-blue-sm'
                     : 'text-sky-200 hover:text-white'

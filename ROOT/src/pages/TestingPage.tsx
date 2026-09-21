@@ -202,7 +202,7 @@ export const TestingPage: React.FC = () => {
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <label className="text-xs font-semibold text-sky-200">FT3 Match Rounds</label>
-                  <button onClick={resetRounds} className="text-[10px] text-sky-300 hover:text-[#42A5F5] transition-colors font-semibold uppercase tracking-wider">Reset</button>
+                  <button onClick={resetRounds} className="inline-flex items-center min-h-[36px] px-1 text-[10px] text-sky-300 hover:text-[#42A5F5] transition-colors font-semibold uppercase tracking-wider cursor-pointer">Reset</button>
                 </div>
                 <div className="flex items-center gap-3">
                   {rounds.map((r, i) => (

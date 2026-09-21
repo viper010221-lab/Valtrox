@@ -147,7 +147,7 @@ export const PlayersPage: React.FC = () => {
           <span className="text-sky-300 font-semibold mr-1">Filter Gamemode:</span>
           <button
             onClick={() => setSelectedGamemode('All')}
-            className={`px-2.5 py-1 rounded-lg transition-all cursor-pointer ${
+            className={`px-2.5 py-1 min-h-[38px] inline-flex items-center justify-center rounded-lg transition-all cursor-pointer ${
               selectedGamemode === 'All'
                 ? 'bg-[#1976D2] text-white font-bold'
                 : 'bg-[#0B3C70]/55 text-sky-200 hover:text-white border border-white/20'
@@ -159,7 +159,7 @@ export const PlayersPage: React.FC = () => {
             <button
               key={gm.id}
               onClick={() => setSelectedGamemode(gm.id)}
-              className={`px-2.5 py-1 rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
+              className={`px-2.5 py-1 min-h-[38px] rounded-lg transition-all flex items-center gap-1 cursor-pointer ${
                 selectedGamemode === gm.id
                   ? 'bg-[#1976D2] text-white font-bold shadow-glow-blue-sm'
                   : 'bg-[#0B3C70]/55 text-sky-200 hover:text-white border border-white/20'
