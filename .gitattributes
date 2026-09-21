@@ -1,0 +1,28 @@
+# ---------------------------------------------------------------------------
+# Line endings
+#
+# Store every text file as LF in the repository *and* in the working tree.
+# Without this, a Windows checkout (core.autocrlf=true) keeps rewriting files
+# between LF and CRLF: git prints "LF will be replaced by CRLF the next time
+# Git touches it" on every push, and a handful of files had ended up committed
+# with genuinely mixed line endings (some lines LF, some CRLF), which made them
+# show up as fully modified in every diff.
+# ---------------------------------------------------------------------------
+* text=auto eol=lf
+
+# Binary assets — never convert, never diff as text
+*.png    binary
+*.jpg    binary
+*.jpeg   binary
+*.gif    binary
+*.ico    binary
+*.webp   binary
+*.avif   binary
+*.woff   binary
+*.woff2  binary
+*.ttf    binary
+*.otf    binary
+*.eot    binary
+*.zip    binary
+*.mp3    binary
+*.mp4    binary
