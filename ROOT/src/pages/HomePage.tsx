@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
 import { useData } from '../context/DataContext';
 import {
-  Shield,
   Trophy,
   Layers,
   Sparkles,
-  Zap,
-  Users,
   ChevronRight,
   CheckCircle2,
-  Flame,
-  Sliders,
-  TrendingUp,
   ArrowUpRight
 } from 'lucide-react';
 import { GamemodeIcon } from '../components/GamemodeIcon';
@@ -21,34 +15,12 @@ import { RankBadge } from '../components/RankBadge';
 import { DiscordWidget } from '../components/DiscordWidget';
 import { HeroBanner } from '../components/HeroBanner';
 import { INITIAL_GAMEMODES, getPlayerPoints } from '../data/initialData';
-import { Gamemode, TierRank } from '../types';
+import { Gamemode } from '../types';
 import { motion } from 'framer-motion';
 
 export const HomePage: React.FC = () => {
   const { players, testResults, serverConfig, navigateTo, setSelectedGamemode, perfMode } = useData();
   const [selectedShowcaseMode, setSelectedShowcaseMode] = useState<Gamemode>('Bedfight');
-
-  // Interactive quick calculator state
-  const [calcMode, setCalcMode] = useState<Gamemode>('Bedfight');
-  const [calcScore, setCalcScore] = useState<string>('3-1');
-  const [calcMechanics, setCalcMechanics] = useState<string>('High');
-
-  const getSimulatedTier = (): TierRank => {
-    if (calcScore === '3-0' && calcMechanics === 'Elite') return 'HT1';
-    if (calcScore === '3-0') return 'MT1';
-    if (calcScore === '3-1' && calcMechanics === 'Elite') return 'LT1';
-    if (calcScore === '3-1') return 'HT2';
-    if (calcScore === '3-2' && calcMechanics === 'High') return 'MT2';
-    if (calcScore === '3-2') return 'LT2';
-    if (calcScore === '2-3' && calcMechanics === 'High') return 'HT3';
-    if (calcScore === '2-3') return 'MT3';
-    if (calcScore === '1-3' && calcMechanics === 'High') return 'LT3';
-    if (calcScore === '1-3') return 'HT4';
-    if (calcScore === '0-3' && calcMechanics === 'High') return 'MT4';
-    if (calcScore === '0-3' && calcMechanics === 'Medium') return 'LT4';
-    if (calcScore === '0-3') return 'LT5';
-    return 'MT4';
-  };
 
   const showcasePlayers = players
     .filter((p) => {
@@ -99,15 +71,16 @@ export const HomePage: React.FC = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 scene-3d-deep">
           {(perfMode === 'phone' ? testResults.slice(0, 4) : testResults).map((result, idx) => (
             <motion.div
               key={result.id}
               initial={perfMode === 'pc' ? { opacity: 0, y: 15 } : false}
               animate={perfMode === 'pc' ? { opacity: 1, y: 0 } : { opacity: 1 }}
               transition={perfMode === 'pc' ? { delay: idx * 0.15 } : undefined}
+              whileHover={perfMode === 'pc' ? { y: -6, rotateX: 6, rotateY: -6 } : undefined}
               onClick={() => navigateTo('results')}
-              className="p-6 rounded-2xl card-3d bg-gradient-to-br from-[#0E4A87]/85 to-[#1a1a26] border border-white/20 hover:border-[#1976D2]/60 cursor-pointer space-y-4 group relative overflow-hidden"
+              className="p-6 rounded-2xl card-3d sheen-3d bg-gradient-to-br from-[#0E4A87]/85 to-[#1a1a26] border border-white/20 hover:border-[#1976D2]/60 cursor-pointer space-y-4 group relative overflow-hidden"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -176,19 +149,19 @@ export const HomePage: React.FC = () => {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 scene-3d-deep">
           {INITIAL_GAMEMODES.map((gm, idx) => (
             <motion.div
               key={gm.id}
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              whileHover={{ y: -4 }}
+              whileHover={{ y: -6, rotateX: 6, rotateY: idx % 2 === 0 ? -6 : 6 }}
               onClick={() => {
                 setSelectedGamemode(gm.id);
                 navigateTo('tierlist');
               }}
-              className="p-6 rounded-2xl card-3d bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/60 cursor-pointer group flex flex-col justify-between space-y-5 relative overflow-hidden"
+              className="p-6 rounded-2xl card-3d sheen-3d bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/60 cursor-pointer group flex flex-col justify-between space-y-5 relative overflow-hidden"
             >
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
@@ -245,7 +218,7 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
 
-        <div className="rounded-2xl bg-[#0E4A87]/70 border border-white/20 overflow-hidden shadow-2xl">
+        <div className="rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 overflow-hidden">
           {showcasePlayers.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
@@ -344,89 +317,6 @@ export const HomePage: React.FC = () => {
             >
               <span>View Full {selectedShowcaseMode} Leaderboard</span>
               <ChevronRight size={14} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* INTERACTIVE TIER SIMULATOR WIDGET */}
-      <section className="p-8 rounded-3xl panel-3d bg-gradient-to-br from-[#0E4A87]/85 via-[#1257A0] to-[#12121B] border border-[#1976D2]/40 relative overflow-hidden">
-        <div className="absolute -right-20 -bottom-20 w-80 h-80 bg-[#1976D2]/20 rounded-full blur-[100px] pointer-events-none" />
-
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          <div className="lg:col-span-7 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#1976D2]/20 border border-[#1976D2]/40 text-xs font-bold uppercase tracking-wider text-sky-200">
-              <Zap size={13} className="text-amber-400" />
-              <span>Interactive Tier Estimator</span>
-            </div>
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-              Test Your Estimated Tier Placement
-            </h3>
-            <p className="text-sm text-sky-200 leading-relaxed">
-              Wondering where you will place before booking your official test? Input your scrim win rates and mechanical precision to calculate your predicted Bedrock Union tier.
-            </p>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
-              <div>
-                <label className="text-xs font-semibold text-sky-200 block mb-1.5">Gamemode</label>
-                <select
-                  value={calcMode}
-                  onChange={(e) => setCalcMode(e.target.value as Gamemode)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B3C70]/55 border border-white/20 focus:border-[#1976D2] text-xs text-white focus:outline-none"
-                >
-                  <option value="Bedfight">Bedfight</option>
-                  <option value="Skywars">Skywars</option>
-                  <option value="Mace">Mace</option>
-                  <option value="Fireball Fight">Fireball Fight</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="text-xs font-semibold text-sky-200 block mb-1.5">Tester Match Score</label>
-                <select
-                  value={calcScore}
-                  onChange={(e) => setCalcScore(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B3C70]/55 border border-white/20 focus:border-[#1976D2] text-xs text-white focus:outline-none"
-                >
-                  <option value="3-0">3 - 0 (Clean Sweep)</option>
-                  <option value="3-1">3 - 1 (Dominant)</option>
-                  <option value="3-2">3 - 2 (Close Win)</option>
-                  <option value="2-3">2 - 3 (Close Loss)</option>
-                  <option value="1-3">1 - 3 (Contested)</option>
-                  <option value="0-3">0 - 3 (Learning)</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="text-xs font-semibold text-sky-200 block mb-1.5">Mechanics & Aim</label>
-                <select
-                  value={calcMechanics}
-                  onChange={(e) => setCalcMechanics(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[#0B3C70]/55 border border-white/20 focus:border-[#1976D2] text-xs text-white focus:outline-none"
-                >
-                  <option value="Elite">Elite (100% precision)</option>
-                  <option value="High">High (Smooth tracking)</option>
-                  <option value="Medium">Medium (Consistent)</option>
-                  <option value="Developing">Developing</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-5 p-6 rounded-2xl bg-[#0B3C70]/75 border border-white/20 flex flex-col items-center justify-center text-center space-y-4 shadow-inner">
-            <span className="text-xs font-bold uppercase tracking-wider text-sky-200">Estimated Result</span>
-            <div className="p-4">
-              <TierBadge tier={getSimulatedTier()} size="xl" pulse />
-            </div>
-            <div className="space-y-1">
-              <div className="text-sm font-bold text-white">Estimated for {calcMode}</div>
-              <div className="text-xs text-sky-200 font-mono">Score: {calcScore} | Aim: {calcMechanics}</div>
-            </div>
-            <button
-              onClick={() => navigateTo('testing')}
-              className="w-full py-2.5 px-4 rounded-xl bg-[#1976D2] hover:bg-[#42A5F5] text-white text-xs font-bold shadow-glow-blue-sm transition-all cursor-pointer"
-            >
-              Book Official Test in Discord &rarr;
             </button>
           </div>
         </div>

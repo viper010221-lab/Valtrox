@@ -192,7 +192,7 @@ export const LeaderboardsPage: React.FC = () => {
       )}
 
       {/* Filter and Search Bar */}
-      <div className="p-4 rounded-2xl bg-[#0E4A87]/70 border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+      <div className="p-4 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
         <div className="relative w-full sm:max-w-sm">
           <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-300" />
           <input
@@ -226,7 +226,7 @@ export const LeaderboardsPage: React.FC = () => {
 
       {/* Gamemode Leaderboard Table or Empty State */}
       {rankedPlayers.length > 0 ? (
-        <div className="rounded-2xl bg-[#0E4A87]/70 border border-white/20 overflow-hidden shadow-2xl">
+        <div className="rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 overflow-hidden shadow-2xl">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead className="bg-[#0B3C70]/75 text-sky-200 uppercase text-[11px] font-mono tracking-wider border-b border-white/20">
@@ -322,7 +322,7 @@ export const LeaderboardsPage: React.FC = () => {
           </div>
         </div>
       ) : (
-        <div className="p-12 rounded-2xl bg-[#0E4A87]/70 border border-white/20 text-center space-y-4 shadow-xl">
+        <div className="p-12 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 text-center space-y-4 shadow-xl">
           <div className="w-14 h-14 rounded-2xl bg-[#0B3C70]/55 border border-white/20 flex items-center justify-center mx-auto text-sky-300">
             <GamemodeIcon gamemode={activeBoard} size={28} />
           </div>

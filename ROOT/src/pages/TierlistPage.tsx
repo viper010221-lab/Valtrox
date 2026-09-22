@@ -126,7 +126,7 @@ export const TierlistPage: React.FC = () => {
       </div>
 
       {/* Search Filter */}
-      <div className="p-4 rounded-2xl bg-[#0E4A87]/70 border border-white/20">
+      <div className="p-4 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20">
         <div className="relative max-w-sm">
           <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-300" />
           <input
@@ -148,7 +148,7 @@ export const TierlistPage: React.FC = () => {
           return (
             <div
               key={tier}
-              className="rounded-2xl bg-[#0E4A87]/70 border border-white/20 overflow-hidden flex flex-col md:flex-row shadow-lg"
+              className="rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 overflow-hidden flex flex-col md:flex-row shadow-lg"
             >
               {/* Tier Left Header */}
               <div className={`p-4 md:w-56 shrink-0 border-b md:border-b-0 md:border-r border-white/20 flex items-center justify-between md:justify-center md:flex-col gap-1 ${details.style}`}>

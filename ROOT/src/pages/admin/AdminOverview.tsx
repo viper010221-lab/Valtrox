@@ -9,25 +9,25 @@ export const AdminOverview: React.FC<{ onNavigateTab: (tab: any) => void }> = ({
     <div className="space-y-8">
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-1">
+        <div className="p-5 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 space-y-1">
           <span className="text-xs font-mono text-sky-200 uppercase">Registered Players</span>
           <div className="text-3xl font-black text-white font-mono">{players.length}</div>
           <span className="text-[11px] text-emerald-400 font-medium">100% Synced to Database</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-1">
+        <div className="p-5 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 space-y-1">
           <span className="text-xs font-mono text-sky-200 uppercase">Audited Test Results</span>
           <div className="text-3xl font-black text-[#42A5F5] font-mono">{testResults.length}</div>
           <span className="text-[11px] text-sky-200 font-medium">Official Public Ledger</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-1">
+        <div className="p-5 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 space-y-1">
           <span className="text-xs font-mono text-sky-200 uppercase">Active Testers</span>
           <div className="text-3xl font-black text-cyan-400 font-mono">{testers.length}</div>
           <span className="text-[11px] text-cyan-300 font-medium">7 Gamemodes Covered</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-1">
+        <div className="p-5 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 space-y-1">
           <span className="text-xs font-mono text-sky-200 uppercase">Testing Queue Status</span>
           <div className="text-2xl font-black text-emerald-400 font-mono">{serverConfig.testingStatus}</div>
           <span className="text-[11px] text-sky-200 font-medium">{serverConfig.activeSeason}</span>
@@ -35,7 +35,7 @@ export const AdminOverview: React.FC<{ onNavigateTab: (tab: any) => void }> = ({
       </div>
 
       {/* Quick Staff Actions */}
-      <div className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-4">
+      <div className="p-6 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 space-y-4">
         <h3 className="text-sm font-bold text-white uppercase tracking-wider">Quick Staff Operations</h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <button

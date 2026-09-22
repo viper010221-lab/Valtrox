@@ -34,7 +34,7 @@ export const AdminTesters: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
   return (
     <div className="space-y-6">
       {/* Create Tester */}
-      <div className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-4">
+      <div className="p-6 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 space-y-4">
         <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
           <Shield size={16} className="text-emerald-400" />
           <span>Recruit New Gamemode Tester</span>
@@ -91,7 +91,7 @@ export const AdminTesters: React.FC<{ onFeedback: (msg: string) => void }> = ({ 
       </div>
 
       {/* Table */}
-      <div className="rounded-2xl bg-[#0E4A87]/70 border border-white/20 overflow-hidden">
+      <div className="rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead className="bg-[#0B3C70]/55 text-sky-200 uppercase font-mono tracking-wider border-b border-white/20">

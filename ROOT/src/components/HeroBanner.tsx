@@ -35,7 +35,7 @@ export const HeroBanner: React.FC = () => {
       {/* Loose isometric blocks drifting around the banner.
           z-20 keeps them in FRONT of the backing plate — behind it they get
           sliced by the panel edge and read as a rendering glitch. */}
-      <div className="pointer-events-none absolute inset-0 z-20 hidden lg:block">
+      <div className="pointer-events-none absolute inset-0 z-20 hidden sm:block">
         <McBlock tone="gold" size={44} float={isPc} className="absolute -top-4 left-6" />
         <McBlock
           tone="cyan"
@@ -60,7 +60,7 @@ export const HeroBanner: React.FC = () => {
         className="relative"
       >
         {/* Backing plate — clipped so the rays and grid respect the radius */}
-        <div className="absolute inset-0 overflow-hidden rounded-[28px] border border-[#FBBF24]/40 panel-3d bg-gradient-to-b from-[#1565C0]/92 via-[#0E4A87]/92 to-[#0B3C70]/96">
+        <div className="absolute inset-0 overflow-hidden rounded-[28px] border border-[#FBBF24]/40 slab-3d sheen-3d bg-gradient-to-b from-[#1565C0]/92 via-[#0E4A87]/92 to-[#0B3C70]/96">
           <div className="absolute inset-0 bg-sky-rays opacity-60" />
           <div className="absolute inset-0 bg-grid-pattern opacity-[0.12]" />
           {isPc && (
@@ -117,10 +117,10 @@ export const HeroBanner: React.FC = () => {
                 {stats.map(({ label, value, Icon }) => (
                   <div
                     key={label}
-                    className="card-3d rounded-2xl bg-[#0B3C70]/70 px-3 py-3 flex flex-col items-center lg:items-start gap-1"
+                    className="card-3d tilt-3d rounded-2xl bg-[#0B3C70]/70 px-3 py-3 flex flex-col items-center lg:items-start gap-1"
                   >
                     <Icon size={15} className="text-[#FBBF24]" />
-                    <span className="text-lg font-black text-white leading-none">{value}</span>
+                    <span className="text-lg font-black text-white leading-none extrude-3d">{value}</span>
                     <span className="text-[10px] font-semibold uppercase tracking-wider text-sky-200">
                       {label}
                     </span>

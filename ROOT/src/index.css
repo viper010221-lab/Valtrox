@@ -532,6 +532,215 @@
 }
 
 /* ==========================================================================
+   DEPTH LAYER — the "diorama" pass
+   --------------------------------------------------------------------------
+   A second, chunkier 3D pass layered on top of the base slabs. Everything
+   here animates only transform / box-shadow / opacity, which the compositor
+   can handle without repainting. Anything expensive (mask-image, wide blurs)
+   is either static or explicitly disabled on phones and for users who ask for
+   reduced motion.
+   ========================================================================== */
+
+/* Deeper shared perspective for sections that should read as a diorama. */
+.scene-3d-deep {
+  perspective: 1100px;
+  perspective-origin: 50% 28%;
+}
+
+/* --------------------------------------------------------------------------
+   Hover tilt — the card swings toward the viewer and rises off the page.
+   -------------------------------------------------------------------------- */
+.tilt-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease;
+}
+
+.tilt-3d:hover {
+  transform: perspective(900px) rotateX(7deg) rotateY(-7deg) translate3d(0, -8px, 30px);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.30),
+    inset 0 -3px 0 rgba(0, 0, 0, 0.26),
+    0 18px 0 -4px rgba(6, 28, 63, 0.45),
+    0 34px 52px -14px rgba(6, 28, 63, 0.60);
+}
+
+/* Mirrored tilt for cards sitting on the right of a row, so a grid of cards
+   fans outward instead of leaning uniformly. */
+.tilt-3d--alt:hover {
+  transform: perspective(900px) rotateX(7deg) rotateY(7deg) translate3d(0, -8px, 30px);
+}
+
+/* --------------------------------------------------------------------------
+   Chunky slab — two stacked hard edges below the element, giving the thick
+   "two blocks deep" extrusion the Minecraft UI language is built on.
+   -------------------------------------------------------------------------- */
+.slab-3d {
+  transform-style: preserve-3d;
+  box-shadow:
+    inset 0 3px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -4px 0 rgba(0, 0, 0, 0.26),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.10),
+    0 10px 0 -3px rgba(6, 28, 63, 0.55),
+    0 20px 0 -6px rgba(6, 28, 63, 0.34),
+    0 40px 60px -18px rgba(6, 28, 63, 0.62);
+}
+
+/* --------------------------------------------------------------------------
+   Extruded small headings.
+   text-shadow only works on a solid fill colour — for the gradient-clipped
+   .heading-gold / .heading-blue utilities use their existing drop-shadow
+   filter instead, since text-shadow paints behind a transparent fill.
+   -------------------------------------------------------------------------- */
+.extrude-3d {
+  text-shadow:
+    0 1px 0 rgba(6, 28, 63, 0.85),
+    0 2px 0 rgba(6, 28, 63, 0.70),
+    0 3px 0 rgba(6, 28, 63, 0.55),
+    0 5px 10px rgba(6, 28, 63, 0.45);
+}
+
+.extrude-3d-gold {
+  text-shadow:
+    0 1px 0 #B45309,
+    0 2px 0 #92400E,
+    0 3px 0 #7C2D12,
+    0 6px 12px rgba(4, 18, 42, 0.55);
+}
+
+/* --------------------------------------------------------------------------
+   Sheen sweep — a diagonal light bar that travels across a surface. Requires
+   the caller to supply `relative overflow-hidden`.
+   -------------------------------------------------------------------------- */
+@keyframes sheen3d {
+  0%   { transform: translateX(-140%) rotate(18deg); opacity: 0; }
+  12%  { opacity: 0.85; }
+  58%  { opacity: 0.35; }
+  100% { transform: translateX(240%) rotate(18deg); opacity: 0; }
+}
+
+.sheen-3d::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 45%;
+  height: 220%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.30) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  animation: sheen3d 6.5s ease-in-out infinite;
+}
+
+/* --------------------------------------------------------------------------
+   Perspective floor — a receding grid that grounds the backdrop.
+   -------------------------------------------------------------------------- */
+.floor-3d {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 240%;
+  height: 58vh;
+  transform: translateX(-50%) perspective(700px) rotateX(74deg);
+  transform-origin: 50% 100%;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.18) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 72%);
+  mask-image: radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0) 72%);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Idle float with real Z travel, so decoration drifts in depth rather than
+   just sliding up and down.
+   -------------------------------------------------------------------------- */
+@keyframes floatY3d {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50%      { transform: translate3d(0, -12px, 20px); }
+}
+
+.float-3d {
+  animation: floatY3d 7s ease-in-out infinite;
+}
+.float-3d--slow { animation-duration: 11s; }
+.float-3d--fast { animation-duration: 5s; }
+
+/* --------------------------------------------------------------------------
+   Depth glow accents
+   -------------------------------------------------------------------------- */
+.glow-3d-gold {
+  box-shadow:
+    0 0 0 1px rgba(251, 191, 36, 0.35),
+    0 6px 0 rgba(6, 28, 63, 0.50),
+    0 14px 40px -12px rgba(251, 191, 36, 0.45);
+}
+
+.glow-3d-blue {
+  box-shadow:
+    0 0 0 1px rgba(66, 165, 245, 0.35),
+    0 6px 0 rgba(6, 28, 63, 0.50),
+    0 14px 40px -12px rgba(25, 118, 210, 0.55);
+}
+
+/* --------------------------------------------------------------------------
+   Sticky top bar — reads as a raised slab: a bright bevel along its top lip
+   and a thick hard edge dropping away underneath.
+   -------------------------------------------------------------------------- */
+.bar-3d {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.30),
+    0 4px 0 rgba(6, 28, 63, 0.55),
+    0 12px 24px -8px rgba(6, 28, 63, 0.55);
+}
+
+/* Pressed-into-the-page state, for anything that can be clicked. */
+.press-3d:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 2px 0 rgba(0, 0, 0, 0.20),
+    0 2px 0 rgba(6, 28, 63, 0.55);
+}
+
+/* Motion-sensitive users: keep the depth styling, drop all the movement. */
+@media (prefers-reduced-motion: reduce) {
+  .sheen-3d::after,
+  .float-3d,
+  .float-3d--slow,
+  .float-3d--fast {
+    animation: none !important;
+  }
+  .tilt-3d:hover,
+  .tilt-3d--alt:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* Phones: the sheen repaints a large surface every frame, and a hover tilt
+   fights vertical scrolling. Keep the chunky slab depth, drop the motion. */
+@media (max-width: 1023px), (hover: none) and (pointer: coarse) {
+  .sheen-3d::after {
+    display: none;
+  }
+  .tilt-3d,
+  .tilt-3d--alt {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .tilt-3d:hover,
+  .tilt-3d--alt:hover {
+    transform: translateY(-3px);
+  }
+  .floor-3d {
+    height: 40vh;
+  }
+}
+
+/* ==========================================================================
    Phone / touch ergonomics
    --------------------------------------------------------------------------
    WCAG 2.5.5 asks for 44x44 CSS px tap targets; touch-action also skips the

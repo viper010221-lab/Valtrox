@@ -89,7 +89,7 @@ export const PlayersPage: React.FC = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="p-4 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-4">
+      <div className="p-4 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-3">
           <div className="relative md:col-span-2">
             <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-300" />
@@ -179,7 +179,7 @@ export const PlayersPage: React.FC = () => {
             <div
               key={player.id}
               onClick={() => navigateTo('player-detail', player.id)}
-              className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/50 transition-all cursor-pointer group flex flex-col justify-between space-y-5"
+              className="p-6 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/50 transition-all cursor-pointer group flex flex-col justify-between space-y-5"
             >
               <div className="space-y-4">
                 <div className="flex items-start justify-between">

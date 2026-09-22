@@ -38,7 +38,7 @@ export const AdminAnnouncements: React.FC<{ onFeedback: (msg: string) => void }>
   return (
     <div className="space-y-6">
       {/* Create Form */}
-      <div className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 space-y-4">
+      <div className="p-6 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 space-y-4">
         <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
           <Bell size={16} className="text-[#42A5F5]" />
           <span>Create Community Announcement</span>

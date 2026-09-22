@@ -59,7 +59,7 @@ export const Navbar: React.FC = () => {
   );
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#0B3C70]/85 backdrop-blur-2xl border-b border-[#FBBF24]/35">
+    <header className="sticky top-0 z-40 w-full bg-[#0B3C70]/85 backdrop-blur-2xl border-b border-[#FBBF24]/35 bar-3d">
       {/* Top micro alert banner */}
       <div className="bg-gradient-to-r from-[#FBBF24]/25 via-[#1976D2]/25 to-[#FBBF24]/25 border-b border-[#FBBF24]/40 py-1.5 px-3 sm:px-4 text-[11px] sm:text-xs text-center text-sky-100 flex flex-wrap items-center justify-center gap-x-1.5 gap-y-0.5">
         <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping shrink-0" />

@@ -2,6 +2,7 @@ import React from 'react';
 import { DataProvider, useData } from './context/DataContext';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { McBlock } from './components/McBlock';
 import { QuickSearchModal } from './components/QuickSearchModal';
 import { LiveDMBanner } from './components/LiveDMBanner';
 import { AuthModal } from './components/AuthModal';
@@ -55,6 +56,39 @@ export const AppContent: React.FC = () => {
       {/* Minecraft sky backdrop: block grid + logo-style sunburst rays */}
       <div className="fixed inset-0 bg-grid-pattern pointer-events-none opacity-20 z-0" />
       <div className="fixed inset-0 bg-sky-rays pointer-events-none opacity-70 z-0" />
+
+      {/* Perspective floor — a grid that recedes to the horizon and gives the
+          flat sky a sense of standing on solid ground. */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="floor-3d opacity-25" />
+      </div>
+
+      {/* Isometric blocks drifting at different depths. Kept behind the page
+          canvas (z-0 vs z-10) so they read as scenery in the gaps between
+          panels rather than competing with content. Hidden on phones, where
+          they would just crowd the narrow column. */}
+      <div className="fixed inset-0 pointer-events-none z-0 hidden md:block scene-3d-deep" aria-hidden="true">
+        <McBlock tone="blue" size={38} className="absolute top-[16%] left-[3%] float-3d" />
+        <McBlock
+          tone="gold"
+          size={28}
+          className="absolute top-[58%] left-[7%] float-3d float-3d--slow"
+          style={{ animationDelay: '1.2s' }}
+        />
+        <McBlock
+          tone="cyan"
+          size={46}
+          className="absolute top-[24%] right-[2.5%] float-3d float-3d--fast"
+          style={{ animationDelay: '2.4s' }}
+        />
+        <McBlock
+          tone="gold"
+          size={24}
+          className="absolute top-[76%] right-[8%] float-3d float-3d--slow"
+          style={{ animationDelay: '0.6s' }}
+        />
+      </div>
+
       {perfMode === 'pc' && (
         <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[550px] bg-radial-glow opacity-90" />

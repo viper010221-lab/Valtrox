@@ -208,7 +208,7 @@ export const PlayerDetailPage: React.FC = () => {
         </div>
 
         {playerTests.length > 0 ? (
-          <div className="rounded-2xl bg-[#0E4A87]/70 border border-white/20 overflow-hidden shadow-xl">
+          <div className="rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 overflow-hidden shadow-xl">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead className="bg-[#0B3C70]/75 text-sky-200 uppercase text-[11px] font-mono tracking-wider border-b border-white/20">
@@ -246,7 +246,7 @@ export const PlayerDetailPage: React.FC = () => {
             </div>
           </div>
         ) : (
-          <div className="p-8 rounded-2xl bg-[#0E4A87]/70 border border-white/20 text-center space-y-2">
+          <div className="p-8 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 text-center space-y-2">
             <p className="text-sm text-sky-200">No test records registered yet for {player.ign}.</p>
             <p className="text-xs text-sky-300">Apply for a tier test via Discord to have your matches audited and recorded here.</p>
           </div>

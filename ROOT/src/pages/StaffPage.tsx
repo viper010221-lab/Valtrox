@@ -84,7 +84,7 @@ export const StaffPage: React.FC = () => {
               {staff.map((member) => (
                 <div
                   key={member.id}
-                  className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/40 transition-all space-y-4 flex flex-col justify-between"
+                  className="p-6 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/40 transition-all space-y-4 flex flex-col justify-between"
                 >
                   <div className="space-y-4">
                     <div className="flex items-center gap-4">
@@ -108,7 +108,7 @@ export const StaffPage: React.FC = () => {
               ))}
             </div>
           ) : (
-            <div className="p-8 rounded-2xl bg-[#0E4A87]/70 border border-white/20 text-center space-y-2">
+            <div className="p-8 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 text-center space-y-2">
               <p className="text-sm font-bold text-white">Staff Roster is Currently Being Calibrated</p>
               <p className="text-xs text-sky-200">Join our Discord community to view staff openings and team roles.</p>
             </div>
@@ -129,7 +129,7 @@ export const StaffPage: React.FC = () => {
               {testers.map((tester) => (
                 <div
                   key={tester.id}
-                  className="p-6 rounded-2xl bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/40 transition-all space-y-4 flex flex-col justify-between"
+                  className="p-6 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/40 transition-all space-y-4 flex flex-col justify-between"
                 >
                   <div className="space-y-4">
                     <div className="flex items-start justify-between">
@@ -176,7 +176,7 @@ export const StaffPage: React.FC = () => {
               ))}
             </div>
           ) : (
-            <div className="p-8 rounded-2xl bg-[#0E4A87]/70 border border-white/20 text-center space-y-2">
+            <div className="p-8 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 text-center space-y-2">
               <p className="text-sm font-bold text-white">Tester Applications are Open</p>
               <p className="text-xs text-sky-200">Apply on our Discord server in #tester-apply to evaluate Bedfight, Skywars, Mace, and Fireball Fight!</p>
             </div>

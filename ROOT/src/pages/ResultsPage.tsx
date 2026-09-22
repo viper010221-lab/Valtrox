@@ -60,7 +60,7 @@ export const ResultsPage: React.FC = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="p-4 rounded-2xl bg-[#0E4A87]/70 border border-white/20 flex flex-col md:flex-row items-center justify-between gap-4 shadow-lg">
+      <div className="p-4 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 flex flex-col md:flex-row items-center justify-between gap-4 shadow-lg">
         <div className="relative w-full md:max-w-xs">
           <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-300" />
           <input
@@ -128,7 +128,7 @@ export const ResultsPage: React.FC = () => {
           {filteredResults.map((res) => (
             <div
               key={res.id}
-              className="p-5 rounded-2xl bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/40 transition-all space-y-4 group"
+              className="p-5 rounded-2xl slab-3d bg-[#0E4A87]/70 border border-white/20 hover:border-[#1976D2]/40 transition-all space-y-4 group"
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3.5">
