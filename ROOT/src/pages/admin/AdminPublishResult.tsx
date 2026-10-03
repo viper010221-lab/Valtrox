@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useData } from '../../context/DataContext';
 import { Award, CheckCircle2, Trash2 } from 'lucide-react';
-import { Gamemode, TierRank } from '../../types';
+import { TierRank } from '../../types';
 import { INITIAL_GAMEMODES } from '../../data/initialData';
 
 export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }> = ({ onFeedback }) => {
   const { players, testers, addTestResult, testResults, deleteTestResult, serverConfig } = useData();
 
-  const [pubPlayerId, setPubPlayerId] = useState<string>(players[0]?.id || '');
-  const [pubGamemode, setPubGamemode] = useState<Gamemode>('Bedfight');
+  const [pubPlayerIgn, setPubPlayerIgn] = useState<string>(players[0]?.ign || '');
+  const [pubGamemodeInput, setPubGamemodeInput] = useState<string>('Bedfight');
   const [pubOldTier, setPubOldTier] = useState<TierRank>('LT2');
   const [pubNewTier, setPubNewTier] = useState<TierRank>('HT1');
   const [pubScore, setPubScore] = useState<string>('10 - 3');
@@ -17,19 +17,40 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const targetPlayer = players.find(p => p.id === pubPlayerId);
-    if (!targetPlayer) return;
+
+    // Resolve the typed player IGN against the roster (case-insensitive).
+    const ignQuery = pubPlayerIgn.trim().toLowerCase();
+    const targetPlayer = players.find((p) => p.ign.trim().toLowerCase() === ignQuery);
+    if (!targetPlayer) {
+      onFeedback(`Player "${pubPlayerIgn.trim()}" was not found on the roster. Type an exact IGN, e.g. ${players[0]?.ign}.`);
+      return;
+    }
+
+    // Resolve the typed gamemode against the official list (case-insensitive).
+    const gmQuery = pubGamemodeInput.trim().toLowerCase();
+    const matchedGamemode = INITIAL_GAMEMODES.find(
+      (gm) => gm.id.trim().toLowerCase() === gmQuery || gm.name.trim().toLowerCase() === gmQuery
+    );
+    if (!matchedGamemode) {
+      onFeedback(`"${pubGamemodeInput.trim()}" is not a valid gamemode. Use one of: ${INITIAL_GAMEMODES.map((gm) => gm.id).join(', ')}.`);
+      return;
+    }
+
+    // Snap the typed tester name to the roster entry when it matches.
+    const testerQuery = pubTesterName.trim().toLowerCase();
+    const matchedTester = testers.find((t) => t.name.trim().toLowerCase() === testerQuery);
+    const resolvedTesterName = matchedTester ? matchedTester.name : pubTesterName.trim();
 
     addTestResult({
       playerId: targetPlayer.id,
       playerIgn: targetPlayer.ign,
       playerDiscord: targetPlayer.discordTag,
-      gamemode: pubGamemode,
+      gamemode: matchedGamemode.id,
       previousTier: pubOldTier,
       newTier: pubNewTier,
       score: pubScore,
-      testerId: 't-admin',
-      testerName: pubTesterName,
+      testerId: matchedTester?.id || 't-admin',
+      testerName: resolvedTesterName,
       notes: pubNotes,
       date: new Date().toISOString().split('T')[0],
       verified: true
@@ -51,30 +72,45 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
-            <label className="text-xs font-semibold text-sky-100 block mb-1.5">Select Player</label>
-            <select
-              value={pubPlayerId}
-              onChange={(e) => setPubPlayerId(e.target.value)}
+            <label className="text-xs font-semibold text-sky-100 block mb-1.5">Player IGN</label>
+            <input
+              type="text"
+              value={pubPlayerIgn}
+              onChange={(e) => setPubPlayerIgn(e.target.value)}
+              placeholder="Type player IGN"
+              list="admin-publish-player-igns"
+              autoComplete="off"
               className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
               required
-            >
+            />
+            <datalist id="admin-publish-player-igns">
               {players.map((p) => (
-                <option key={p.id} value={p.id}>{p.ign} ({p.discordTag})</option>
+                <option key={p.id} value={p.ign} style={{ backgroundColor: '#0B3C70' }}>
+                  {p.discordTag}
+                </option>
               ))}
-            </select>
+            </datalist>
           </div>
 
           <div>
             <label className="text-xs font-semibold text-sky-100 block mb-1.5">Gamemode</label>
-            <select
-              value={pubGamemode}
-              onChange={(e) => setPubGamemode(e.target.value as Gamemode)}
+            <input
+              type="text"
+              value={pubGamemodeInput}
+              onChange={(e) => setPubGamemodeInput(e.target.value)}
+              placeholder="e.g. Bedfight"
+              list="admin-publish-gamemodes"
+              autoComplete="off"
               className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
-            >
+              required
+            />
+            <datalist id="admin-publish-gamemodes">
               {INITIAL_GAMEMODES.map((gm) => (
-                <option key={gm.id} value={gm.id}>{gm.name}</option>
+                <option key={gm.id} value={gm.id} style={{ backgroundColor: '#0B3C70' }}>
+                  {gm.name}
+                </option>
               ))}
-            </select>
+            </datalist>
           </div>
 
           <div>
@@ -142,15 +178,23 @@ export const AdminPublishResult: React.FC<{ onFeedback: (msg: string) => void }>
 
           <div>
             <label className="text-xs font-semibold text-sky-100 block mb-1.5">Evaluating Tester</label>
-            <select
+            <input
+              type="text"
               value={pubTesterName}
               onChange={(e) => setPubTesterName(e.target.value)}
+              placeholder="Type tester name"
+              list="admin-publish-testers"
+              autoComplete="off"
               className="w-full px-3 py-2 bg-[#0B3C70]/55 border border-white/20 rounded-xl text-xs text-white focus:outline-none focus:border-[#1976D2]"
-            >
+              required
+            />
+            <datalist id="admin-publish-testers">
               {testers.map((t) => (
-                <option key={t.id} value={t.name}>{t.name} ({t.role})</option>
+                <option key={t.id} value={t.name} style={{ backgroundColor: '#0B3C70' }}>
+                  {t.role}
+                </option>
               ))}
-            </select>
+            </datalist>
           </div>
         </div>
 
