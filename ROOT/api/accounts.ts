@@ -27,6 +27,14 @@
 //   get     { email }
 //   delete  { email }
 //
+// Optional on any write: createRosterEntry:false skips adding the player
+// to the leaderboard, and region / device set the new roster row's
+// region ("NA"|"EU"|"AS"|"SA"|"OC") and device ("Touch"|"KBM"|"Controller").
+// Roster rows are never overwritten, only created when missing.
+//
+// Every write response includes `roster`:
+//   "created" | "already-present" | "skipped"
+//
 // AUTH for every action:
 //   x-bot-secret: <BOT_API_SECRET>
 //
@@ -59,6 +67,7 @@ interface ApiResponse {
 // --- Constants ------------------------------------------------------
 
 const ACCOUNTS_TABLE = 'accounts';
+const PLAYERS_TABLE = 'players';
 
 // Mirrors the `UserRank` union in src/types/index.ts. Anything outside
 // this list is rejected, so a bug (or a hostile caller) cannot invent a
@@ -118,6 +127,90 @@ function toAccount(row: { id: string; data: unknown } | null): Record<string, un
     return { ...(row.data as Record<string, unknown>), id: row.id };
   }
   return null;
+}
+
+/**
+ * Ensures a matching row exists in the `players` roster.
+ *
+ * WHY THIS IS NEEDED
+ * The website only ever creates roster entries as a side effect of
+ * signing in (DataContext.tsx:508, "Ensure player is in Players
+ * roster"). Creating an `accounts` row on its own therefore leaves the
+ * user invisible in the leaderboard until they log in for the first
+ * time. A Discord registration should put them in the roster
+ * immediately, so we do it here.
+ *
+ * DELIBERATELY NON-DESTRUCTIVE: this only inserts when no row matches the
+ * account's email or IGN. It never overwrites an existing roster entry,
+ * because doing so would wipe `tiers` and `tierHistory` -- a player's
+ * competitive record must never be clobbered by an account sync.
+ */
+async function ensureRosterEntry(
+  supabase: SupabaseClient,
+  account: { id: string; email: string; ign: string; discordTag: string; rank: string; createdAt: string },
+  opts: { region?: string; device?: string } = {}
+): Promise<'created' | 'already-present' | 'skipped'> {
+  const email = account.email.toLowerCase();
+  const ign = account.ign.toLowerCase();
+  if (!ign) return 'skipped';
+
+  const { data: rows, error } = await supabase
+    .from(PLAYERS_TABLE)
+    .select('id, data')
+    .or(`data->>email.eq.${email},data->>ign.eq.${ign}`);
+  if (error || !rows) return 'skipped';
+
+  const alreadyThere = rows.some((row: any) => {
+    const d = toAccount(row);
+    if (!d) return false;
+    const rowEmail = String(d.email ?? '').toLowerCase();
+    const rowIgn = String(d.ign ?? '').toLowerCase();
+    return rowEmail === email || rowIgn === ign;
+  });
+  if (alreadyThere) return 'already-present';
+
+  // Mirrors the shape DataContext builds at sign-in, so a bot-created
+  // player is indistinguishable from a self-registered one.
+  const { count } = await supabase
+    .from(PLAYERS_TABLE)
+    .select('id', { count: 'exact', head: true });
+
+  const isMasterAdmin = email === MASTER_OWNER_EMAIL;
+  const rank = isMasterAdmin ? 'Owner' : account.rank;
+
+  const player = {
+    id: `ply-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    ign: account.ign,
+    discordTag: account.discordTag,
+    email: account.email,
+    rank,
+    points: 1000,
+    region: (opts.region ?? 'NA') as string,
+    device: (opts.device ?? 'KBM') as string,
+    joinDate: (account.createdAt || new Date().toISOString()).split('T')[0],
+    bio: 'Competitive Minecraft Bedrock player on Bedrock Union.',
+    verified: true,
+    status: 'Active',
+    tiers: {
+      Bedfight: isMasterAdmin ? 'HT1' : 'Untested',
+      Skywars: isMasterAdmin ? 'HT1' : 'Untested',
+      Mace: isMasterAdmin ? 'HT1' : 'Untested',
+      'Fireball Fight': isMasterAdmin ? 'HT1' : 'Untested',
+    },
+    tierHistory: [],
+    matchesPlayed: 0,
+    winRate: 0,
+    scrimWins: 0,
+    tourneyTrophies: 0,
+    globalRank: (count ?? 0) + 1,
+  };
+
+  const { error: writeErr } = await supabase
+    .from(PLAYERS_TABLE)
+    .upsert({ id: player.id, data: player, created_at: new Date().toISOString() }, { onConflict: 'id' });
+  if (writeErr) return 'skipped';
+
+  return 'created';
 }
 
 function fail(res: ApiResponse, code: number, message: string, extra?: Record<string, unknown>) {
@@ -286,7 +379,22 @@ async function handleAction(
       .upsert({ id: email, data: account, created_at: new Date().toISOString() }, { onConflict: 'id' });
     if (error) return fail(res, 502, 'Database write failed.');
 
-    return res.status(201).json({ success: true, created: true, account: redact(account as any) });
+    // Put them in the leaderboard roster straight away. The website only
+    // does this at sign-in, so without this a Discord registrant stays
+    // invisible until they log in.
+    const roster = payload.createRosterEntry === false
+      ? 'skipped'
+      : await ensureRosterEntry(supabase, account as any, {
+          region: payload.region ? String(payload.region) : undefined,
+          device: payload.device ? String(payload.device) : undefined,
+        });
+
+    return res.status(201).json({
+      success: true,
+      created: true,
+      account: redact(account as any),
+      roster,
+    });
   }
 
   // sync (or create-over-existing) -> partial patch.
@@ -305,7 +413,25 @@ async function handleAction(
     .upsert({ id: email, data: patch, created_at: new Date().toISOString() }, { onConflict: 'id' });
   if (error) return fail(res, 502, 'Database write failed.');
 
-  return res.status(200).json({ success: true, created: false, account: redact(patch as any) });
+  // Also make sure the roster knows about this account, e.g. when a bot
+  // mirrors a rank change for someone who has never opened the site.
+  const roster = payload.createRosterEntry === false
+    ? 'skipped'
+    : await ensureRosterEntry(supabase, {
+        id: email,
+        email,
+        ign: String(patch.ign ?? ''),
+        discordTag: String(patch.discordTag ?? ''),
+        rank: String(patch.rank ?? 'Player'),
+        createdAt: String(patch.createdAt ?? new Date().toISOString()),
+      });
+
+  return res.status(200).json({
+    success: true,
+    created: false,
+    account: redact(patch as any),
+    roster,
+  });
 }
 
 // --- Entry point ----------------------------------------------------
