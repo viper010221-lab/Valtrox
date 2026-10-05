@@ -4,6 +4,28 @@
 --
 -- After running, every admin that adds a player/tester/staff member will
 -- have that change saved here, visible to ALL admins on ANY device.
+--
+-- ####################################################################
+-- #  WARNING -- THIS SCHEMA IS DELIBERATELY PERMISSIVE. DO NOT TREAT IT
+-- #  AS SECURE. IT IS A KNOWN, DOCUMENTED RISK.
+-- #
+-- #  Every policy below uses `using (true)` / `with check (true)`, which
+-- #  means NO authorization at all. Anyone holding the publishable key
+-- #  can read, edit and delete every row in every table -- including
+-- #  `accounts`, which stores a PLAINTEXT `password` per user.
+-- #
+-- #  Since the publishable key is committed in this public repository,
+-- #  that data is currently reachable by anyone on the internet.
+-- #
+-- #  The permissive policies exist for one reason: the site does
+-- #  authentication in the BROWSER (DataContext.tsx:497 compares
+-- #  `account.password !== pass` client-side), so the browser must be
+-- #  able to read and write everything. Fixing the auth model is the
+-- #  prerequisite for tightening this.
+-- #
+-- #  See supabase-hardening.sql for the target state and its
+-- #  prerequisites. Until that ships, rotate any password stored here.
+-- ####################################################################
 -- ====================================================================
 
 create table if not exists players (
