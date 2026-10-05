@@ -62,6 +62,7 @@ interface ApiResponse {
   json(body: unknown): void;
   setHeader(name: string, value: string): void;
   end(): void;
+  readonly headersSent?: boolean;
 }
 
 // --- Constants ------------------------------------------------------
